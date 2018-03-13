@@ -10,9 +10,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 
-    @RequestMapping(value="/home", method = RequestMethod.GET)
+    @RequestMapping("/home")
     public String viewHome(){
         return "home";
     }
-
+    
+    @RequestMapping("/login")
+    public String viewLogin(){
+        return "login";
+    }
+    
+    @RequestMapping("/registration")
+    public String viewrRegistration(){
+        return "registration";
+    }
 }

@@ -1,17 +1,17 @@
-<%-- 
-    Document   : login
-    Created on : 13.3.2018, 9:04:29
-    Author     : jchovanec
---%>
-
-<%@page contentType="text/html" pageEncoding="windows-1250"%>
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
-        <title>JSP Page</title>
+        <title>Login</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Login</h1>
+        <a href="/Projekt/home">Home</a>
+        <a href="/Projekt/login">Login</a>
+        <form method="post">
+            Name <input type="text" name="loginName" value=""/><br/>
+            Password <input type="password" name="possword" value=""/><br/>
+            <input type="submit" value="Submit">
+        </form>
+        <a href="/Projekt/registration">Create an account</a>
     </body>
 </html>
