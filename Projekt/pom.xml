@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>SpringMVC4</groupId>
-    <artifactId>SpringMVC4</artifactId>
+    <artifactId>Projekt</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>SpringMVC4 Maven Webapp</name>
+    <name>Projekt</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -55,17 +55,9 @@
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.10</version>
+                <version>6.1.14</version>
                 <configuration>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <connectors>
-                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                            <port>8080</port>
-                            <maxIdleTime>60000</maxIdleTime>
-                        </connector>
-                    </connectors>
-                    <stopKey>STOP</stopKey>
-                    <stopPort>8005</stopPort>
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
                 </configuration>
             </plugin>
         </plugins>
