@@ -8,9 +8,9 @@
         <a href="/Projekt/home">Home</a>
         <a href="/Projekt/login">Login</a>
         <form method="post">
-            Name <input type="text" name="loginName" value=""/><br/>
+            E-mail <input type="email" name="login-email" value=""/><br/>
             Password <input type="password" name="possword" value=""/><br/>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Login">
         </form>
         <a href="/Projekt/registration">Create an account</a>
     </body>

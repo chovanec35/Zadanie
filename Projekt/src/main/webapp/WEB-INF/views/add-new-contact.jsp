@@ -9,9 +9,24 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
-        <title>JSP Page</title>
+        <title>New contact</title>
+
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>New contact</h1>
+        <a href="/Projekt/my-contacts">My contacts</a>
+        <a href="/Projekt/home">Logout</a>
+        <form>
+            First name * <input type="text" name="name"><br/>
+            Last name * <input type="text" name="last-name"><br/>
+            Birthdate <input type="date" name="birthdate"><br/>
+            Description <textarea name="text-area" cols="30" rows="3"></textarea><br/>
+            Category * <select name="category"><br/>
+                <option value="men">Family</option>
+                <option value="woman">Friends</option>
+                <option value="other">Job</option>
+            </select><br/>
+            <input type="submit" value="Add new contact">
+        </form>
     </body>
 </html>

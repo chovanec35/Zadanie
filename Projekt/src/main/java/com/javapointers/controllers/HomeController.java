@@ -21,7 +21,17 @@ public class HomeController {
     }
     
     @RequestMapping("/registration")
-    public String viewrRegistration(){
+    public String viewRegistration(){
         return "registration";
+    }
+    
+    @RequestMapping("/add-new-contact")
+    public String viewAddNewContact(){
+        return "add-new-contact";
+    }
+    
+    @RequestMapping("/my-contacts")
+    public String viewMyContacts(){
+        return "my-contacts";
     }
 }

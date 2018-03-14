@@ -9,9 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
-        <title>JSP Page</title>
+        <title>My contacts</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>My contacts</h1>
+        <a href="/Projekt/my-contacts">My contacts</a>
+        <a href="/Projekt/home">Logout</a>
     </body>
 </html>
