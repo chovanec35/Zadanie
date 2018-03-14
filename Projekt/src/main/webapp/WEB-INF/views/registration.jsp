@@ -7,6 +7,7 @@
         <h1>Registration form</h1>
         <a href="/Projekt/home">Home</a>
         <a href="/Projekt/login">Login</a>
+        
         <form action="" method="post">
             First name <input type="text" name="first-name" value=""/><br/>
             Last name <input type="text" name="last-name" value=""/><br/>

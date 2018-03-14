@@ -7,8 +7,9 @@
         <h1>Login</h1>
         <a href="/Projekt/home">Home</a>
         <a href="/Projekt/login">Login</a>
-        <form method="post">
-            E-mail <input type="email" name="login-email" value=""/><br/>
+        
+        <form action="/Projekt/login" method="post">
+            E-mail <input type="email" name="email" value=""/><br/>
             Password <input type="password" name="possword" value=""/><br/>
             <input type="submit" value="Login">
         </form>
