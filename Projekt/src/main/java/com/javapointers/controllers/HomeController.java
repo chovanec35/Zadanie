@@ -14,10 +14,10 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping("/login")
-    public String viewLogin() {
-        return "login";
-    }
+//    @RequestMapping("/login")
+//    public String viewLogin() {
+//        return "login";
+//    }
 
     @RequestMapping("/registration")
     public String viewRegistration() {

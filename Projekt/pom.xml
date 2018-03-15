@@ -5,6 +5,7 @@
     <artifactId>Projekt</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
+    
     <name>Projekt</name>
     <url>http://maven.apache.org</url>
 
@@ -18,6 +19,12 @@
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
             <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.8.3.0</version>
         </dependency>
 
         <!--Spring Dependencies-->
@@ -47,7 +54,7 @@
     </dependencies>
     <build>
         <finalName>SpringMVC4</finalName>
-        <plugins>
+        <plugins>                        
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

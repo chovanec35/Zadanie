@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlet;
+package com.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -71,9 +71,9 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        String email = request.getParameter("email");
-        request.setAttribute("email", email);
-        request.getRequestDispatcher("/WEB-INF/views/welcome.jsp");
+//        String email = request.getParameter("email");
+//        request.setAttribute("email", email);
+//        request.getRequestDispatcher("/WEB-INF/views/welcome.jsp");
     }
 
     /**
