@@ -1,20 +1,25 @@
-package com.javapointers.controllers;
+package sk.zadanie.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
 
     @RequestMapping("/home")
-    public String viewHome() {                
-        return "home";
+    public ModelAndView viewHome(ModelMap model) { 
+        Map<String, String> map = new HashMap();
+        map.put("1", "Mato");
+        map.put("2", "Jozo");
+        model.put("email", map);
+        return new ModelAndView("home", model);
     }
 
-//    @RequestMapping("/login")
-//    public String viewLogin() {
-//        return "login";
-//    }
+    
 
     @RequestMapping("/registration")
    

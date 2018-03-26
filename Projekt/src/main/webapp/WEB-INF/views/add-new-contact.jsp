@@ -5,6 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="windows-1250"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,8 +19,8 @@
     </head>
     <body>
         <h1>New contact</h1>
-        <a href="/Projekt/my-contacts">My contacts</a>
-        <a href="/Projekt/home">Logout</a>
+        <a href="${path}/my-contacts">My contacts</a>
+        <a href="${path}/home">Logout</a>
         <form>
             First name * <input type="text" name="name"><br/>
             Last name * <input type="text" name="last-name"><br/>
