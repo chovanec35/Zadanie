@@ -5,20 +5,46 @@
  */
 package sk.zadanie.controller;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import sk.zadanie.model.Login;
 import sk.zadanie.model.User;
+import sk.zadanie.service.UserService;
+import sk.zadanie.service.impl.UserServiceImpl;
 
 @Controller
-@RequestMapping(method = RequestMethod.GET)
 public class LoginController {
 
-    @RequestMapping("/login")
-    public String viewLogin() {
-        return "login";
+    @Autowired
+    UserServiceImpl userServiceImpl;
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView viewLogin(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView mav = new ModelAndView("login");
+        mav.addObject("login", new Login());
+        return mav;
+    }
+
+    @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
+    public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
+            @ModelAttribute("login") Login login) {
+        ModelAndView mav = null;
+        User user = userServiceImpl.validateUser(login);
+        System.out.println(user);
+     /*   if (null != user) {
+            mav = new ModelAndView("welcome");
+            mav.addObject("firstname", user.getFirstname());
+        } else {
+            mav = new ModelAndView("login");
+            mav.addObject("message", "Username or Password is wrong!!");
+        }*/
+        
+        return mav;
     }
 }

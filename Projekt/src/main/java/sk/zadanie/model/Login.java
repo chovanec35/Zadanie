@@ -14,7 +14,7 @@ public class Login {
     private String email;
     private String password;
     
-    public String getUsername() {
+    public String getEmail() {
         return email;
     }
     

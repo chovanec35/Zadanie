@@ -8,8 +8,7 @@ package sk.zadanie.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import javax.activation.DataSource;
-import org.hibernate.SessionFactory;
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -22,9 +21,12 @@ import sk.zadanie.model.User;
 public class UserDaoImpl implements UserDao {
 
     @Autowired
-    private SessionFactory session;
+    DataSource datasource;
+    
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
-    @Override
+    /*@Override
     public void add(User user) {
         session.getCurrentSession().save(user);
     }
@@ -47,12 +49,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List getAllUser() {
         return session.getCurrentSession().createQuery("from User").list();
-    }
+    }*/
 
-    @Autowired
-    DataSource datasource;
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+    
 
     @Override
     public void register(User user) {
@@ -63,7 +62,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User validateUser(Login login) {
-        String sql = "select * from users where username='" + login.getUsername() + "' and password='" + login.getPassword()
+        String sql = "select * from users where email='" + login.getEmail()+ "' and password='" + login.getPassword()
                 + "'";
         List<User> users = jdbcTemplate.query(sql, new UserMapper());
         return users.size() > 0 ? users.get(0) : null;
@@ -75,7 +74,7 @@ class UserMapper implements RowMapper<User> {
     @Override
     public User mapRow(ResultSet rs, int arg1) throws SQLException {
         User user = new User();
-        user.setName(rs.getString("username"));
+        user.setName(rs.getString("lastname"));
         user.setPassword(rs.getString("password"));
 
         user.setEmail(rs.getString("email"));

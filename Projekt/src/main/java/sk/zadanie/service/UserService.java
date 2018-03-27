@@ -13,9 +13,9 @@ import sk.zadanie.model.User;
  * @author jchovanec
  */
 public interface UserService {
-    public void add(User user);
+  /*  public void add(User user);
     public void edit(User user);
     public void delete(int id);
     public User getUser(int id);
-    public List getAllUser();
+    public List getAllUser();*/
 }

@@ -14,7 +14,7 @@
         <a href="${path}/home">Home</a>
         <a href="${path}/login">Login</a>
 
-        <form method="POST" action="${path}/login">
+        <form method="POST" modelAttribute="login" action="${path}/loginProcess">
             <table>
                 <tr>
                     <td>E-mail</td>
