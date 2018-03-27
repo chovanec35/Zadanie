@@ -15,15 +15,22 @@
         <a href="${path}/login">Login</a>
 
         <form method="POST" action="${path}/login">
-
-            <div>
-                <input path="email" name="email" type="text" placeholder="E-mail"/><br>
-                <input path="password" name="password" type="password" placeholder="Password"/><br>
-
-                <button type="submit">Log In</button>
-                <h4> <a href="${path}/registration">Create an account</a></h4>
-            </div>
-
+            <table>
+                <tr>
+                    <td>E-mail</td>
+                    <td><input path="email" name="email" type="text" placeholder="E-mail"/></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input  path="password" name="password" type="password" placeholder="Password"/></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Login</button></td>
+                </tr>
+                <tr>
+                    <td><h4><a href="${path}/registration">Create an account</a></h4></td>
+                </tr>                
+            </table>
         </form>
     </body>
 </html>

@@ -6,6 +6,7 @@
 package sk.zadanie.controller;
 
 import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import sk.zadanie.model.User;
 @Controller
 @RequestMapping(method = RequestMethod.GET)
 public class LoginController {
+
     @RequestMapping("/login")
     public String viewLogin() {
         return "login";
