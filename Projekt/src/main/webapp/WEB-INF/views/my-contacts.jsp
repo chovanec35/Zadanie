@@ -18,7 +18,7 @@
         <table>
             <tr>
                 <td>First name</td>
-                <td><input path="firstname" /></td>
+                <td><input path="firstname" placeholder=${firstName} /></td>
             </tr>
             <tr>
                 <td>Last name</td>

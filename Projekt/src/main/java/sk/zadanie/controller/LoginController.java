@@ -37,14 +37,20 @@ public class LoginController {
         ModelAndView mav = null;
         User user = userServiceImpl.validateUser(login);
         System.out.println(user);
-     /*   if (null != user) {
-            mav = new ModelAndView("welcome");
-            mav.addObject("firstname", user.getFirstname());
+        if (user != null) {
+            mav = new ModelAndView("my-contacts");
+            mav.addObject("id", user.getId());
+            mav.addObject("firstName", user.getFirstName());
+            mav.addObject("lastName", user.getLastName());
+            mav.addObject("email", user.getEmail());
+            mav.addObject("password", user.getPassword());
+            mav.addObject("birthdate", user.getBirthdate());
+
         } else {
             mav = new ModelAndView("login");
             mav.addObject("message", "Username or Password is wrong!!");
-        }*/
-        
+        }
+
         return mav;
     }
 }

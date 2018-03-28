@@ -15,6 +15,6 @@ public interface UserDao {
     public void delete(int id);
     public User getUser(int id);
     public List getAllUser();*/
-    public void register(User user);
+    //public void register(User user);
     User validateUser(Login login);
 }

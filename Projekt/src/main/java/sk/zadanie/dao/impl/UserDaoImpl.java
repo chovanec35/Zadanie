@@ -53,12 +53,12 @@ public class UserDaoImpl implements UserDao {
 
     
 
-    @Override
+    /*@Override
     public void register(User user) {
         String sql = "insert into users values(?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getName(),
             user.getName(), user.getEmail(),});
-    }
+    }*/
 
     @Override
     public User validateUser(Login login) {
@@ -74,9 +74,11 @@ class UserMapper implements RowMapper<User> {
     @Override
     public User mapRow(ResultSet rs, int arg1) throws SQLException {
         User user = new User();
-        user.setName(rs.getString("lastname"));
+        user.setId(rs.getInt("user_id"));
+        user.setFirstName(rs.getString("firstName"));
+        user.setLastName(rs.getString("lastName"));
+        user.setBirthdate(rs.getDate("birthDate"));
         user.setPassword(rs.getString("password"));
-
         user.setEmail(rs.getString("email"));
 
         return user;
