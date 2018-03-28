@@ -25,13 +25,14 @@ public class User {
     @Column
     private String password;
 
-    public User(){}
-    
+    public User() {
+    }
+
     public User(int id, String name, String email, Date birthdate, String password) {
         super();
         this.id = id;
-        this.lastName = lastName;
         this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.birthdate = birthdate;
         this.password = password;
@@ -85,10 +86,12 @@ public class User {
         this.password = password;
     }
 
+
     
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", First name=" + firstName + " , Last name=" + lastName + ", email=" + email + ", birthdate=" + birthdate + ", password=" + password + '}';
+
+        return "User{" + "id=" + id + ", fisrt name=" + firstName + ", last name=" + lastName + ", email=" + email + ", birthdate=" + birthdate + ", password=" + password + '}';
     }
 }

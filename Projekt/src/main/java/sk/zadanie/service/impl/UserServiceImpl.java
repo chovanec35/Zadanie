@@ -17,10 +17,11 @@ import sk.zadanie.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService{
+    
     @Autowired
     private UserDao userDao;
     
-   /* @Transactional
+    /*@Transactional
     public void add(User user) {
         userDao.add(user);
     }

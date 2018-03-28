@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sk.zadanie.dao.impl;
 
 import java.sql.ResultSet;
@@ -60,7 +55,6 @@ public class UserDaoImpl implements UserDao {
             user.getName(), user.getEmail(),});
     }*/
 
-    @Override
     public User validateUser(Login login) {
         String sql = "select * from users where email='" + login.getEmail()+ "' and password='" + login.getPassword()
                 + "'";
@@ -71,7 +65,6 @@ public class UserDaoImpl implements UserDao {
 
 class UserMapper implements RowMapper<User> {
 
-    @Override
     public User mapRow(ResultSet rs, int arg1) throws SQLException {
         User user = new User();
         user.setId(rs.getInt("user_id"));
@@ -80,7 +73,7 @@ class UserMapper implements RowMapper<User> {
         user.setBirthdate(rs.getDate("birthDate"));
         user.setPassword(rs.getString("password"));
         user.setEmail(rs.getString("email"));
-
         return user;
     }
+
 }

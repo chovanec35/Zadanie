@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import sk.zadanie.model.Login;
 import sk.zadanie.model.User;
-import sk.zadanie.service.UserService;
 import sk.zadanie.service.impl.UserServiceImpl;
 
 @Controller

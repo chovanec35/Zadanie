@@ -10,5 +10,5 @@ package sk.zadanie.controller;
  * @author Lenovo
  */
 public class RegistrationController {
-    
+
 }
