@@ -16,17 +16,17 @@
         <a href="${path}/home">Logout</a>
     <form method="POST">
         <table>
-            <tr>
+                <tr>
                 <td>First name</td>
-                <td><input path="firstname" /></td>
+                <td><input path="firstname" placeholder= ${firstname} /></td>
             </tr>
             <tr>
                 <td>Last name</td>
-                <td><input path="lastname" /></td>
+                <td><input path="lastname" placeholder= ${lastname} /></td>
             </tr>
             <tr>
                 <td>E-mail</td>
-                <td><input path="email" /></td>
+                <td><input path="email" placeholder= ${email} /></td>
             </tr>
             <tr>
                 <td>Birthdate</td>

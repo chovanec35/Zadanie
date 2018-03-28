@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import sk.zadanie.model.Login;
 import sk.zadanie.model.User;
-import sk.zadanie.service.UserService;
 import sk.zadanie.service.impl.UserServiceImpl;
 
 @Controller
@@ -37,14 +36,16 @@ public class LoginController {
         ModelAndView mav = null;
         User user = userServiceImpl.validateUser(login);
         System.out.println(user);
-     /*   if (null != user) {
-            mav = new ModelAndView("welcome");
-            mav.addObject("firstname", user.getFirstname());
+        if (user != null) {
+            mav = new ModelAndView("my-contact");
+            mav.addObject("firstname", user.getFirstName());
+            mav.addObject("lastname", user.getLastName());
+            mav.addObject("email", user.getEmail());
         } else {
             mav = new ModelAndView("login");
             mav.addObject("message", "Username or Password is wrong!!");
-        }*/
-        
+        }
+
         return mav;
     }
 }

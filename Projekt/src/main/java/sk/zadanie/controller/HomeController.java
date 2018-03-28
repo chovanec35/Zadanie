@@ -11,19 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 
     @RequestMapping("/home")
-    public ModelAndView viewHome(ModelMap model) { 
-        Map<String, String> map = new HashMap();
-        map.put("1", "Mato");
-        map.put("2", "Jozo");
-        model.put("email", map);
-        return new ModelAndView("home", model);
+    public String viewHome(ModelMap model) {
+        return "home";
     }
 
-    
-
     @RequestMapping("/registration")
-   
-    public String viewRegistration() {    
+
+    public String viewRegistration() {
         return "registration";
     }
 

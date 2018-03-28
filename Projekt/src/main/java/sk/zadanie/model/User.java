@@ -15,21 +15,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column
-    private String name;
+    private String firstName;
+    @Column
+    private String lastName;
     @Column
     private String email;
     @Column
-    private String birthdate;
-    //private Date birthdate;
+    //private String birthdate;
+    private Date birthdate;
     @Column
     private String password;
 
-    public User(){}
-    
-    public User(int id, String name, String email, String birthdate, String password) {
+    public User() {
+    }
+
+    public User(int id, String name, String email, Date birthdate, String password) {
         super();
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.birthdate = birthdate;
         this.password = password;
@@ -39,15 +43,27 @@ public class User {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
 
@@ -59,15 +75,11 @@ public class User {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -77,6 +89,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", email=" + email + ", birthdate=" + birthdate + ", password=" + password + '}';
+        return "User{" + "id=" + id + ", fisrt name=" + firstName + ", last name=" + lastName + ", email=" + email + ", birthdate=" + birthdate + ", password=" + password + '}';
     }
 }

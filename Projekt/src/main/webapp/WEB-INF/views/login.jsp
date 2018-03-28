@@ -12,8 +12,8 @@
     <body>
         <h1>Login</h1>
         <a href="${path}/home">Home</a>
-        <a href="${path}/login">Login</a>
-
+        <a href="${path}/login">Login</a><br>
+        <label style="color: red;"> ${message}</label><br>
         <form method="POST" modelAttribute="login" action="${path}/loginProcess">
             <table>
                 <tr>
@@ -32,5 +32,8 @@
                 </tr>                
             </table>
         </form>
+        <table>
+            
+        </table>
     </body>
 </html>

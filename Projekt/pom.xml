@@ -84,6 +84,7 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>4.3.6.Final</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
     <build>
