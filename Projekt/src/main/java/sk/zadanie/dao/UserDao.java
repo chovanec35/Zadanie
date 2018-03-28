@@ -11,6 +11,5 @@ public interface UserDao {
     public List getAllUser();*/
     //public void register(User user);
 
-
     User validateUser(Login login);
 }

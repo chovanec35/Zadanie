@@ -29,7 +29,7 @@
                 <td>E-mail</td>
                 <td><input path="email" placeholder= ${email} /></td>
             </tr>
-            <tr>
+            <tr>    
                 <td>Birthdate</td>
                 <td><input path="birthdate" placeholder= ${birthdate} /></td>
             </tr>

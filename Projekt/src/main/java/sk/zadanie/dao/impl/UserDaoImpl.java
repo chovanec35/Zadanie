@@ -54,7 +54,8 @@ public class UserDaoImpl implements UserDao {
         jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getName(),
             user.getName(), user.getEmail(),});
     }*/
-
+    
+    @Override
     public User validateUser(Login login) {
         String sql = "select * from users where email='" + login.getEmail()+ "' and password='" + login.getPassword()
                 + "'";
@@ -75,5 +76,4 @@ class UserMapper implements RowMapper<User> {
         user.setEmail(rs.getString("email"));
         return user;
     }
-
 }

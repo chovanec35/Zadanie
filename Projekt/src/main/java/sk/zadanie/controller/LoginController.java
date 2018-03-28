@@ -44,7 +44,6 @@ public class LoginController {
             mav.addObject("email", user.getEmail());
             mav.addObject("password", user.getPassword());
             mav.addObject("birthdate", user.getBirthdate());
-
         } else {
             mav = new ModelAndView("login");
             mav.addObject("message", "Username or Password is wrong!!");

@@ -12,7 +12,7 @@ public class HomeController {
     }
 
     @RequestMapping("/registration")
-    public String viewRegistration() {    
+    public String viewRegistration() {
         return "registration";
     }
 
