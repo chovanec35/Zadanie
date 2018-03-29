@@ -81,7 +81,7 @@ public class UserDto {
         this.password = password;
     }
 
-    public boolean isDeleted() {
+    public boolean getDeleted() {
         return deleted;
     }
 
