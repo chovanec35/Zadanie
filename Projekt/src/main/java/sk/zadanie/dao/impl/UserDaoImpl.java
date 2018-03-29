@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import sk.zadanie.dao.UserDao;
+import sk.zadanie.dto.UserDto;
 import sk.zadanie.model.Login;
 import sk.zadanie.model.User;
 
@@ -46,12 +47,12 @@ public class UserDaoImpl implements UserDao {
         return session.getCurrentSession().createQuery("from User").list();
     }*/
     
-    public void registration(User user) {
-        String sql = "insert into users values(?,?,?,?,?,?,?)";
+    public void registration(UserDto user) {
+        System.out.println("zapisujem do DB");
+       /* String sql = "insert into users values(?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getFirstName(),
-            user.getLastName(), user.getEmail(),user.getBirthdate(), user.getId()});
+            user.getLastName(), user.getEmail(),user.getBirthdate(), user.getId(), user.getFlag_del()});*/
     }
-    
     
     public User validateUser(Login login) {
         String sql = "select * from users where email='" + login.getEmail()+ "' and password='" + login.getPassword()

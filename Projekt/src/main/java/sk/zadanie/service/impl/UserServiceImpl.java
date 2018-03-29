@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sk.zadanie.dao.UserDao;
+import sk.zadanie.dto.UserDto;
 import sk.zadanie.model.Login;
 import sk.zadanie.model.User;
 import sk.zadanie.service.UserService;
@@ -47,7 +48,7 @@ public class UserServiceImpl implements UserService{
     }*/
     
     @Transactional
-    public void registration(User user){
+    public void registration(UserDto user){
         userDao.registration(user);
     }
     

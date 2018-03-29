@@ -6,6 +6,7 @@
 package sk.zadanie.service;
 
 import java.util.List;
+import sk.zadanie.dto.UserDto;
 import sk.zadanie.model.Login;
 import sk.zadanie.model.User;
 
@@ -19,6 +20,6 @@ public interface UserService {
     public void delete(int id);
     public User getUser(int id);
     public List getAllUser();*/
-    public void registration(User user);
+    public void registration(UserDto user);
     public User validateUser(Login login);
 }
