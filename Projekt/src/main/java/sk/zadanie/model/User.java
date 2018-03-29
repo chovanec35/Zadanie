@@ -24,6 +24,8 @@ public class User {
     private Date birthdate;
     @Column
     private String password;
+    @Column
+    private boolean flag_del;
 
     public User() {
     }
@@ -36,6 +38,7 @@ public class User {
         this.email = email;
         this.birthdate = birthdate;
         this.password = password;
+        this.flag_del = flag_del;
     }
 
     public int getId() {
@@ -86,9 +89,17 @@ public class User {
         this.password = password;
     }
 
+    public boolean getFlag_del() {
+        return flag_del;
+    }
+
+    public void setFlag_del(boolean flag_del) {
+        this.flag_del = flag_del;
+    }
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", fisrt name=" + firstName + ", last name=" + lastName + ", email=" + email + ", birthdate=" + birthdate + ", password=" + password + '}';
+        return "User{" + "id=" + id + ", flag_del=" + flag_del + ", fisrt name=" + firstName + ", last name=" + lastName + ", "
+                + "email=" + email + ", birthdate=" + birthdate + ", password=" + password + '}';
     }
 }

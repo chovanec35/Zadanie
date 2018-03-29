@@ -19,5 +19,6 @@ public interface UserService {
     public void delete(int id);
     public User getUser(int id);
     public List getAllUser();*/
+    public void registration(User user);
     public User validateUser(Login login);
 }

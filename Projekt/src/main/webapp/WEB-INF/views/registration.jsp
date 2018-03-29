@@ -12,15 +12,32 @@
         <h1>Registration form</h1>
         <a href="${path}/home">Home</a>
         <a href="${path}/login">Login</a>
-        
-        <form action="" method="post">
-            First name <input type="text" name="first-name" value=""/><br/>
-            Last name <input type="text" name="last-name" value=""/><br/>
-            E-mail <input type="email" name="email" value=""/><br/>
-            Birthdate <input type="date" name="birthdate" value=""/><br/>
-            Password <input type="password" name="password" value=""/><br/>
-            Confirm Password <input type="password" name="conf-password" value=""/><br/>
-            <input type="submit" value="Register">
+
+        <form method="POST" modelAttribute="user" action="${path}/registerProcess">
+            <table>
+                <tr>
+                    <td>First name <input path="firstName" type="text" name="firstName" value=""/></td>
+                </tr>
+                <tr>
+                    <td>Last name <input path="lastName" type="text" name="lastName" value=""/></td>
+                </tr>
+                <tr>
+                    <td>E-mail <input path="email" type="email" name="email" value=""/></td>
+                </tr>
+                <tr>
+                    <td>Birthdate <input path="birthdate" type="date" name="birthdate" value=""/></td>
+                </tr>
+                <tr>
+                    <td>Password <input path="password" type="password" name="password" value=""/></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password <input path="confirmPassword" type="password" name="confirmPassword" value=""/></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Registration</button></td>
+                </tr>
+            </table>
         </form>
+
     </body>
 </html>

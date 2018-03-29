@@ -47,6 +47,11 @@ public class UserServiceImpl implements UserService{
     }*/
     
     @Transactional
+    public void registration(User user){
+        userDao.registration(user);
+    }
+    
+    @Transactional
     public User validateUser(Login login){
         return userDao.validateUser(login);
     }

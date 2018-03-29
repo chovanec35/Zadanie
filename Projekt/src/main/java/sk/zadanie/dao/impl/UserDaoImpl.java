@@ -45,17 +45,14 @@ public class UserDaoImpl implements UserDao {
     public List getAllUser() {
         return session.getCurrentSession().createQuery("from User").list();
     }*/
-
     
-
-    /*@Override
-    public void register(User user) {
+    public void registration(User user) {
         String sql = "insert into users values(?,?,?,?,?,?,?)";
-        jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getName(),
-            user.getName(), user.getEmail(),});
-    }*/
+        jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getFirstName(),
+            user.getLastName(), user.getEmail(),user.getBirthdate(), user.getId()});
+    }
     
-    @Override
+    
     public User validateUser(Login login) {
         String sql = "select * from users where email='" + login.getEmail()+ "' and password='" + login.getPassword()
                 + "'";
@@ -74,6 +71,7 @@ class UserMapper implements RowMapper<User> {
         user.setBirthdate(rs.getDate("birthDate"));
         user.setPassword(rs.getString("password"));
         user.setEmail(rs.getString("email"));
+        user.setFlag_del(rs.getBoolean("flag_del"));
         return user;
     }
 }

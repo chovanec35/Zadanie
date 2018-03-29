@@ -9,7 +9,7 @@ public interface UserDao {
     public void delete(int id);
     public User getUser(int id);
     public List getAllUser();*/
-    //public void register(User user);
-
+    
+    void registration(User user);
     User validateUser(Login login);
 }

@@ -18,20 +18,20 @@
         <table>
                 <tr>
                 <td>First name</td>
-                <td><input path="firstname" placeholder=${firstName} /></td>
+                <td><input path="firstname" /></td>
 
             </tr>
             <tr>
                 <td>Last name</td>
-                <td><input path="lastname" placeholder= ${lastName} /></td>
+                <td><input path="lastname" /></td>
             </tr>
             <tr>
                 <td>E-mail</td>
-                <td><input path="email" placeholder= ${email} /></td>
+                <td><input path="email" /></td>
             </tr>
             <tr>    
                 <td>Birthdate</td>
-                <td><input path="birthdate" placeholder= ${birthdate} /></td>
+                <td><input path="birthdate" /></td>
             </tr>
             <tr>
                 <td colspan="3">

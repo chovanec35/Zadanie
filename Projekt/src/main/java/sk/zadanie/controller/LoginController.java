@@ -32,11 +32,11 @@ public class LoginController {
 
     @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
     public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
-            @ModelAttribute("login") Login login) {
+        @ModelAttribute("login") Login login) {
         ModelAndView mav = null;
         User user = userServiceImpl.validateUser(login);
         System.out.println(user);
-        if (user != null) {
+        if (user != null && user.getFlag_del() == false) {
             mav = new ModelAndView("my-contacts");
             mav.addObject("id", user.getId());
             mav.addObject("firstName", user.getFirstName());
@@ -44,7 +44,12 @@ public class LoginController {
             mav.addObject("email", user.getEmail());
             mav.addObject("password", user.getPassword());
             mav.addObject("birthdate", user.getBirthdate());
-        } else {
+        }
+        else if(user != null && user.getFlag_del() == true){
+            mav = new ModelAndView("login");
+            mav.addObject("message", "This user is deleted!!");
+        } 
+        else {
             mav = new ModelAndView("login");
             mav.addObject("message", "Username or Password is wrong!!");
         }

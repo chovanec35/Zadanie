@@ -11,10 +11,10 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping("/registration")
+    /*@RequestMapping("/registration")
     public String viewRegistration() {
         return "registration";
-    }
+    }*/
 
     @RequestMapping("/add-new-contact")
     public String viewAddNewContact() {
