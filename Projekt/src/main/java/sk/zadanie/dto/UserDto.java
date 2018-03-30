@@ -79,7 +79,7 @@ public class UserDto {
         this.password = password;
     }
 
-    public boolean getDeleted() {
+    public boolean isDeleted() {
         return deleted;
     }
 
@@ -91,8 +91,4 @@ public class UserDto {
     public String toString() {
         return "UserDto{" + "user_id=" + user_id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", deleted=" + deleted + '}';
     }
-
-
-    
-
 }

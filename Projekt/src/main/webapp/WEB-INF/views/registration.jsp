@@ -15,12 +15,6 @@
 
         <form method="POST" modelAttribute="user" action="${path}/registrationProcess">
             <table>
-<!--                <tr>
-                    <td><input path="user_id" type="hidden" name="user_id" value="6" /></td>
-                </tr>-->
-<!--                <tr>
-                    <td><input path="deleted" type="hidden" name="deleted" value="false"/></td>
-                </tr>-->
                 <tr>
                     <td>First name <input path="firstName" type="text" name="firstName" value=""/></td>
                 </tr>
@@ -43,7 +37,6 @@
                 <!--                <tr>
                                     <td>Confirm Password <input type="password" name="confirmPassword" value=""/></td>
                                 </tr>-->
-                <tr>
                     <td><button type="submit">Registration</button></td>
                 </tr>
             </table>

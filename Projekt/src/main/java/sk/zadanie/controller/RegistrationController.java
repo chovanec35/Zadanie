@@ -36,7 +36,6 @@ public class RegistrationController {
     @RequestMapping(value = "/registrationProcess", method = RequestMethod.POST)
     public ModelAndView registrationProcess(HttpServletRequest request, HttpServletResponse response,
             @ModelAttribute("user") UserDto user) throws IOException {
-        System.out.println("POST");
         userServiceImpl.registration(user);
         
         return new ModelAndView("registration");
