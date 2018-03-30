@@ -1,5 +1,6 @@
 package sk.zadanie.dao;
 
+import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.UserDto;
 import sk.zadanie.model.Login;
 import sk.zadanie.model.User;
@@ -11,7 +12,7 @@ public interface UserDao {
     public User getUser(int id);
     public List getAllUser();*/
     
-    
+    public void addNewContact(ContactDto contact);
     public void registration(UserDto user);
     User validateUser(Login login);
 //    User validateName(Login login);

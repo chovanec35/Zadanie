@@ -26,11 +26,11 @@
             <table>
                 <tr>
                     <td>First name *</td> 
-                    <td><input type="text" name="name"></td>
+                    <td><input path="firstName" type="text" name="firstName"></td>
                 </tr>
                 <tr>
                     <td>Last name *</td> 
-                    <td><input type="text" name="last-name"></td>
+                    <td><input path="lastName" type="text" name="lastName"></td>
                 </tr>
                 <!--                <tr>
                                     <td>Birthdate <input type="date" name="birthdate"></td>
@@ -41,10 +41,10 @@
                 </tr>              
                 <tr>
                     <td>Category *</td> 
-                    <td><select name="category">
-                            <option value="men">Family</option>
-                            <option value="woman">Friends</option>
-                            <option value="other">Job</option>
+                    <td><select path="category" name="category">
+                            <option value="1">Family</option>
+                            <option value="2">Friends</option>
+                            <option value="3">Job</option>
                         </select></td>
                 </tr>
                 <tr>

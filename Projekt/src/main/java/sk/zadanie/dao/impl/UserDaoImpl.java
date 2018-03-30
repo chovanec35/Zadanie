@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import sk.zadanie.dao.UserDao;
+import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.UserDto;
 import sk.zadanie.model.Login;
 import sk.zadanie.model.User;
@@ -59,6 +60,14 @@ public class UserDaoImpl implements UserDao {
                 + "'";
         List<User> users = jdbcTemplate.query(sql, new UserMapper());
         return users.size() > 0 ? users.get(0) : null;
+    }
+
+    @Override
+    public void addNewContact(ContactDto contact) {
+        System.out.println("Kontakt bol pridany");
+//        String sql = "insert into users (USER_ID, ROLE_ID, FNAME, LNAME ,DESCRIPTION) values(?,?,?,?)";
+//        jdbcTemplate.update(sql, new Object[]{user.getFirstName(), user.getLastName(), 
+//             user.getPassword(), user.getEmail()});
     }
 }
 
