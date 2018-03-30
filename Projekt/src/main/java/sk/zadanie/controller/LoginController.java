@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import sk.zadanie.model.Login;
 import sk.zadanie.model.User;
-import sk.zadanie.service.UserService;
 import sk.zadanie.service.impl.UserServiceImpl;
 
 @Controller
@@ -32,20 +31,21 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-    public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
+    public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response, 
             @ModelAttribute("login") Login login) {
         ModelAndView mav = null;
         User user = userServiceImpl.validateUser(login);
         System.out.println(user);
-        if (user != null) {
+        if (user != null && !user.isDeleted()) {
             mav = new ModelAndView("my-contacts");
             mav.addObject("id", user.getId());
             mav.addObject("firstName", user.getFirstName());
             mav.addObject("lastName", user.getLastName());
             mav.addObject("email", user.getEmail());
             mav.addObject("password", user.getPassword());
-            mav.addObject("birthdate", user.getBirthdate());
-
+        } else if (user != null && user.isDeleted()) {
+            mav = new ModelAndView("login");
+            mav.addObject("message", "This user is deleted!!");
         } else {
             mav = new ModelAndView("login");
             mav.addObject("message", "Username or Password is wrong!!");

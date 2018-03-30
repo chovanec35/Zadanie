@@ -1,6 +1,6 @@
-package sk.zadanie.model;
+package sk.zadanie.dto;
 
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -8,30 +8,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class UserDto {
 
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int user_id;
+    @Column
+    private String email;
     @Column
     private String firstName;
     @Column
     private String lastName;
-    @Column
-    private String email;
-    //@Column
-    //private Date birthdate;
+//    @Column
+//     String birthdate;
     @Column
     private String password;
     @Column
     private boolean deleted;
 
-    public User() {
+    public UserDto() {
     }
 
-    public User(int id, String firstName, String lastName, String email, String password, boolean deleted) {
-        this.id = id;
+    public UserDto(int user_id, String firstName, String lastName, String email, String password, boolean deleted) {
+        this.user_id = user_id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -39,12 +39,12 @@ public class User {
         this.deleted = deleted;
     }
 
-    public int getId() {
-        return id;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getFirstName() {
@@ -79,7 +79,7 @@ public class User {
         this.password = password;
     }
 
-    public boolean isDeleted() {
+    public boolean getDeleted() {
         return deleted;
     }
 
@@ -89,7 +89,10 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password + ", deleted=" + deleted + '}';
+        return "UserDto{" + "user_id=" + user_id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", deleted=" + deleted + '}';
     }
+
+
     
+
 }

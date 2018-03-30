@@ -20,18 +20,37 @@
     <body>
         <h1>New contact</h1>
         <a href="${path}/my-contacts">My contacts</a>
+        <a href="${path}/add-new-contact">Add new contact</a>
         <a href="${path}/home">Logout</a>
-        <form>
-            First name * <input type="text" name="name"><br/>
-            Last name * <input type="text" name="last-name"><br/>
-            Birthdate <input type="date" name="birthdate"><br/>
-            Description <textarea name="text-area" cols="30" rows="3"></textarea><br/>
-            Category * <select name="category"><br/>
-                <option value="men">Family</option>
-                <option value="woman">Friends</option>
-                <option value="other">Job</option>
-            </select><br/>
-            <input type="submit" value="Add new contact">
+        <form method="POST">
+            <table>
+                <tr>
+                    <td>First name *</td> 
+                    <td><input type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <td>Last name *</td> 
+                    <td><input type="text" name="last-name"></td>
+                </tr>
+                <!--                <tr>
+                                    <td>Birthdate <input type="date" name="birthdate"></td>
+                                </tr>-->
+                <tr>
+                    <td>Description</td> 
+                    <td><textarea name="text-area" cols="30" rows="3"></textarea></td>
+                </tr>              
+                <tr>
+                    <td>Category *</td> 
+                    <td><select name="category">
+                            <option value="men">Family</option>
+                            <option value="woman">Friends</option>
+                            <option value="other">Job</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Add new conntact</button></td>
+                </tr>
+            </table>
         </form>
     </body>
 </html>

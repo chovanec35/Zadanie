@@ -13,9 +13,10 @@
         <h1>Welcome to Home Page!</h1>
         <a href="${path}/home">Home</a>
         <a href="${path}/login">Login</a>
+        <a href="${path}/registration">Registration</a>
         
         <p>
-            ${email["1"]}
+            Here is description about this application.
         </p>
     </body>
 </html>

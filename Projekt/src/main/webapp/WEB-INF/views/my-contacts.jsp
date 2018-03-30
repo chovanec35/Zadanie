@@ -13,33 +13,38 @@
     <body>
         <h1>My contacts</h1>
         <a href="${path}/my-contacts">My contacts</a>
+        <a href="${path}/add-new-contact">Add new contact</a>
         <a href="${path}/home">Logout</a>
-    <form method="POST">
-        <table>
-            <tr>
-                <td>First name</td>
-                <td><input path="firstname" placeholder=${firstName} /></td>
-            </tr>
-            <tr>
-                <td>Last name</td>
-                <td><input path="lastname" /></td>
-            </tr>
-            <tr>
-                <td>E-mail</td>
-                <td><input path="email" /></td>
-            </tr>
-            <tr>
-                <td>Birthdate</td>
-                <td><input path="birthdate" /></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <input type="submit" name="action" value="Add" />
-                    <input type="submit" name="action" value="Edit" />
-                    <input type="submit" name="action" value="Delete" />
-                </td>
-            </tr>
-        </table>
-    </form>
-</body>
+        <form method="POST">
+            <table>
+                <tr>
+                    <td>First name</td>
+                    <td><input path="firstname" /></td>
+
+                </tr>
+                <tr>
+                    <td>Last name</td>
+                    <td><input path="lastname" /></td>
+                </tr>
+                <tr>
+                    <td>Category</td>
+                    <td>
+                        <select name="category">
+                            <option value="empty"></option>
+                            <option value="men">Family</option>
+                            <option value="woman">Friends</option>
+                            <option value="other">Job</option>
+                        </select>
+                    </td>
+                </tr>
+<!--            <tr>    
+                    <td>Birthdate</td>
+                    <td><input path="birthdate" /></td>
+                </tr>-->
+                <tr>
+                    <td><button type="submit">Search</button></td>
+                </tr>
+            </table>
+        </form>
+    </body>
 </html>

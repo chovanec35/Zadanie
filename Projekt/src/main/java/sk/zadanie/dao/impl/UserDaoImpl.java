@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sk.zadanie.dao.impl;
 
 import java.sql.ResultSet;
@@ -14,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import sk.zadanie.dao.UserDao;
+import sk.zadanie.dto.UserDto;
 import sk.zadanie.model.Login;
 import sk.zadanie.model.User;
 
@@ -50,17 +46,14 @@ public class UserDaoImpl implements UserDao {
     public List getAllUser() {
         return session.getCurrentSession().createQuery("from User").list();
     }*/
-
     
-
-    /*@Override
-    public void register(User user) {
-        String sql = "insert into users values(?,?,?,?,?,?,?)";
-        jdbcTemplate.update(sql, new Object[]{user.getPassword(), user.getName(),
-            user.getName(), user.getEmail(),});
-    }*/
-
-    @Override
+    public void registration(UserDto user) {
+        System.out.println("zapisujem do DB");
+        String sql = "insert into users (FIRSTNAME, LASTNAME, PASSWORD, EMAIL) values(?,?,?,?)";
+        jdbcTemplate.update(sql, new Object[]{user.getFirstName(), user.getLastName(), 
+             user.getPassword(), user.getEmail()});
+    }
+    
     public User validateUser(Login login) {
         String sql = "select * from users where email='" + login.getEmail()+ "' and password='" + login.getPassword()
                 + "'";
@@ -71,16 +64,14 @@ public class UserDaoImpl implements UserDao {
 
 class UserMapper implements RowMapper<User> {
 
-    @Override
     public User mapRow(ResultSet rs, int arg1) throws SQLException {
         User user = new User();
-        user.setId(rs.getInt("user_id"));
+        //user.setId(rs.getInt("user_id"));
         user.setFirstName(rs.getString("firstName"));
         user.setLastName(rs.getString("lastName"));
-        user.setBirthdate(rs.getDate("birthDate"));
         user.setPassword(rs.getString("password"));
         user.setEmail(rs.getString("email"));
-
+        user.setDeleted(rs.getBoolean("deleted"));
         return user;
     }
 }

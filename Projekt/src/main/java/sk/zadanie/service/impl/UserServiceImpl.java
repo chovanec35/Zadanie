@@ -11,16 +11,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sk.zadanie.dao.UserDao;
+import sk.zadanie.dto.UserDto;
 import sk.zadanie.model.Login;
 import sk.zadanie.model.User;
 import sk.zadanie.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService{
+    
     @Autowired
     private UserDao userDao;
     
-   /* @Transactional
+    /*@Transactional
     public void add(User user) {
         userDao.add(user);
     }
@@ -44,6 +46,11 @@ public class UserServiceImpl implements UserService{
     public List getAllUser() {
         return userDao.getAllUser();
     }*/
+    
+    @Transactional
+    public void registration(UserDto user){
+        userDao.registration(user);
+    }
     
     @Transactional
     public User validateUser(Login login){
