@@ -35,7 +35,6 @@ public class LoginController {
             @ModelAttribute("login") Login login) {
         ModelAndView mav = null;
         User user = userServiceImpl.validateUser(login);
-        System.out.println(user);
         if (user != null && !user.isDeleted()) {
             mav = new ModelAndView("my-contacts");
             mav.addObject("id", user.getId());

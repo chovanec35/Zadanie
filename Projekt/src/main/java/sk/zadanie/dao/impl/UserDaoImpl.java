@@ -51,6 +51,8 @@ public class UserDaoImpl implements UserDao {
     public void registration(UserDto user) {
         System.out.println("zapisujem do DB");
         String sql = "insert into users (FIRSTNAME, LASTNAME, PASSWORD, EMAIL) values(?,?,?,?)";
+        
+        
         jdbcTemplate.update(sql, new Object[]{user.getFirstName(), user.getLastName(), 
              user.getPassword(), user.getEmail()});
     }
@@ -65,9 +67,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void addNewContact(ContactDto contact) {
         System.out.println("Kontakt bol pridany");
-//        String sql = "insert into users (USER_ID, ROLE_ID, FNAME, LNAME ,DESCRIPTION) values(?,?,?,?)";
-//        jdbcTemplate.update(sql, new Object[]{user.getFirstName(), user.getLastName(), 
-//             user.getPassword(), user.getEmail()});
+//        String sql = "insert into users (FIRSTNAME, LASTNAME, PASSWORD, EMAIL) values(?,?,?,?)";
+//        jdbcTemplate.update(sql, new Object[]{contact.getFirstName(), contact.getLastName(), 
+//             contact.getPassword(), contact.getEmail()});
     }
 }
 
@@ -75,7 +77,6 @@ class UserMapper implements RowMapper<User> {
 
     public User mapRow(ResultSet rs, int arg1) throws SQLException {
         User user = new User();
-        //user.setId(rs.getInt("user_id"));
         user.setFirstName(rs.getString("firstName"));
         user.setLastName(rs.getString("lastName"));
         user.setPassword(rs.getString("password"));

@@ -6,6 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class UserDto {
@@ -14,28 +18,48 @@ public class UserDto {
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int user_id;
+    
     @Column
+    @NotNull
+    @NotEmpty
+    @Email
     private String email;
+    
     @Column
+    @NotEmpty
+    @NotNull
     private String firstName;
+    
     @Column
+    @NotEmpty
+    @NotNull
     private String lastName;
 //    @Column
 //     String birthdate;
-    @Column
+    
+    @Column 
+    @Size(min = 8, max = 16)
+    @NotEmpty
     private String password;
+
+    @Size(min = 8, max = 16)
+    @NotNull
+    @NotEmpty
+    private String confirmPassword;
+    
     @Column
     private boolean deleted;
 
     public UserDto() {
     }
 
-    public UserDto(int user_id, String firstName, String lastName, String email, String password, boolean deleted) {
+    public UserDto(int user_id, String email, String firstName, String lastName, String password, boolean deleted, String confirmPassword) {
         this.user_id = user_id;
+        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.password = password;
+        this.confirmPassword = confirmPassword;
         this.deleted = deleted;
     }
 
@@ -79,6 +103,14 @@ public class UserDto {
         this.password = password;
     }
 
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
     public boolean isDeleted() {
         return deleted;
     }
@@ -89,6 +121,6 @@ public class UserDto {
 
     @Override
     public String toString() {
-        return "UserDto{" + "user_id=" + user_id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", deleted=" + deleted + '}';
+        return "UserDto{" + "user_id=" + user_id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", deleted=" + deleted + ", confirmPassword=" + confirmPassword + '}';
     }
 }

@@ -31,9 +31,9 @@
                     <td>
                         <select name="category">
                             <option value="empty"></option>
-                            <option value="men">Family</option>
-                            <option value="woman">Friends</option>
-                            <option value="other">Job</option>
+                            <option value="1">Family</option>
+                            <option value="2">Friends</option>
+                            <option value="3">Job</option>
                         </select>
                     </td>
                 </tr>

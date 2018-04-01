@@ -22,7 +22,8 @@
         <a href="${path}/my-contacts">My contacts</a>
         <a href="${path}/add-new-contact">Add new contact</a>
         <a href="${path}/home">Logout</a>
-        <form method="POST">
+        
+        <form method="POST" modelAttribute="contact" action="${path}/newContactProcess">
             <table>
                 <tr>
                     <td>First name *</td> 

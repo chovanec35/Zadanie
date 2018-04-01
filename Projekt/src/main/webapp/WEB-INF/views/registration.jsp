@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+
 <html>
     <head>
         <title>Registration</title>
@@ -16,10 +17,12 @@
         <form method="POST" modelAttribute="user" action="${path}/registrationProcess">
             <table>
                 <tr>
-                    <td>First name <input path="firstName" type="text" name="firstName" value=""/></td>
+                    <td>First name</td>
+                    <td><input path="firstName" type="text" name="firstName" value=""/></td>
                 </tr>
                 <tr>
-                    <td>Last name <input path="lastName" type="text" name="lastName" value=""/></td>
+                    <td>Last name </td>
+                    <td><input path="lastName" type="text" name="lastName" value=""/></td>
                 </tr>
 
                 <!--                               
@@ -29,14 +32,18 @@
                 -->
 
                 <tr>
-                    <td>E-mail <input path="email" type="email" name="email" value=""/></td>
+                    <td>E-mail </td>
+                    <td><input path="email" type="email" name="email" value=""/></td>
                 </tr> 
                 <tr>
-                    <td>Password <input path="password" type="password" name="password" value=""/></td>
+                    <td>Password </td>
+                    <td><input path="password" type="password" name="password" value=""/></td>
                 </tr>
-                <!--                <tr>
-                                    <td>Confirm Password <input type="password" name="confirmPassword" value=""/></td>
-                                </tr>-->
+                <tr>
+                    <td>Confirm Password</td>
+                    <td><input type="password" name="confirmPassword" value=""/></td>
+                </tr>
+                <tr>
                     <td><button type="submit">Registration</button></td>
                 </tr>
             </table>
