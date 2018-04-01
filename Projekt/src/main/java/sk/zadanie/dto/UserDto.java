@@ -17,7 +17,7 @@ public class UserDto {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int user_id;
+    private int userId;
     
     @Column
     @NotNull
@@ -53,8 +53,8 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(int user_id, String email, String firstName, String lastName, String password, boolean deleted, String confirmPassword) {
-        this.user_id = user_id;
+    public UserDto(int userId, String email, String firstName, String lastName, String password, boolean deleted, String confirmPassword) {
+        this.userId = userId;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -63,12 +63,12 @@ public class UserDto {
         this.deleted = deleted;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -121,6 +121,6 @@ public class UserDto {
 
     @Override
     public String toString() {
-        return "UserDto{" + "user_id=" + user_id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", deleted=" + deleted + ", confirmPassword=" + confirmPassword + '}';
+        return "UserDto{" + "userId=" + userId + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", deleted=" + deleted + ", confirmPassword=" + confirmPassword + '}';
     }
 }

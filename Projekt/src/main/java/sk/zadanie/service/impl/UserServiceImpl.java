@@ -49,8 +49,8 @@ public class UserServiceImpl implements UserService{
     }*/
     
     @Transactional
-    public void addNewContact(ContactDto contact){
-        userDao.addNewContact(contact);
+    public void addNewContact(ContactDto contact, UserDto userDto){
+        userDao.addNewContact(contact, userDto);
     }
     
     @Transactional

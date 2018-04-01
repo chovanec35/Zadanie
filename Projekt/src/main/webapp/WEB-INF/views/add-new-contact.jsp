@@ -38,7 +38,7 @@
                                 </tr>-->
                 <tr>
                     <td>Description</td> 
-                    <td><textarea name="text-area" cols="30" rows="3"></textarea></td>
+                    <td><textarea path="description" name="text-area" cols="30" rows="3"></textarea></td>
                 </tr>              
                 <tr>
                     <td>Category *</td> 

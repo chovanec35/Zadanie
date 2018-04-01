@@ -21,7 +21,7 @@ public interface UserService {
     public void delete(int id);
     public User getUser(int id);
     public List getAllUser();*/
-    public void addNewContact(ContactDto contact);
+    public void addNewContact(ContactDto contact, UserDto userDto);
     public void registration(UserDto user);
     public User validateUser(Login login);
 }

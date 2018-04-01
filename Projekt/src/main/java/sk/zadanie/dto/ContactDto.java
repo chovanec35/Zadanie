@@ -23,18 +23,18 @@ public class ContactDto {
     @Column
     private String lastName;
     @Column
-    private String decripttion;
+    private String description;
 
     public ContactDto() {
     }
 
-    public ContactDto(int contact_id, String role_id, String user_id, String firstName, String lastName, String decripttion) {
+    public ContactDto(int contact_id, String role_id, String user_id, String firstName, String lastName, String description) {
         this.contact_id = contact_id;
         this.role_id = role_id;
         this.user_id = user_id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.decripttion = decripttion;
+        this.description = description;
     }
 
     public int getContact_id() {
@@ -77,17 +77,17 @@ public class ContactDto {
         this.lastName = lastName;
     }
 
-    public String getDecripttion() {
-        return decripttion;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDecripttion(String decripttion) {
-        this.decripttion = decripttion;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
     public String toString() {
-        return "ContactDto{" + "contact_id=" + contact_id + ", role_id=" + role_id + ", user_id=" + user_id + ", firstName=" + firstName + ", lastName=" + lastName + ", decripttion=" + decripttion + '}';
+        return "ContactDto{" + "contact_id=" + contact_id + ", role_id=" + role_id + ", user_id=" + user_id + ", firstName=" + firstName + ", lastName=" + lastName + ", description=" + description + '}';
     }
-
+        
 }

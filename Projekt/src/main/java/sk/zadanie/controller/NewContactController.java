@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import sk.zadanie.dto.ContactDto;
+import sk.zadanie.dto.UserDto;
 import sk.zadanie.service.impl.UserServiceImpl;
 
 @Controller
@@ -33,8 +34,8 @@ public class NewContactController {
 
     @RequestMapping(value = "/newContactProcess", method = RequestMethod.POST)
     public ModelAndView newContactProcess(HttpServletRequest request, HttpServletResponse response,
-            @ModelAttribute("contact") ContactDto contact) throws IOException {
-        userServiceImpl.addNewContact(contact);
+            @ModelAttribute("contact") ContactDto contact, UserDto userDto) throws IOException {
+        userServiceImpl.addNewContact(contact, userDto);
         
         return new ModelAndView("add-new-contact");
     }

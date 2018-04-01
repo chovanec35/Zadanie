@@ -37,14 +37,31 @@
                         </select>
                     </td>
                 </tr>
-<!--            <tr>    
-                    <td>Birthdate</td>
-                    <td><input path="birthdate" /></td>
-                </tr>-->
+                <!--            <tr>    
+                                    <td>Birthdate</td>
+                                    <td><input path="birthdate" /></td>
+                                </tr>-->
                 <tr>
                     <td><button type="submit">Search</button></td>
                 </tr>
             </table>
         </form>
-    </body>
+        <c:if test="${!empty userList}">
+        <tablel>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Category</th>
+            </tr>
+            <c:forEach items="${userList}" var="user">
+                <tr>
+                    <td><c:out value="${users.firstName}" /></td>
+                    <td><c:out value="${users.lastName}" /></td>
+                    <td><c:out value="${users.category}" /></td>
+                </tr>
+                
+            </c:forEach>
+        </tablel>
+    </c:if>
+</body>
 </html>
