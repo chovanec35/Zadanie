@@ -39,11 +39,16 @@ public class LoginController {
     @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
     public ModelAndView loginProcess(HttpServletRequest request, 
             HttpServletResponse response, @ModelAttribute("login") Login login, HttpSession httpSession) {
-        ModelAndView mav = null;
+        
         User user = userServiceImpl.validateUser(login);
+        User user1 = (User) httpSession.getAttribute("loggedUser");
+        
+        ModelAndView mav = null;
+        ModelAndView mav1 = new ModelAndView();
         
         if (user != null && !user.isDeleted()) {
-            httpSession.setAttribute("loggedUser", user);
+            mav1.addObject("user_Id", user1.getUser_id());
+            
             mav = new ModelAndView("my-contacts");
             mav.addObject("user_Id",user.getUser_id());
             mav.addObject("email", user.getEmail());

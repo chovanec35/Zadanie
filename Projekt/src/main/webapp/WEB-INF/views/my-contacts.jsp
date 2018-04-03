@@ -12,6 +12,7 @@
     </head>
     <body>
         <h1>My contacts</h1>
+        <a href="${path}/home">Home</a>
         <a href="${path}/my-contacts">My contacts</a>
         <a href="${path}/add-new-contact">Add new contact</a>
         <a href="<c:url value="/logoutProcess" />">Odhlasit sa</a>
