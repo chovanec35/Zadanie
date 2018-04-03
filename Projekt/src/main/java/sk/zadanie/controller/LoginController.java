@@ -7,17 +7,23 @@ package sk.zadanie.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
 import sk.zadanie.model.Login;
 import sk.zadanie.model.User;
 import sk.zadanie.service.impl.UserServiceImpl;
 
 @Controller
+@SessionAttributes("loggedUser")
 public class LoginController {
 
     @Autowired
@@ -31,17 +37,18 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-    public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response, 
-            @ModelAttribute("login") Login login) {
+    public ModelAndView loginProcess(HttpServletRequest request, 
+            HttpServletResponse response, @ModelAttribute("login") Login login, HttpSession httpSession) {
         ModelAndView mav = null;
         User user = userServiceImpl.validateUser(login);
+        
         if (user != null && !user.isDeleted()) {
+            httpSession.setAttribute("loggedUser", user);
             mav = new ModelAndView("my-contacts");
-            mav.addObject("id", user.getId());
-            mav.addObject("firstName", user.getFirstName());
-            mav.addObject("lastName", user.getLastName());
+            mav.addObject("user_Id",user.getUser_id());
             mav.addObject("email", user.getEmail());
             mav.addObject("password", user.getPassword());
+            System.out.println(user.toString());
         } else if (user != null && user.isDeleted()) {
             mav = new ModelAndView("login");
             mav.addObject("message", "This user is deleted!!");
@@ -49,7 +56,6 @@ public class LoginController {
             mav = new ModelAndView("login");
             mav.addObject("message", "Username or Password is wrong!!");
         }
-
         return mav;
     }
 }

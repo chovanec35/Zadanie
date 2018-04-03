@@ -14,7 +14,10 @@
         <h1>My contacts</h1>
         <a href="${path}/my-contacts">My contacts</a>
         <a href="${path}/add-new-contact">Add new contact</a>
-        <a href="${path}/home">Logout</a>
+        <a href="<c:url value="/logoutProcess" />">Odhlasit sa</a>
+        <p>
+            my ID is: ${user_Id}
+        </p>
         <form method="POST">
             <table>
                 <tr>
