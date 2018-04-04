@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import sk.zadanie.dao.UserDao;
 import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.UserDto;
@@ -15,6 +16,7 @@ import sk.zadanie.model.Login;
 import sk.zadanie.model.User;
 
 @Repository
+@SessionAttributes("loggedUser")
 public class UserDaoImpl implements UserDao {
 
     @Autowired
@@ -63,9 +65,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addNewContact(ContactDto contact, UserDto userDto) {
-        String sql = "insert into contacts (USER_ID, ROLE_ID, FNAME, LNAME, DESCRIPTION) values(?,?,?,?,?)";
-        jdbcTemplate.update(sql, new Object[]{userDto.getUserId(), contact.getRole_id(), 
+    public void addNewContact(ContactDto contact, UserDto userDto, int userId) {
+        System.out.println("contact: " + contact);
+        String sql = "insert into contacts (USER_ID, ROLE, FNAME, LNAME, DESCRIPTION) values(?,?,?,?,?)";
+        jdbcTemplate.update(sql, new Object[]{userId, contact.getRole(), 
              contact.getFirstName(), contact.getLastName(), contact.getDescription()});
         System.out.println("Kontakt bol pridany");
     }

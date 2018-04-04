@@ -13,8 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;                   
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,16 +38,11 @@ public class LoginController {
     @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
     public ModelAndView loginProcess(HttpServletRequest request, 
             HttpServletResponse response, @ModelAttribute("login") Login login, HttpSession httpSession) {
-        
         User user = userServiceImpl.validateUser(login);
-        User user1 = (User) httpSession.getAttribute("loggedUser");
-        
         ModelAndView mav = null;
-        ModelAndView mav1 = new ModelAndView();
         
-        if (user != null && !user.isDeleted()) {
-            mav1.addObject("user_Id", user1.getUser_id());
-            
+        if (user != null && !user.isDeleted()) {    
+            httpSession.setAttribute("loggedUser", user);
             mav = new ModelAndView("my-contacts");
             mav.addObject("user_Id",user.getUser_id());
             mav.addObject("email", user.getEmail());

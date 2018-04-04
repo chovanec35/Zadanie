@@ -12,7 +12,7 @@ public interface UserDao {
     public User getUser(int id);
     public List getAllUser();*/
     
-    public void addNewContact(ContactDto contact, UserDto userDto);
+    public void addNewContact(ContactDto contact, UserDto userDto, int userId);
     public void registration(UserDto user);
     User validateUser(Login login);
 //    User validateName(Login login);

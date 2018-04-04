@@ -21,8 +21,8 @@
         <h1>New contact</h1>
         <a href="${path}/my-contacts">My contacts</a>
         <a href="${path}/add-new-contact">Add new contact</a>
-        <a href="${path}/home">Logout</a>
-        
+        <a href="<c:url value="/logoutProcess" />">Log out</a><br>
+        my ID is: ${user_Id}
         <form method="POST" modelAttribute="contact" action="${path}/newContactProcess">
             <table>
                 <tr>
@@ -38,14 +38,14 @@
                                 </tr>-->
                 <tr>
                     <td>Description</td> 
-                    <td><textarea path="description" name="text-area" cols="30" rows="3"></textarea></td>
+                    <td><textarea path="description" name="description" cols="30" rows="3"></textarea></td>
                 </tr>              
                 <tr>
                     <td>Category *</td> 
-                    <td><select path="category" name="category">
-                            <option value="1">Family</option>
-                            <option value="2">Friends</option>
-                            <option value="3">Job</option>
+                    <td><select path="role" name="role">
+                            <option value="family">Family</option>
+                            <option value="friends">Friends</option>
+                            <option value="job">Job</option>
                         </select></td>
                 </tr>
                 <tr>

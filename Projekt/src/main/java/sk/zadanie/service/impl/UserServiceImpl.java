@@ -49,8 +49,8 @@ public class UserServiceImpl implements UserService{
     }*/
     
     @Transactional
-    public void addNewContact(ContactDto contact, UserDto userDto){
-        userDao.addNewContact(contact, userDto);
+    public void addNewContact(ContactDto contact, UserDto userDto, int userId){
+        userDao.addNewContact(contact, userDto, userId);
     }
     
     @Transactional
@@ -63,4 +63,5 @@ public class UserServiceImpl implements UserService{
         return userDao.validateUser(login);
     }
 
+    
 }

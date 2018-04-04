@@ -15,7 +15,7 @@ public class ContactDto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int contact_id;
     @Column
-    private String role_id;
+    private String role;
     @Column
     private String user_id;
     @Column
@@ -28,9 +28,9 @@ public class ContactDto {
     public ContactDto() {
     }
 
-    public ContactDto(int contact_id, String role_id, String user_id, String firstName, String lastName, String description) {
+    public ContactDto(int contact_id, String role, String user_id, String firstName, String lastName, String description) {
         this.contact_id = contact_id;
-        this.role_id = role_id;
+        this.role = role;
         this.user_id = user_id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,12 +45,12 @@ public class ContactDto {
         this.contact_id = contact_id;
     }
 
-    public String getRole_id() {
-        return role_id;
+    public String getRole() {
+        return role;
     }
 
-    public void setRole_id(String role_id) {
-        this.role_id = role_id;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getUser_id() {
@@ -87,7 +87,8 @@ public class ContactDto {
 
     @Override
     public String toString() {
-        return "ContactDto{" + "contact_id=" + contact_id + ", role_id=" + role_id + ", user_id=" + user_id + ", firstName=" + firstName + ", lastName=" + lastName + ", description=" + description + '}';
+        return "ContactDto{" + "contact_id=" + contact_id + ", role=" + role + ", user_id=" + user_id + ", firstName=" + firstName + ", lastName=" + lastName + ", description=" + description + '}';
     }
-        
+
+           
 }

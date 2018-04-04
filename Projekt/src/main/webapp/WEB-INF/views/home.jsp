@@ -14,7 +14,9 @@
         <a href="${path}/home">Home</a>
         <a href="${path}/login">Login</a>
         <a href="${path}/registration">Registration</a>
-        
+        <c:if test="${user_Id} == 13">
+            <a href="<c:url value="/logoutProcess" />">Log out</a>
+        </c:if>
         <p>
             Here is description about this application.<br>
             my ID is: ${user_Id}

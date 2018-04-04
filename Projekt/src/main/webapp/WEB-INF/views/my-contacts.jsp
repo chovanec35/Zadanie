@@ -15,10 +15,7 @@
         <a href="${path}/home">Home</a>
         <a href="${path}/my-contacts">My contacts</a>
         <a href="${path}/add-new-contact">Add new contact</a>
-        <a href="<c:url value="/logoutProcess" />">Odhlasit sa</a>
-        <p>
-            my ID is: ${user_Id}
-        </p>
+        <a href="<c:url value="/logoutProcess" />">Log out</a>
         <form method="POST">
             <table>
                 <tr>
@@ -33,11 +30,11 @@
                 <tr>
                     <td>Category</td>
                     <td>
-                        <select name="category">
+                        <select name="role">
                             <option value="empty"></option>
-                            <option value="1">Family</option>
-                            <option value="2">Friends</option>
-                            <option value="3">Job</option>
+                            <option value="family">Family</option>
+                            <option value="friends">Friends</option>
+                            <option value="job">Job</option>
                         </select>
                     </td>
                 </tr>
@@ -50,22 +47,26 @@
                 </tr>
             </table>
         </form>
-        <c:if test="${!empty userList}">
-        <tablel>
+
+       Toto je user id: ${user_Id}
+        
+    <c:if test="${!empty contactsList}">
+        <table>
             <tr>
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Category</th>
             </tr>
-            <c:forEach items="${userList}" var="user">
+            <c:forEach items="${contactsList.rows}" var="contact">
+
                 <tr>
-                    <td><c:out value="${users.firstName}" /></td>
-                    <td><c:out value="${users.lastName}" /></td>
-                    <td><c:out value="${users.category}" /></td>
+                    <td><c:out value="${contact.firstName}" /></td>
+                    <td><c:out value="${contact.lastName}" /></td>
+                    <td><c:out value="${contact.category}" /></td>
                 </tr>
-                
+
             </c:forEach>
-        </tablel>
+        </table>
     </c:if>
 </body>
 </html>
