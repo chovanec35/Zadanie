@@ -19,10 +19,12 @@
                 <tr>
                     <td>First name</td>
                     <td><input path="firstName" type="text" name="firstName" value=""/></td>
+                    <td><form:errors path="badfirst" class="error" /></td>
                 </tr>
                 <tr>
                     <td>Last name </td>
                     <td><input path="lastName" type="text" name="lastName" value=""/></td>
+                    <td><form:errors path="badlast" class="error" /></td>
                 </tr>
 
                 <!--                               
@@ -42,6 +44,7 @@
                 <tr>
                     <td>Confirm Password</td>
                     <td><input type="password" name="confirmPassword" value=""/></td>
+                    <td><form:errors path="diffpassword" class="error" /></td>
                 </tr>
                 <tr>
                     <td><button type="submit">Registration</button></td>

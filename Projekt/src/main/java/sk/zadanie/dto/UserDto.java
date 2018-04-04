@@ -8,8 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class UserDto {
@@ -21,17 +19,13 @@ public class UserDto {
     
     @Column
     @NotNull
-    @NotEmpty
-    @Email
     private String email;
     
     @Column
-    @NotEmpty
     @NotNull
     private String firstName;
     
     @Column
-    @NotEmpty
     @NotNull
     private String lastName;
 //    @Column
@@ -39,12 +33,10 @@ public class UserDto {
     
     @Column 
     @Size(min = 8, max = 16)
-    @NotEmpty
     private String password;
 
     @Size(min = 8, max = 16)
     @NotNull
-    @NotEmpty
     private String confirmPassword;
     
     @Column

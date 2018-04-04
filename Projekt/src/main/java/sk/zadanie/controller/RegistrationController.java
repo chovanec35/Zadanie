@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import sk.zadanie.dto.UserDto;
 import sk.zadanie.model.Login;
-import sk.zadanie.service.impl.PasswordValidator;
+import sk.zadanie.service.impl.RegistrationValidator;
 import sk.zadanie.service.impl.UserServiceImpl;
 
 @Controller
@@ -32,7 +32,7 @@ public class RegistrationController {
 
     //PasswordValidator passwordValidator;
 
-    public static final String REGISRATION_FORM = "user";
+    //public static final String REGISTRATION_FORM = "user";
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView viewRegistration(HttpServletRequest request, HttpServletResponse response) {
@@ -42,14 +42,16 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/registrationProcess", method = RequestMethod.POST)
-    public ModelAndView registrationProcess(@ModelAttribute("user")
-            @Valid UserDto userDto, BindingResult result) throws IOException {
+    public ModelAndView registrationProcess(@ModelAttribute("user") UserDto userDto, 
+            BindingResult result) throws IOException {
         System.out.println("Chcem overit vstupy");
+        RegistrationValidator registrationValidator = new RegistrationValidator();
+        registrationValidator.validate(userDto, result);
+
         if (result.hasErrors()) {
-            System.out.println("Padol som do errors (result.hasErrors())");
+            System.out.println("Padol som do errors");
             return new ModelAndView("registration", "user", userDto);
         }
-        //passwordValidator.validate(user, error);
         System.out.println("Chcem zapisat do DB");
         userServiceImpl.registration(userDto);
         return new ModelAndView("Login", "user", userDto);
