@@ -30,7 +30,7 @@ public class RegistrationController {
     @Autowired
     UserServiceImpl userServiceImpl;
 
-    //PasswordValidator passwordValidator;
+    RegistrationValidator registrationValidator;
 
     //public static final String REGISTRATION_FORM = "user";
 
@@ -44,15 +44,12 @@ public class RegistrationController {
     @RequestMapping(value = "/registrationProcess", method = RequestMethod.POST)
     public ModelAndView registrationProcess(@ModelAttribute("user") UserDto userDto, 
             BindingResult result) throws IOException {
-        System.out.println("Chcem overit vstupy");
         RegistrationValidator registrationValidator = new RegistrationValidator();
         registrationValidator.validate(userDto, result);
 
         if (result.hasErrors()) {
-            System.out.println("Padol som do errors");
             return new ModelAndView("registration", "user", userDto);
         }
-        System.out.println("Chcem zapisat do DB");
         userServiceImpl.registration(userDto);
         return new ModelAndView("Login", "user", userDto);
     }

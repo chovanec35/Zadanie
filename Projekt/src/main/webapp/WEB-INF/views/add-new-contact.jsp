@@ -22,7 +22,7 @@
         <a href="${path}/my-contacts">My contacts</a>
         <a href="${path}/add-new-contact">Add new contact</a>
         <a href="<c:url value="/logoutProcess" />">Log out</a><br>
-        my ID is: ${user_Id}
+        
         <form method="POST" modelAttribute="contact" action="${path}/newContactProcess">
             <table>
                 <tr>

@@ -7,6 +7,7 @@
 package sk.zadanie.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,31 +24,6 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserDao userDao;
     
-    /*@Transactional
-    public void add(User user) {
-        userDao.add(user);
-    }
-
-    @Transactional
-    public void edit(User user) {
-        userDao.edit(user);
-    }
-
-    @Transactional
-    public void delete(int id) {
-        userDao.delete(id);
-    }
-
-    @Transactional
-    public User getUser(int id) {
-        return userDao.getUser(id);
-    }
-
-    @Transactional
-    public List getAllUser() {
-        return userDao.getAllUser();
-    }*/
-    
     @Transactional
     public void addNewContact(ContactDto contact, UserDto userDto, int userId){
         userDao.addNewContact(contact, userDto, userId);
@@ -63,5 +39,8 @@ public class UserServiceImpl implements UserService{
         return userDao.validateUser(login);
     }
 
-    
+     @Transactional
+    public List<Map<String, Object>> getAllContacts(int userId){ //, String fName, String lName, String role
+        return userDao.getAllContacts(userId); //, fName, lName, role
+    }
 }

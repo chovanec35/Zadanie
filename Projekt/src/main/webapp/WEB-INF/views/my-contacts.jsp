@@ -47,8 +47,6 @@
                 </tr>
             </table>
         </form>
-
-       Toto je user id: ${user_Id}
         
     <c:if test="${!empty contactsList}">
         <table>
@@ -56,13 +54,14 @@
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Category</th>
+                <th></th>
             </tr>
-            <c:forEach items="${contactsList.rows}" var="contact">
+            <c:forEach items="${contactsList}" var="contact">
 
                 <tr>
-                    <td><c:out value="${contact.firstName}" /></td>
-                    <td><c:out value="${contact.lastName}" /></td>
-                    <td><c:out value="${contact.category}" /></td>
+                    <td><c:out value="${contact.fName}" /></td>
+                    <td><c:out value="${contact.lName}" /></td>
+                    <td><c:out value="${contact.role}" /></td>
                 </tr>
 
             </c:forEach>

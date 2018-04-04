@@ -19,7 +19,7 @@
         </c:if>
         <p>
             Here is description about this application.<br>
-            my ID is: ${user_Id}
+            
         </p>
     </body>
 </html>

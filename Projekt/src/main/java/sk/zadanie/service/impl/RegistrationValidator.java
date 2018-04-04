@@ -30,15 +30,15 @@ public class RegistrationValidator implements Validator {
         
         Matcher matcherLastname = pattern.matcher(userDto.getLastName());
         if (!matcherLastname.matches()) {
-            errors.rejectValue("badlast", "error.badLastname");
+            errors.rejectValue("lastName", "error.badLastname");
         }
         
         if (userDto.getPassword().length() < 8) {
-            errors.rejectValue("shortPassword", "error.shortPassword");
+            errors.rejectValue("password", "error.shortPassword");
         }
        
         if (!userDto.getConfirmPassword().equals(userDto.getPassword())) {
-            errors.rejectValue("diffpassword", "error.passwordConfDiff");
+            errors.rejectValue("password", "error.passwordConfDiff");
         }
         
     }
