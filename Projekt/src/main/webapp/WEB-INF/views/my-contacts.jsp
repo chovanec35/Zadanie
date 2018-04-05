@@ -16,7 +16,7 @@
         <a href="${path}/my-contacts">My contacts</a>
         <a href="${path}/add-new-contact">Add new contact</a>
         <a href="<c:url value="/logoutProcess" />">Log out</a>
-        <form method="POST" modelAttribute="search" action="${path}/searchProcess">
+        <form method="POST">
             <table>
                 <tr>
                     <td>First name</td>
