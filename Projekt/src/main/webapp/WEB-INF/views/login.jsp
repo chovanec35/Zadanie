@@ -34,8 +34,5 @@
                 </tr>                
             </table>
         </form>
-        <table>
-            
-        </table>
     </body>
 </html>
