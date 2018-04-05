@@ -16,7 +16,7 @@
         <a href="${path}/registration">Registration</a><br>
 
         <label style="color: red"> ${message} </label><br>
-        <form method="POST" modelAttribute="login" action="${path}/loginProcess">
+        <form method="POST" modelAttribute="login" action="${path}/my-contacts">
             <table>
                 <tr>
                     <td>E-mail</td>

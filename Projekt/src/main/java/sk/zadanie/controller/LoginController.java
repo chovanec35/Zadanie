@@ -35,8 +35,8 @@ public class LoginController {
         return mav;
     }
 
-    @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-    public ModelAndView loginProcess(HttpServletRequest request, 
+    @RequestMapping(value = "/my-contacts", method = RequestMethod.POST)
+    public ModelAndView myContacts(HttpServletRequest request, 
             HttpServletResponse response, @ModelAttribute("login") Login login, HttpSession httpSession) {
         User user = userServiceImpl.validateUser(login);
         ModelAndView mav = null;
