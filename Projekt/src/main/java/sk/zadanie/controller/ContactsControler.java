@@ -5,8 +5,6 @@
  */
 package sk.zadanie.controller;
 
-import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,27 +25,46 @@ import sk.zadanie.service.impl.UserServiceImpl;
 @Controller
 public class ContactsControler {
 
-    @Autowired
-    UserServiceImpl userServiceImpl;
+//    @Autowired
+//    UserServiceImpl userServiceImpl;
+//
+//    @RequestMapping(value = "/searchProcess", method = RequestMethod.POST)
+//    public ModelAndView loginProcess(HttpServletRequest request,
+//            HttpServletResponse response, @ModelAttribute("login") Login login, HttpSession httpSession) {
+//        User user = (User) httpSession.getAttribute("loggedUser");
+//        ContactDto contact = ContactDto();
+//        
+//        ModelAndView mav = new ModelAndView();
+//        ModelAndView mav1 = new ModelAndView();
+//        
+//
+//        if (user != null) {
+//            mav.addObject("user_Id", user.getUser_id());
+//            System.out.println("USER ID" + user.getUser_id());
+//            System.out.println("mav -> " + mav);
+//            List<Map<String, Object>> contactsList = userServiceImpl.getAllContacts(user.getUser_id());
+//            mav.addObject("contactsList", contactsList);
+//
+//        } else {
+//            mav.addObject("user_Id", "error");
+//        }
+//        return mav;
+//    }
+//}
 
-    @RequestMapping(value = "/searchProcess", method = RequestMethod.POST)
-    public ModelAndView loginProcess(HttpServletRequest request,
-            HttpServletResponse response, @ModelAttribute("search") Login login, HttpSession httpSession) {
+//
+//    @RequestMapping("/my-contacts")
+//    public List<ContactDto> showContacts(HttpSession httpSession) {
+//        User user = (User) httpSession.getAttribute("loggedUser");
+//        int userId = user.getUser_id();
+//        ModelAndView mav = new ModelAndView();
+//        mav.addObject("user_Id", user.getUser_id());
+//        
+//        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//        Session session = sessionFactory.openSession();
+//        Query query = session.createQuery("from Contacts where id = :id ");
+//        query.setParameter("id", 1);
+//        List<ContactDto> contacts = query.list();
+//        return contacts;
+    }    
 
-        User user = (User) httpSession.getAttribute("loggedUser");
-        ModelAndView mav = new ModelAndView();
-
-        System.out.println("som prihlasenz ako" + user);
-
-        if (user != null) {
-            mav.addObject("user_Id", user.getUser_id());
-            List<Map<String, Object>> contactsList = userServiceImpl.getAllContacts(user.getUser_id());
-            mav.addObject("contactsList", contactsList);
-
-        } else {
-            mav.addObject("user_Id", "error");
-        }
-        return mav;
-    }
-    
-}
