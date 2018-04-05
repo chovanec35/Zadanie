@@ -28,13 +28,35 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    /*@Override
+    public void add(User user) {
+        session.getCurrentSession().save(user);
+    }
+
+    @Override
+    public void edit(User user) {
+        session.getCurrentSession().update(user);
+    }
+
+    @Override
+    public void delete(int id) {
+        session.getCurrentSession().delete(getUser(id));
+    }
+
+    @Override
+    public User getUser(int id) {
+        return (User) session.getCurrentSession().get(User.class, id);
+    }
+
+    @Override
+    public List getAllUser() {
+        return session.getCurrentSession().createQuery("from User").list();
+    }*/
     public void registration(UserDto user) {
         System.out.println("zapisujem do DB");
         String sql = "insert into users (FIRSTNAME, LASTNAME, PASSWORD, EMAIL) values(?,?,?,?)";
         jdbcTemplate.update(sql, new Object[]{user.getFirstName(), user.getLastName(),
             user.getPassword(), user.getEmail()});
-        System.out.println(user.getFirstName() + user.getLastName() +
-            user.getPassword() + user.getEmail());
     }
 
     public User validateUser(Login login) {
@@ -73,6 +95,7 @@ class UserMapper implements RowMapper<User> {
         user.setLastName(rs.getString("lastName"));
         user.setPassword(rs.getString("password"));
         user.setEmail(rs.getString("email"));
+        user.setDeleted(rs.getBoolean("deleted"));
         return user;
     }
 }
