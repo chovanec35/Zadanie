@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity 
 public class ContactDto {
 
     @Id
@@ -20,7 +20,7 @@ public class ContactDto {
     private String user_id;
     @Column
     private String firstName;
-    @Column
+    @Column 
     private String lastName;
     @Column
     private String description;
