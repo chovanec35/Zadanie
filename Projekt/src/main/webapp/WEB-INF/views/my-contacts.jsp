@@ -28,7 +28,7 @@
                     <td><input path="lastname" /></td>
                 </tr>
                 <tr>
-                    <td>Category1</td>
+                    <td>Category12</td>
                     <td>
                         <select accesskey="">
                             <option value=${values}</option>
