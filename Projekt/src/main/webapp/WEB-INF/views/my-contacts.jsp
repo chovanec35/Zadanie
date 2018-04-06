@@ -30,7 +30,7 @@
                 <tr>
                 <td>Category</td>
                 <td><select>
-                    <option>${categoryList}</option>
+                    <option>${categoryList1}</option>
                 </select></td>
                 </tr>
                 <!--            <tr>    
