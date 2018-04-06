@@ -31,8 +31,7 @@
                     <td>Category</td>
                     <td>
                         <select>
-                           
-                            <option value=""</option>
+                            <option value=${values}</option>
                         </select>
                     </td>
                 </tr>
