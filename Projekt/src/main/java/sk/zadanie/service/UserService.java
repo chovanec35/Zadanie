@@ -8,8 +8,6 @@ package sk.zadanie.service;
 import java.util.List;
 import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.UserDto;
-import sk.zadanie.entity.Login;
-import sk.zadanie.entity.User;
 
 /**
  *
@@ -23,5 +21,5 @@ public interface UserService {
     public List getAllUser();*/
     public void addNewContact(ContactDto contact, UserDto userDto, int userId);
     public void registration(UserDto user);
-    public User validateUser(Login login);
+//    public User validateUser(Login login);
 }

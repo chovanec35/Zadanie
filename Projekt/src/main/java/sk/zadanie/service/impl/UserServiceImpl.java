@@ -14,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import sk.zadanie.dao.UserDao;
 import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.UserDto;
-import sk.zadanie.entity.Login;
-import sk.zadanie.entity.User;
 import sk.zadanie.service.UserService;
 
 @Service
@@ -34,10 +32,10 @@ public class UserServiceImpl implements UserService{
         userDao.registration(user);
     }
     
-    @Transactional
-    public User validateUser(Login login){
-        return userDao.validateUser(login);
-    }
+//    @Transactional
+//    public User validateUser(Login login){
+//        return userDao.validateUser(login);
+//    }
 
      @Transactional
     public List<Map<String, Object>> getAllContacts(int userId){ //, String fName, String lName, String role

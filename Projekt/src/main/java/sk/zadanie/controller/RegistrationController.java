@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import sk.zadanie.dto.UserDto;
-import sk.zadanie.entity.Login;
 import sk.zadanie.service.impl.RegistrationValidator;
 import sk.zadanie.service.impl.UserServiceImpl;
 

@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import sk.zadanie.dao.UserDao;
 import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.UserDto;
-import sk.zadanie.entity.Login;
-import sk.zadanie.entity.User;
 
 @Repository
 @SessionAttributes("loggedUser")
@@ -59,12 +57,12 @@ public class UserDaoImpl implements UserDao {
             user.getPassword(), user.getEmail()});
     }
 
-    public User validateUser(Login login) {
-        String sql = "select * from users where email='" + login.getEmail() + "' and password='" + login.getPassword()
-                + "'";
-        List<User> users = jdbcTemplate.query(sql, new UserMapper());
-        return users.size() > 0 ? users.get(0) : null;
-    }
+//    public User validateUser(Login login) {
+//        String sql = "select * from users where email='" + login.getEmail() + "' and password='" + login.getPassword()
+//                + "'";
+//        List<User> users = jdbcTemplate.query(sql, new UserMapper());
+//        return users.size() > 0 ? users.get(0) : null;
+//    }
 
     public List<Map<String, Object>> getAllContacts(int userId) { //, String fName, String lName, String role
         //String sql = "select * from contacts where user_Id=" + userId + "AND FNAME=" + fName + "AND LNAME=" + lName + "AND ROLE=" + role;
@@ -86,16 +84,16 @@ public class UserDaoImpl implements UserDao {
     }
 }
 
-class UserMapper implements RowMapper<User> {
-
-    public User mapRow(ResultSet rs, int arg1) throws SQLException {
-        User user = new User();
-        user.setUser_id(rs.getInt("user_Id"));
-        user.setFirstName(rs.getString("firstName"));
-        user.setLastName(rs.getString("lastName"));
-        user.setPassword(rs.getString("password"));
-        user.setEmail(rs.getString("email"));
-        user.setDeleted(rs.getBoolean("deleted"));
-        return user;
-    }
-}
+//class UserMapper implements RowMapper<User> {
+//
+//    public User mapRow(ResultSet rs, int arg1) throws SQLException {
+//        User user = new User();
+//        user.setUser_id(rs.getInt("user_Id"));
+//        user.setFirstName(rs.getString("firstName"));
+//        user.setLastName(rs.getString("lastName"));
+//        user.setPassword(rs.getString("password"));
+//        user.setEmail(rs.getString("email"));
+//        user.setDeleted(rs.getBoolean("deleted"));
+//        return user;
+//    }
+//}
