@@ -30,7 +30,7 @@
                 <tr>
                     <td>Category1</td>
                     <td>
-                        <select>
+                        <select accesskey="">
                             <option value=${values}</option>
                         </select>
                     </td>
