@@ -28,7 +28,7 @@
                     <td><input path="lastname" /></td>
                 </tr>
                 <tr>
-                    <td>Category</td>
+                    <td>Category1</td>
                     <td>
                         <select>
                             <option value=${values}</option>
