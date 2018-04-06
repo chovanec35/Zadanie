@@ -28,16 +28,7 @@
                     <td><input path="lastname" /></td>
                 </tr>
                 <tr>
-<<<<<<< HEAD
-                    <td>Category12</td>
-                    <td>
-                        <select accesskey="">
-                            <option value=${values}</option>
-                        </select>
-                    </td>
-=======
-                    
->>>>>>> vymayanie tagu value
+
                 </tr>
                 <!--            <tr>    
                                     <td>Birthdate</td>
