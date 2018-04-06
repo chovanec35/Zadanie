@@ -38,7 +38,7 @@ public class Categories implements Serializable {
     @Basic(optional = false)
     @Column(name = "CATEGORY_ID")
     private Integer categoryId;
-    @Size(max = 20)
+    @Size(max = 50)
     @Column(name = "NAME")
     private String name;
 

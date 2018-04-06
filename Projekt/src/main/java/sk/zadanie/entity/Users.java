@@ -7,6 +7,7 @@
 package sk.zadanie.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -29,10 +32,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
     , @NamedQuery(name = "Users.findByUserId", query = "SELECT u FROM Users u WHERE u.userId = :userId")
-    , @NamedQuery(name = "Users.findByFirstname", query = "SELECT u FROM Users u WHERE u.firstname = :firstname")
-    , @NamedQuery(name = "Users.findByLastname", query = "SELECT u FROM Users u WHERE u.lastname = :lastname")
+    , @NamedQuery(name = "Users.findByFirstName", query = "SELECT u FROM Users u WHERE u.firstName = :firstName")
+    , @NamedQuery(name = "Users.findByLastName", query = "SELECT u FROM Users u WHERE u.lastName = :lastName")
     , @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")
-    , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")})
+    , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
+    , @NamedQuery(name = "Users.findByBirthdate", query = "SELECT u FROM Users u WHERE u.birthdate = :birthdate")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,10 +46,10 @@ public class Users implements Serializable {
     @Column(name = "USER_ID")
     private Integer userId;
     @Size(max = 50)
-    @Column(name = "FIRSTNAME")
+    @Column(name = "FIRST_NAME")
     private String firstName;
     @Size(max = 50)
-    @Column(name = "LASTNAME")
+    @Column(name = "LAST_NAME")
     private String lastName;
     @Size(max = 20)
     @Column(name = "PASSWORD")
@@ -54,6 +58,9 @@ public class Users implements Serializable {
     @Size(max = 50)
     @Column(name = "EMAIL")
     private String email;
+    @Column(name = "BIRTHDATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date birthdate;
 
     public Users() {
     }
@@ -70,19 +77,19 @@ public class Users implements Serializable {
         this.userId = userId;
     }
 
-    public String getFirstname() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstname(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastname() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastname(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
@@ -100,6 +107,14 @@ public class Users implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
 
     @Override

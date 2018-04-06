@@ -7,6 +7,7 @@
 package sk.zadanie.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -31,10 +34,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Contacts.findByContactId", query = "SELECT c FROM Contacts c WHERE c.contactId = :contactId")
     , @NamedQuery(name = "Contacts.findByUserId", query = "SELECT c FROM Contacts c WHERE c.userId = :userId")
     , @NamedQuery(name = "Contacts.findByCategoryId", query = "SELECT c FROM Contacts c WHERE c.categoryId = :categoryId")
-    , @NamedQuery(name = "Contacts.findByFname", query = "SELECT c FROM Contacts c WHERE c.fname = :fname")
-    , @NamedQuery(name = "Contacts.findByLname", query = "SELECT c FROM Contacts c WHERE c.lname = :lname")
+    , @NamedQuery(name = "Contacts.findByFirstName", query = "SELECT c FROM Contacts c WHERE c.firstName = :firstName")
+    , @NamedQuery(name = "Contacts.findByLastName", query = "SELECT c FROM Contacts c WHERE c.lastName = :lastName")
     , @NamedQuery(name = "Contacts.findByDescription", query = "SELECT c FROM Contacts c WHERE c.description = :description")
-    , @NamedQuery(name = "Contacts.findByFlagDel", query = "SELECT c FROM Contacts c WHERE c.flagDel = :flagDel")})
+    , @NamedQuery(name = "Contacts.findByFlagDel", query = "SELECT c FROM Contacts c WHERE c.flagDel = :flagDel")
+    , @NamedQuery(name = "Contacts.findByCreationTs", query = "SELECT c FROM Contacts c WHERE c.creationTs = :creationTs")
+    , @NamedQuery(name = "Contacts.findByBirthdate", query = "SELECT c FROM Contacts c WHERE c.birthdate = :birthdate")})
 public class Contacts implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,16 +53,22 @@ public class Contacts implements Serializable {
     @Column(name = "CATEGORY_ID")
     private Integer categoryId;
     @Size(max = 50)
-    @Column(name = "FNAME")
-    private String fname;
+    @Column(name = "FIRST_NAME")
+    private String firstName;
     @Size(max = 50)
-    @Column(name = "LNAME")
-    private String lname;
+    @Column(name = "LAST_NAME")
+    private String lastName;
     @Size(max = 255)
     @Column(name = "DESCRIPTION")
     private String description;
     @Column(name = "FLAG_DEL")
     private Boolean flagDel;
+    @Column(name = "CREATION_TS")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationTs;
+    @Column(name = "BIRTHDATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date birthdate;
 
     public Contacts() {
     }
@@ -90,20 +101,20 @@ public class Contacts implements Serializable {
         this.categoryId = categoryId;
     }
 
-    public String getFname() {
-        return fname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLname() {
-        return lname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLname(String lname) {
-        this.lname = lname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getDescription() {
@@ -120,6 +131,22 @@ public class Contacts implements Serializable {
 
     public void setFlagDel(Boolean flagDel) {
         this.flagDel = flagDel;
+    }
+
+    public Date getCreationTs() {
+        return creationTs;
+    }
+
+    public void setCreationTs(Date creationTs) {
+        this.creationTs = creationTs;
+    }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
 
     @Override
