@@ -28,7 +28,10 @@
                     <td><input path="lastname" /></td>
                 </tr>
                 <tr>
-
+                <td>Category</td>
+                <td><select>
+                    <option>${categoryList}</option>
+                </select></td>
                 </tr>
                 <!--            <tr>    
                                     <td>Birthdate</td>
