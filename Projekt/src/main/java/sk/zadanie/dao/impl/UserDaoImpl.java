@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import sk.zadanie.dao.UserDao;
 import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.UserDto;
-import sk.zadanie.model.Login;
-import sk.zadanie.model.User;
+import sk.zadanie.entity.Login;
+import sk.zadanie.entity.User;
 
 @Repository
 @SessionAttributes("loggedUser")

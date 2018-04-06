@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.UserDto;
-import sk.zadanie.model.Login;
-import sk.zadanie.model.User;
+import sk.zadanie.entity.Login;
+import sk.zadanie.entity.User;
 
 public interface UserDao {
     

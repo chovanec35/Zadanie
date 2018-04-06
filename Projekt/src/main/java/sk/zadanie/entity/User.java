@@ -1,4 +1,4 @@
-package sk.zadanie.model;
+package sk.zadanie.entity;
 
 import java.sql.Date;
 import javax.persistence.Entity;

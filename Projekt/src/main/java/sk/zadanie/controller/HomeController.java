@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import sk.zadanie.dao.impl.UserDaoImpl;
-import sk.zadanie.model.User;
+import sk.zadanie.entity.User;
 import sk.zadanie.service.impl.UserServiceImpl;
 
 @Controller

@@ -14,8 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import sk.zadanie.dao.UserDao;
 import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.UserDto;
-import sk.zadanie.model.Login;
-import sk.zadanie.model.User;
+import sk.zadanie.entity.Login;
+import sk.zadanie.entity.User;
 import sk.zadanie.service.UserService;
 
 @Service

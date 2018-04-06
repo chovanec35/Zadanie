@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import sk.zadanie.model.Login;
-import sk.zadanie.model.User;
+import sk.zadanie.entity.Login;
+import sk.zadanie.entity.User;
 import sk.zadanie.service.impl.UserServiceImpl;
 
 /**
