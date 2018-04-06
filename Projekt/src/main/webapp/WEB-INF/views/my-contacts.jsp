@@ -30,11 +30,9 @@
                 <tr>
                     <td>Category</td>
                     <td>
-                        <select name="role">
-                            <option value="empty"></option>
-                            <option value="family">Family</option>
-                            <option value="friends">Friends</option>
-                            <option value="job">Job</option>
+                        <select>
+                           
+                            <option value=""</option>
                         </select>
                     </td>
                 </tr>
@@ -47,25 +45,25 @@
                 </tr>
             </table>
         </form>
-        
-    <c:if test="${!empty contactsList}">
-        <table>
-            <tr>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Category</th>
-                <th></th>
-            </tr>
-            <c:forEach items="${contactsList}" var="contact">
 
+        <c:if test="${!empty contactsList}">
+            <table>
                 <tr>
-                    <td><c:out value="${contact.fName}" /></td>
-                    <td><c:out value="${contact.lName}" /></td>
-                    <td><c:out value="${contact.role}" /></td>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Category</th>
+                    <th></th>
                 </tr>
+                <c:forEach items="${contactsList}" var="contact">
 
-            </c:forEach>
-        </table>
-    </c:if>
-</body>
+                    <tr>
+                        <td><c:out value="${contact.fName}" /></td>
+                        <td><c:out value="${contact.lName}" /></td>
+                        <td><c:out value="${contact.role}" /></td>
+                    </tr>
+
+                </c:forEach>
+            </table>
+        </c:if>
+    </body>
 </html>
