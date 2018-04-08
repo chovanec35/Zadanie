@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sk.zadanie.dao.UserDao;
-import sk.zadanie.dto.ContactDto;
-import sk.zadanie.dto.UserDto;
 import sk.zadanie.service.UserService;
 
 @Service
@@ -22,15 +20,15 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserDao userDao;
     
-    @Transactional
-    public void addNewContact(ContactDto contact, UserDto userDto, int userId){
-        userDao.addNewContact(contact, userDto, userId);
-    }
-    
-    @Transactional
-    public void registration(UserDto user){
-        userDao.registration(user);
-    }
+//    @Transactional
+//    public void addNewContact(ContactDto contact, UserDto userDto, int userId){
+//        userDao.addNewContact(contact, userDto, userId);
+//    }
+//    
+//    @Transactional
+//    public void registration(UserDto user){
+//        userDao.registration(user);
+//    }
     
 //    @Transactional
 //    public User validateUser(Login login){

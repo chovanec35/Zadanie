@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import sk.zadanie.dto.ContactDto;
-import sk.zadanie.dto.UserDto;
 import sk.zadanie.service.impl.UserServiceImpl;
 
 @Controller

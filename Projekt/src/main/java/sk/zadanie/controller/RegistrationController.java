@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import sk.zadanie.dto.UserDto;
-import sk.zadanie.service.impl.RegistrationValidator;
+//import sk.zadanie.service.impl.RegistrationValidator;
 import sk.zadanie.service.impl.UserServiceImpl;
 
 @Controller
@@ -29,27 +28,27 @@ public class RegistrationController {
     @Autowired
     UserServiceImpl userServiceImpl;
 
-    RegistrationValidator registrationValidator;
+//    RegistrationValidator registrationValidator;
 
     //public static final String REGISTRATION_FORM = "user";
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public ModelAndView viewRegistration(HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView mav = new ModelAndView("registration");
-        mav.addObject("user", new UserDto());
-        return mav;
-    }
+//    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+//    public ModelAndView viewRegistration(HttpServletRequest request, HttpServletResponse response) {
+//        ModelAndView mav = new ModelAndView("registration");
+//        mav.addObject("user", new UserDto());
+//        return mav;
+//    }
 
-    @RequestMapping(value = "/registrationProcess", method = RequestMethod.POST)
-    public ModelAndView registrationProcess(@ModelAttribute("user") UserDto userDto, 
-            BindingResult result) throws IOException {
-        RegistrationValidator registrationValidator = new RegistrationValidator();
-        registrationValidator.validate(userDto, result);
-
-        if (result.hasErrors()) {
-            return new ModelAndView("registration", "user", userDto);
-        }
-        userServiceImpl.registration(userDto);
-        return new ModelAndView("Login", "user", userDto);
-    }
+//    @RequestMapping(value = "/registrationProcess", method = RequestMethod.POST)
+//    public ModelAndView registrationProcess(@ModelAttribute("user") UserDto userDto, 
+//            BindingResult result) throws IOException {
+//        RegistrationValidator registrationValidator = new RegistrationValidator();
+//        registrationValidator.validate(userDto, result);
+//
+//        if (result.hasErrors()) {
+//            return new ModelAndView("registration", "user", userDto);
+//        }
+//        userServiceImpl.registration(userDto);
+//        return new ModelAndView("Login", "user", userDto);
+//    }
 }
