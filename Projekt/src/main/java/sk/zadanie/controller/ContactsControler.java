@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import sk.zadanie.dao.impl.CategoryDaoImpl;
 import sk.zadanie.service.impl.UserServiceImpl;
 
 /**
@@ -23,8 +24,16 @@ import sk.zadanie.service.impl.UserServiceImpl;
 @Controller
 public class ContactsControler {
 
-//    @Autowired
+    @Autowired
+    CategoryDaoImpl categoryDaoImpl;
 //    UserServiceImpl userServiceImpl;
+
+    @RequestMapping(value = "/my-contacts", method = RequestMethod.GET)
+    public ModelAndView viewLogin(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView mav = new ModelAndView("my-contacts");
+        mav.addObject("categoryList", categoryDaoImpl.getAllCategories());
+        return mav;
+    }
 //
 //    @RequestMapping(value = "/searchProcess", method = RequestMethod.POST)
 //    public ModelAndView loginProcess(HttpServletRequest request,
@@ -64,5 +73,4 @@ public class ContactsControler {
 //        query.setParameter("id", 1);
 //        List<ContactDto> contacts = query.list();
 //        return contacts;
-    }    
-
+}
