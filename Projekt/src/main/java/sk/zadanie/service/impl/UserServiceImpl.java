@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sk.zadanie.dao.UserDao;
+import sk.zadanie.dto.LoginDto;
+import sk.zadanie.dto.UserDto;
+import sk.zadanie.entity.User;
 import sk.zadanie.service.UserService;
 
 @Service
@@ -25,18 +28,19 @@ public class UserServiceImpl implements UserService{
 //        userDao.addNewContact(contact, userDto, userId);
 //    }
 //    
+    @Transactional
+    public void registration(User user){
+        userDao.registration(user);
+    }
+//    
 //    @Transactional
-//    public void registration(UserDto user){
-//        userDao.registration(user);
-//    }
-    
-//    @Transactional
-//    public User validateUser(Login login){
+//    public User validateUser(LoginDto login){
 //        return userDao.validateUser(login);
 //    }
-
-     @Transactional
-    public List<Map<String, Object>> getAllContacts(int userId){ //, String fName, String lName, String role
-        return userDao.getAllContacts(userId); //, fName, lName, role
-    }
+//
+//     @Transactional
+//    public List<Map<String, Object>> getAllContacts(int userId){ //, String fName, String lName, String role
+//        return userDao.getAllContacts(userId); //, fName, lName, role
+//    }
+   
 }

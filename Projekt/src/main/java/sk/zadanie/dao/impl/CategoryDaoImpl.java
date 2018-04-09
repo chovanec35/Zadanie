@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import sk.zadanie.dao.CategoryDao;
-import sk.zadanie.entity.Categories;
+import sk.zadanie.entity.Categorie;
 
 @Repository
 public class CategoryDaoImpl implements CategoryDao {

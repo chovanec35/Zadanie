@@ -25,10 +25,10 @@ public class NewContactController {
     @Autowired
     UserServiceImpl userServiceImpl;
 
-//    @RequestMapping(value = "/add-new-contact", method = RequestMethod.GET)
-//    public ModelAndView viewAddNewContact(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
-//        User user = (User) httpSession.getAttribute("loggedUser");
-//        ModelAndView mav = new ModelAndView();
+    @RequestMapping(value = "/add-new-contact", method = RequestMethod.GET)
+    public ModelAndView viewAddNewContact(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
+        //User user = (User) httpSession.getAttribute("loggedUser");
+        ModelAndView mav = new ModelAndView("add-new-contact");
 //        System.out.println("mav " + mav);
 //        System.out.println("user " + user);
 //        if (user != null) {
@@ -36,9 +36,9 @@ public class NewContactController {
 //        }else {
 //            mav.addObject("user_Id", "error");
 //        }
-////        ModelAndView mav = new ModelAndView("add-new-contact");
-//        return mav;
-//    }
+//        ModelAndView mav = new ModelAndView("add-new-contact");
+        return mav;
+    }
 
 //    @RequestMapping(value = "/newContactProcess", method = RequestMethod.POST)
 //    public ModelAndView newContactProcess(HttpServletRequest request, HttpServletResponse response,

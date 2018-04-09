@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;                   
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import sk.zadanie.dto.LoginDto;
+import sk.zadanie.dto.UserDto;
+import sk.zadanie.service.UserService;
 
 import sk.zadanie.service.impl.UserServiceImpl;
 
@@ -24,7 +27,7 @@ import sk.zadanie.service.impl.UserServiceImpl;
 public class LoginController {
 
     @Autowired
-    UserServiceImpl userServiceImpl;
+    UserService userService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView viewLogin(HttpServletRequest request, HttpServletResponse response) {
@@ -33,12 +36,12 @@ public class LoginController {
         return mav;
     }
 
-//    @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-//    public ModelAndView loginProcess(HttpServletRequest request, 
-//            HttpServletResponse response, @ModelAttribute("login") Login login, HttpSession httpSession) {
-//        User user = userServiceImpl.validateUser(login);
-//        ModelAndView mav = null;
-//        
+    @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
+    public ModelAndView loginProcess(HttpServletRequest request, 
+            HttpServletResponse response, @ModelAttribute("login") LoginDto login, HttpSession httpSession) {
+        //UserDto user = userService.validateUser(login);
+        ModelAndView mav = null;
+        
 //        if (user != null && !user.isDeleted()) {    
 //            httpSession.setAttribute("loggedUser", user);
 //            mav = new ModelAndView("my-contacts");
@@ -53,6 +56,6 @@ public class LoginController {
 //            mav = new ModelAndView("login");
 //            mav.addObject("message", "Username or Password is wrong!!");
 //        }
-//        return mav;
-//    }
+        return mav;
+    }
 }

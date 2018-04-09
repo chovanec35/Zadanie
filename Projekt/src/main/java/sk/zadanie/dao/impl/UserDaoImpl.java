@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import sk.zadanie.dao.UserDao;
+import sk.zadanie.entity.User;
 
 @Repository
 @SessionAttributes("loggedUser")
@@ -23,6 +24,32 @@ public class UserDaoImpl implements UserDao {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+    @Override
+    public List<Map<String, Object>> getAllContacts(int userId) { //, String fName, String lName, String role
+        //String sql = "select * from contacts where user_Id=" + userId + "AND FNAME=" + fName + "AND LNAME=" + lName + "AND ROLE=" + role;
+        String sql = "select * from contacts where user_Id=" + userId;
+        System.out.println("SQL-> " + sql);
+        List<Map<String, Object>> contacts = jdbcTemplate.queryForList(sql);
+
+        System.out.println("contacts " + contacts);
+        return contacts;
+    }
+
+    @Override
+    public void registration(User user) {
+        System.out.println("zapisujem do DB");
+        String sql = "insert into users (FIRST_NAME, LAST_NAME, PASSWORD, EMAIL) values(?,?,?,?)";
+        jdbcTemplate.update(sql, new Object[]{user.getFirstName(), user.getLastName(),
+            user.getPassword(), user.getEmail()});
+    }
+    
+    public User validateUser(Login login) {
+        String sql = "select * from users where email='" + login.getEmail() + "' and password='" + login.getPassword()
+                + "'";
+        List<Map<String, Object>> users = jdbcTemplate.query(sql);
+        return users.size() > 0 ? users.get(0) : null;
+    }
 
     /*@Override
     public void add(User user) {
@@ -48,30 +75,7 @@ public class UserDaoImpl implements UserDao {
     public List getAllUser() {
         return session.getCurrentSession().createQuery("from User").list();
     }*/
-//    public void registration(UserDto user) {
-//        System.out.println("zapisujem do DB");
-//        String sql = "insert into users (FIRSTNAME, LASTNAME, PASSWORD, EMAIL) values(?,?,?,?)";
-//        jdbcTemplate.update(sql, new Object[]{user.getFirstName(), user.getLastName(),
-//            user.getPassword(), user.getEmail()});
-//    }
-
-//    public User validateUser(Login login) {
-//        String sql = "select * from users where email='" + login.getEmail() + "' and password='" + login.getPassword()
-//                + "'";
-//        List<User> users = jdbcTemplate.query(sql, new UserMapper());
-//        return users.size() > 0 ? users.get(0) : null;
-//    }
-
-    public List<Map<String, Object>> getAllContacts(int userId) { //, String fName, String lName, String role
-        //String sql = "select * from contacts where user_Id=" + userId + "AND FNAME=" + fName + "AND LNAME=" + lName + "AND ROLE=" + role;
-        String sql = "select * from contacts where user_Id=" + userId;
-        System.out.println("SQL-> " + sql);
-        List<Map<String, Object>> contacts = jdbcTemplate.queryForList(sql);
-
-        System.out.println("contacts " + contacts);
-        return contacts;
-    }
-
+    
 //    @Override
 //    public void addNewContact(ContactDto contact, UserDto userDto, int userId) {
 //        System.out.println("contact: " + contact);

@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Contacts.findByFlagDel", query = "SELECT c FROM Contacts c WHERE c.flagDel = :flagDel")
     , @NamedQuery(name = "Contacts.findByCreationTs", query = "SELECT c FROM Contacts c WHERE c.creationTs = :creationTs")
     , @NamedQuery(name = "Contacts.findByBirthdate", query = "SELECT c FROM Contacts c WHERE c.birthdate = :birthdate")})
-public class Contacts implements Serializable {
+public class Contact implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -67,15 +67,15 @@ public class Contacts implements Serializable {
     private Date birthdate;
     @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "CATEGORY_ID")
     @ManyToOne
-    private Categories categoryId;
+    private Categorie categoryId;
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     @ManyToOne
-    private Users userId;
+    private User userId;
 
-    public Contacts() {
+    public Contact() {
     }
 
-    public Contacts(Integer contactId) {
+    public Contact(Integer contactId) {
         this.contactId = contactId;
     }
 
@@ -135,19 +135,19 @@ public class Contacts implements Serializable {
         this.birthdate = birthdate;
     }
 
-    public Categories getCategoryId() {
+    public Categorie getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Categories categoryId) {
+    public void setCategoryId(Categorie categoryId) {
         this.categoryId = categoryId;
     }
 
-    public Users getUserId() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(Users userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 
@@ -161,10 +161,10 @@ public class Contacts implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Contacts)) {
+        if (!(object instanceof Contact)) {
             return false;
         }
-        Contacts other = (Contacts) object;
+        Contact other = (Contact) object;
         if ((this.contactId == null && other.contactId != null) || (this.contactId != null && !this.contactId.equals(other.contactId))) {
             return false;
         }

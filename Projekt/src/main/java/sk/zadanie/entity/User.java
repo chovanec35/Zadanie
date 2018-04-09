@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")
     , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
     , @NamedQuery(name = "Users.findByBirthdate", query = "SELECT u FROM Users u WHERE u.birthdate = :birthdate")})
-public class Users implements Serializable {
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -65,12 +65,12 @@ public class Users implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date birthdate;
     @OneToMany(mappedBy = "userId")
-    private Set<Contacts> contactsSet;
+    private Set<Contact> contactsSet;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(Integer userId) {
+    public User(Integer userId) {
         this.userId = userId;
     }
 
@@ -123,11 +123,11 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
-    public Set<Contacts> getContactsSet() {
+    public Set<Contact> getContactsSet() {
         return contactsSet;
     }
 
-    public void setContactsSet(Set<Contacts> contactsSet) {
+    public void setContactsSet(Set<Contact> contactsSet) {
         this.contactsSet = contactsSet;
     }
 
@@ -141,10 +141,10 @@ public class Users implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Users)) {
+        if (!(object instanceof User)) {
             return false;
         }
-        Users other = (Users) object;
+        User other = (User) object;
         if ((this.userId == null && other.userId != null) || (this.userId != null && !this.userId.equals(other.userId))) {
             return false;
         }

@@ -4,17 +4,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
- 
-//public class RegistrationValidator implements Validator {
- 
-//    public boolean supports(Class clazz) {
-//        return UserDto.class.equals(clazz);
-//    }
-// 
-//    public void validate(Object obj, Errors errors) {
-//        UserDto userDto = (UserDto) obj;
-//        
-//        System.out.println("Validujem Password");
+import sk.zadanie.dto.UserDto;
+
+public class RegistrationValidator implements Validator {
+
+    public boolean supports(Class clazz) {
+        return UserDto.class.equals(clazz);
+    }
+
+    public void validate(Object obj, Errors errors) {
+        UserDto userDto = (UserDto) obj;        
+        System.out.println("Validujem Password");
 //        
 //        String regex = "^[a-zA-Z]+$";
 //        Pattern pattern = Pattern.compile(regex);
@@ -38,8 +38,7 @@ import org.springframework.validation.Validator;
 //            errors.rejectValue("password", "error.passwordConfDiff");
 //        }
 //        
-//    }
-        
-    
-//}
+    }
+
+}
 

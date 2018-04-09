@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Categories.findAll", query = "SELECT c FROM Categories c")
     , @NamedQuery(name = "Categories.findByCategoryId", query = "SELECT c FROM Categories c WHERE c.categoryId = :categoryId")
     , @NamedQuery(name = "Categories.findByName", query = "SELECT c FROM Categories c WHERE c.name = :name")})
-public class Categories implements Serializable {
+public class Categorie implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,12 +45,12 @@ public class Categories implements Serializable {
     @Column(name = "NAME")
     private String name;
     @OneToMany(mappedBy = "categoryId")
-    private Set<Contacts> contactsSet;
+    private Set<Contact> contactsSet;
 
-    public Categories() {
+    public Categorie() {
     }
 
-    public Categories(Integer categoryId) {
+    public Categorie(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -71,11 +71,11 @@ public class Categories implements Serializable {
     }
 
     @XmlTransient
-    public Set<Contacts> getContactsSet() {
+    public Set<Contact> getContactsSet() {
         return contactsSet;
     }
 
-    public void setContactsSet(Set<Contacts> contactsSet) {
+    public void setContactsSet(Set<Contact> contactsSet) {
         this.contactsSet = contactsSet;
     }
 
@@ -89,10 +89,10 @@ public class Categories implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Categories)) {
+        if (!(object instanceof Categorie)) {
             return false;
         }
-        Categories other = (Categories) object;
+        Categorie other = (Categorie) object;
         if ((this.categoryId == null && other.categoryId != null) || (this.categoryId != null && !this.categoryId.equals(other.categoryId))) {
             return false;
         }
