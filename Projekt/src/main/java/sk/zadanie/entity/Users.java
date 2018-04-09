@@ -8,6 +8,7 @@ package sk.zadanie.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,11 +17,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -61,6 +64,8 @@ public class Users implements Serializable {
     @Column(name = "BIRTHDATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date birthdate;
+    @OneToMany(mappedBy = "userId")
+    private Set<Contacts> contactsSet;
 
     public Users() {
     }
@@ -115,6 +120,15 @@ public class Users implements Serializable {
 
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
+    }
+
+    @XmlTransient
+    public Set<Contacts> getContactsSet() {
+        return contactsSet;
+    }
+
+    public void setContactsSet(Set<Contacts> contactsSet) {
+        this.contactsSet = contactsSet;
     }
 
     @Override

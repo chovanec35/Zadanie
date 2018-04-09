@@ -26,12 +26,12 @@ public class LoginController {
     @Autowired
     UserServiceImpl userServiceImpl;
 
-//    @RequestMapping(value = "/login", method = RequestMethod.GET)
-//    public ModelAndView viewLogin(HttpServletRequest request, HttpServletResponse response) {
-//        ModelAndView mav = new ModelAndView("login");
-//        mav.addObject("login", new Login());
-//        return mav;
-//    }
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView viewLogin(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView mav = new ModelAndView("login");
+        //mav.addObject("login", new Login());
+        return mav;
+    }
 
 //    @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
 //    public ModelAndView loginProcess(HttpServletRequest request, 

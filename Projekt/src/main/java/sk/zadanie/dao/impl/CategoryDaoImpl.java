@@ -22,7 +22,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public List<Map<String, Object>> getAllCategories() {
-        String sql = "select * from Categories";
+        String sql = "select name from Categories";
         List<Map<String, Object>> categories = jdbcTemplate.queryForList(sql);
 
         System.out.println("categories " + categories);

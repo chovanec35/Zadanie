@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -32,8 +34,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Contacts.findAll", query = "SELECT c FROM Contacts c")
     , @NamedQuery(name = "Contacts.findByContactId", query = "SELECT c FROM Contacts c WHERE c.contactId = :contactId")
-    , @NamedQuery(name = "Contacts.findByUserId", query = "SELECT c FROM Contacts c WHERE c.userId = :userId")
-    , @NamedQuery(name = "Contacts.findByCategoryId", query = "SELECT c FROM Contacts c WHERE c.categoryId = :categoryId")
     , @NamedQuery(name = "Contacts.findByFirstName", query = "SELECT c FROM Contacts c WHERE c.firstName = :firstName")
     , @NamedQuery(name = "Contacts.findByLastName", query = "SELECT c FROM Contacts c WHERE c.lastName = :lastName")
     , @NamedQuery(name = "Contacts.findByDescription", query = "SELECT c FROM Contacts c WHERE c.description = :description")
@@ -48,10 +48,6 @@ public class Contacts implements Serializable {
     @Basic(optional = false)
     @Column(name = "CONTACT_ID")
     private Integer contactId;
-    @Column(name = "USER_ID")
-    private Integer userId;
-    @Column(name = "CATEGORY_ID")
-    private Integer categoryId;
     @Size(max = 50)
     @Column(name = "FIRST_NAME")
     private String firstName;
@@ -69,6 +65,12 @@ public class Contacts implements Serializable {
     @Column(name = "BIRTHDATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date birthdate;
+    @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "CATEGORY_ID")
+    @ManyToOne
+    private Categories categoryId;
+    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
+    @ManyToOne
+    private Users userId;
 
     public Contacts() {
     }
@@ -83,22 +85,6 @@ public class Contacts implements Serializable {
 
     public void setContactId(Integer contactId) {
         this.contactId = contactId;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
     }
 
     public String getFirstName() {
@@ -147,6 +133,22 @@ public class Contacts implements Serializable {
 
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
+    }
+
+    public Categories getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Categories categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public Users getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Users userId) {
+        this.userId = userId;
     }
 
     @Override

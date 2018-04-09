@@ -7,6 +7,7 @@
 package sk.zadanie.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,9 +16,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -41,6 +44,8 @@ public class Categories implements Serializable {
     @Size(max = 50)
     @Column(name = "NAME")
     private String name;
+    @OneToMany(mappedBy = "categoryId")
+    private Set<Contacts> contactsSet;
 
     public Categories() {
     }
@@ -63,6 +68,15 @@ public class Categories implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @XmlTransient
+    public Set<Contacts> getContactsSet() {
+        return contactsSet;
+    }
+
+    public void setContactsSet(Set<Contacts> contactsSet) {
+        this.contactsSet = contactsSet;
     }
 
     @Override
