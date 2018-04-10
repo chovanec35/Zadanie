@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import sk.zadanie.dao.UserDao;
+import sk.zadanie.dto.LoginDto;
 import sk.zadanie.entity.User;
 
 @Repository
@@ -44,11 +45,12 @@ public class UserDaoImpl implements UserDao {
             user.getPassword(), user.getEmail()});
     }
     
-    public User validateUser(Login login) {
+    public User loginUser(LoginDto login) {
         String sql = "select * from users where email='" + login.getEmail() + "' and password='" + login.getPassword()
                 + "'";
-        List<Map<String, Object>> users = jdbcTemplate.query(sql);
-        return users.size() > 0 ? users.get(0) : null;
+        List<Map<String, Object>> users = jdbcTemplate.queryForList(sql);
+        System.out.println("list users: " + users);
+        return null;
     }
 
     /*@Override

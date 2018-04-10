@@ -6,6 +6,7 @@
 package sk.zadanie.service;
 
 import java.util.List;
+import sk.zadanie.dto.LoginDto;
 import sk.zadanie.dto.UserDto;
 import sk.zadanie.entity.User;
 
@@ -21,5 +22,5 @@ public interface UserService {
     public List getAllUser();*/
 //    public void addNewContact(ContactDto contact, UserDto userDto, int userId);
     public void registration(User user);
-//    public User validateUser(Login login);
+    public User loginUser(LoginDto login);
 }

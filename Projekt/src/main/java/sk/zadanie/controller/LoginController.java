@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import sk.zadanie.dto.LoginDto;
 import sk.zadanie.dto.UserDto;
+import sk.zadanie.entity.User;
 import sk.zadanie.service.UserService;
 
 import sk.zadanie.service.impl.UserServiceImpl;
@@ -39,9 +40,9 @@ public class LoginController {
     @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
     public ModelAndView loginProcess(HttpServletRequest request, 
             HttpServletResponse response, @ModelAttribute("login") LoginDto login, HttpSession httpSession) {
-        //UserDto user = userService.validateUser(login);
+        User user = userService.loginUser(login);
+        System.out.println("user" + login);
         ModelAndView mav = null;
-        
 //        if (user != null && !user.isDeleted()) {    
 //            httpSession.setAttribute("loggedUser", user);
 //            mav = new ModelAndView("my-contacts");

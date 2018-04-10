@@ -33,10 +33,10 @@ public class UserServiceImpl implements UserService{
         userDao.registration(user);
     }
 //    
-//    @Transactional
-//    public User validateUser(LoginDto login){
-//        return userDao.validateUser(login);
-//    }
+    @Transactional
+    public User loginUser(LoginDto login){
+        return userDao.loginUser(login);
+    }
 //
 //     @Transactional
 //    public List<Map<String, Object>> getAllContacts(int userId){ //, String fName, String lName, String role
