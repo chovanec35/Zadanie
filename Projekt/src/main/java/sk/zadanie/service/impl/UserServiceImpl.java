@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService{
 //    }
 //    
     @Transactional
-    public void registration(User user){
+    public void registration(UserDto user){
         userDao.registration(user);
     }
 //    

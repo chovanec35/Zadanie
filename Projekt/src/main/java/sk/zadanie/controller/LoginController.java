@@ -13,15 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;                   
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import sk.zadanie.dto.LoginDto;
-import sk.zadanie.dto.UserDto;
 import sk.zadanie.entity.User;
 import sk.zadanie.service.UserService;
-
-import sk.zadanie.service.impl.UserServiceImpl;
 
 @Controller
 @SessionAttributes("loggedUser")
@@ -38,25 +35,17 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-    public ModelAndView loginProcess(HttpServletRequest request, 
+    public ModelAndView loginProcess(HttpServletRequest request,
             HttpServletResponse response, @ModelAttribute("login") LoginDto login, HttpSession httpSession) {
         User user = userService.loginUser(login);
         System.out.println("user" + login);
-        ModelAndView mav = null;
-//        if (user != null && !user.isDeleted()) {    
-//            httpSession.setAttribute("loggedUser", user);
-//            mav = new ModelAndView("my-contacts");
-//            mav.addObject("user_Id",user.getUser_id());
-//            mav.addObject("email", user.getEmail());
-//            mav.addObject("password", user.getPassword());
-//            System.out.println(user.toString());
-//        } else if (user != null && user.isDeleted()) {
-//            mav = new ModelAndView("login");
-//            mav.addObject("message", "This user is deleted!!");
-//        } else {
-//            mav = new ModelAndView("login");
-//            mav.addObject("message", "Username or Password is wrong!!");
-//        }
+        ModelAndView mav = new ModelAndView("login");
+        if (user != null) {
+            httpSession.setAttribute("loggedUser", user);
+            mav = new ModelAndView("redirect:my-contacts");
+        } else {
+            mav.addObject("message", "Username or Password is wrong!!");
+        }
         return mav;
     }
 }

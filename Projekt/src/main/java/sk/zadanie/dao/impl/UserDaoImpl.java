@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import sk.zadanie.dao.UserDao;
 import sk.zadanie.dto.LoginDto;
+import sk.zadanie.dto.UserDto;
 import sk.zadanie.entity.User;
 
 @Repository
@@ -38,19 +39,18 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void registration(User user) {
+    public void registration(UserDto user) {
         System.out.println("zapisujem do DB");
         String sql = "insert into users (FIRST_NAME, LAST_NAME, PASSWORD, EMAIL) values(?,?,?,?)";
         jdbcTemplate.update(sql, new Object[]{user.getFirstName(), user.getLastName(),
             user.getPassword(), user.getEmail()});
     }
-    
+
     public User loginUser(LoginDto login) {
         String sql = "select * from users where email='" + login.getEmail() + "' and password='" + login.getPassword()
                 + "'";
-        List<Map<String, Object>> users = jdbcTemplate.queryForList(sql);
-        System.out.println("list users: " + users);
-        return null;
+        List<User> users = jdbcTemplate.query(sql, new UserMapper());
+        return users.size() > 0 ? users.get(0) : null;  
     }
 
     /*@Override
@@ -77,7 +77,6 @@ public class UserDaoImpl implements UserDao {
     public List getAllUser() {
         return session.getCurrentSession().createQuery("from User").list();
     }*/
-    
 //    @Override
 //    public void addNewContact(ContactDto contact, UserDto userDto, int userId) {
 //        System.out.println("contact: " + contact);
@@ -88,16 +87,18 @@ public class UserDaoImpl implements UserDao {
 //    }
 }
 
-//class UserMapper implements RowMapper<User> {
-//
-//    public User mapRow(ResultSet rs, int arg1) throws SQLException {
-//        User user = new User();
-//        user.setUser_id(rs.getInt("user_Id"));
-//        user.setFirstName(rs.getString("firstName"));
-//        user.setLastName(rs.getString("lastName"));
-//        user.setPassword(rs.getString("password"));
-//        user.setEmail(rs.getString("email"));
-//        user.setDeleted(rs.getBoolean("deleted"));
-//        return user;
-//    }
-//}
+class UserMapper implements RowMapper<User> {
+
+    public User mapRow(ResultSet rs, int arg1) throws SQLException {
+        User user = new User();
+        System.out.println("rs--->" + rs);
+        user.setUserId(rs.getInt("USER_ID"));
+        user.setFirstName(rs.getString("FIRST_NAME"));
+        user.setLastName(rs.getString("LAST_NAME"));
+        user.setPassword(rs.getString("PASSWORD"));
+        user.setEmail(rs.getString("EMAIL"));
+        user.setBirthdate(rs.getTimestamp("BIRTHDATE"));
+
+        return user;
+    }
+}

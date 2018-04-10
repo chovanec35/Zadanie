@@ -43,8 +43,11 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/registrationProcess", method = RequestMethod.POST)
-    public ModelAndView registrationProcess(@ModelAttribute("user") User user, 
+    public ModelAndView registrationProcess(@ModelAttribute("user") UserDto user, 
             BindingResult result) throws IOException {
+        System.out.println("user---> " + user);
+        
+        
         ModelAndView mav = new ModelAndView("Login");
         //RegistrationValidator registrationValidator = new RegistrationValidator();
         //registrationValidator.validate(userDto, result);

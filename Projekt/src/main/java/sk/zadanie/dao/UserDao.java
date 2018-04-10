@@ -11,7 +11,7 @@ public interface UserDao {
 //    public void addNewContact(ContactDto contact, UserDto userDto, int userId);
     
     //User validateUser(Login login);
-    public void registration(User user);
+    public void registration(UserDto user);
     public List<Map<String, Object>> getAllContacts(int userId); //, String fName, String lName, String role
     public User loginUser(LoginDto login);
 
