@@ -49,8 +49,10 @@ public class NewContactController {
     @RequestMapping(value = "/newContactProcess", method = RequestMethod.POST)
     public ModelAndView newContactProcess(HttpServletRequest request, HttpServletResponse response,
             @ModelAttribute("contact") ContactDto contact, UserDto userDto, HttpSession httpSession) throws IOException {
-        System.out.println("daj kategoriu " + contact.getCategory());
+        //System.out.println("daj kategoriu " + contact.getCategory());
         User user = (User) httpSession.getAttribute("loggedUser");
+        String selectedvalue  =  request.getParameter("category");
+        System.out.println("selected value " + selectedvalue);
         int userId = user.getUserId();
         userServiceImpl.addNewContact(contact, userDto, userId);
         return new ModelAndView("add-new-contact");

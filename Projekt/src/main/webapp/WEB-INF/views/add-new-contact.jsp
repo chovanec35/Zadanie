@@ -46,14 +46,7 @@
                             <c:forEach items="${categoryList}" var="category">
                                 <option><c:out value="${category.name}" /></option>
                                 
-                            </c:forEach>
-                                <%
-                                    String selectedItem;
-                                    if (request.getParameter("category") != null) {
-                                        selectedItem = request.getParameter("category");
-                                    }
-                                %>
-                                
+                            </c:forEach>                                
                         </select></td>
                         
                 </tr>

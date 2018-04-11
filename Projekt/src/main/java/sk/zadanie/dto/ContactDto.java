@@ -16,12 +16,12 @@ public class ContactDto {
     private String firstName;
     private String lastName;
     private String description;
-    private Categorie category;
+    private int category;
 
     public ContactDto() {
     }
 
-    public ContactDto(String firstName, String lastName, String description, Categorie category) {
+    public ContactDto(String firstName, String lastName, String description, int category) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;
@@ -52,11 +52,11 @@ public class ContactDto {
         this.description = description;
     }
 
-    public Categorie getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(Categorie category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 
