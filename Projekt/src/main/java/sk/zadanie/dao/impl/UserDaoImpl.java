@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import sk.zadanie.dao.UserDao;
+import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.LoginDto;
 import sk.zadanie.dto.UserDto;
 import sk.zadanie.entity.User;
@@ -46,11 +47,22 @@ public class UserDaoImpl implements UserDao {
             user.getPassword(), user.getEmail()});
     }
 
+    @Override
     public User loginUser(LoginDto login) {
         String sql = "select * from users where email='" + login.getEmail() + "' and password='" + login.getPassword()
                 + "'";
         List<User> users = jdbcTemplate.query(sql, new UserMapper());
-        return users.size() > 0 ? users.get(0) : null;  
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
+    @Override
+    public void addNewContact(ContactDto contact, UserDto userDto, int userId) {
+        System.out.println("vytvaram novy contact: " + contact);
+        System.out.println("contact getCategory: " + contact.getCategory());
+        String sql = "insert into contacts (FNAME, LNAME, DESCRIPTION, CATEGORY_ID, USER_ID) values(?,?,?,?,?)";
+        jdbcTemplate.update(sql, new Object[]{contact.getFirstName(),
+            contact.getLastName(), contact.getDescription(), contact.getCategory(), userId});
+        System.out.println("Kontakt bol pridany");
     }
 
     /*@Override
@@ -77,14 +89,6 @@ public class UserDaoImpl implements UserDao {
     public List getAllUser() {
         return session.getCurrentSession().createQuery("from User").list();
     }*/
-//    @Override
-//    public void addNewContact(ContactDto contact, UserDto userDto, int userId) {
-//        System.out.println("contact: " + contact);
-//        String sql = "insert into contacts (FNAME, LNAME, DESCRIPTION, ROLE, USER_ID) values(?,?,?,?,?)";
-//        jdbcTemplate.update(sql, new Object[]{contact.getFirstName(),
-//            contact.getLastName(), contact.getDescription(), contact.getRole(), userId});
-//        System.out.println("Kontakt bol pridany");
-//    }
 }
 
 class UserMapper implements RowMapper<User> {

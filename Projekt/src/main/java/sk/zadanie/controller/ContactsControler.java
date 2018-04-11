@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import sk.zadanie.dao.CategoryDao;
 import sk.zadanie.dao.impl.CategoryDaoImpl;
+import sk.zadanie.dto.LoginDto;
+import sk.zadanie.entity.User;
 import sk.zadanie.service.impl.UserServiceImpl;
 
 /**
@@ -25,26 +28,25 @@ import sk.zadanie.service.impl.UserServiceImpl;
 public class ContactsControler {
 
     @Autowired
-    CategoryDaoImpl categoryDaoImpl;
+    CategoryDao categoryDao;
 //    UserServiceImpl userServiceImpl;
 
     @RequestMapping(value = "/my-contacts", method = RequestMethod.GET)
     public ModelAndView viewLogin(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView("my-contacts");
-        mav.addObject("categoryList", categoryDaoImpl.getAllCategories());
+        mav.addObject("categoryList", categoryDao.getAllCategories());
         return mav;
-    }
-//
-//    @RequestMapping(value = "/searchProcess", method = RequestMethod.POST)
-//    public ModelAndView loginProcess(HttpServletRequest request,
-//            HttpServletResponse response, @ModelAttribute("login") Login login, HttpSession httpSession) {
-//        User user = (User) httpSession.getAttribute("loggedUser");
-//        ContactDto contact = ContactDto();
-//        
-//        ModelAndView mav = new ModelAndView();
-//        ModelAndView mav1 = new ModelAndView();
-//        
-//
+    }     
+            
+    @RequestMapping(value = "/searchProcess", method = RequestMethod.POST)
+    public ModelAndView loginProcess(HttpServletRequest request,
+            HttpServletResponse response, @ModelAttribute("login") LoginDto login, HttpSession httpSession) {
+        User user = (User) httpSession.getAttribute("loggedUser");
+        //Contact contact = new Contact();
+        
+        ModelAndView mav = new ModelAndView();
+        
+
 //        if (user != null) {
 //            mav.addObject("user_Id", user.getUser_id());
 //            System.out.println("USER ID" + user.getUser_id());
@@ -55,9 +57,9 @@ public class ContactsControler {
 //        } else {
 //            mav.addObject("user_Id", "error");
 //        }
-//        return mav;
-//    }
-//}
+        return mav;
+    }
+}
 
 //
 //    @RequestMapping("/my-contacts")
@@ -73,4 +75,4 @@ public class ContactsControler {
 //        query.setParameter("id", 1);
 //        List<ContactDto> contacts = query.list();
 //        return contacts;
-}
+//}
