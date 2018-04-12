@@ -44,7 +44,8 @@
                     <td>Category</td>
                     <td><select textarea path="category" name="category">
                             <c:forEach items="${categoryList}" var="category">
-                                <option><c:out value="${category.name}" /></option>                              
+                                <option><c:out value="${category.name}" /></option>
+                            </c:forEach>
                         </select></td>                        
                 </tr>
                 <tr>
@@ -53,4 +54,4 @@
             </table>
         </form>
     </body>
-</html>
+</html> 
