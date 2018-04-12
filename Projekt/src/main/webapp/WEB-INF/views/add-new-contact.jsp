@@ -44,18 +44,8 @@
                     <td>Category</td>
                     <td><select textarea path="category" name="category">
                             <c:forEach items="${categoryList}" var="category">
-                                <option><c:out value="${category.name}" /></option>
-                                
-                            </c:forEach>
-                                <%
-                                    String selectedItem;
-                                    if (request.getParameter("category") != null) {
-                                        selectedItem = request.getParameter("category");
-                                    }
-                                %>
-                                
-                        </select></td>
-                        
+                                <option><c:out value="${category.name}" /></option>                              
+                        </select></td>                        
                 </tr>
                 <tr>
                     <td><button type="submit">Add new conntact</button></td>
@@ -64,4 +54,3 @@
         </form>
     </body>
 </html>
-
