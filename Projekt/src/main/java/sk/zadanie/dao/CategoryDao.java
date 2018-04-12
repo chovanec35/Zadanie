@@ -7,6 +7,7 @@ package sk.zadanie.dao;
 
 import java.util.List;
 import java.util.Map;
+import sk.zadanie.entity.Categorie;
 
 /**
  *

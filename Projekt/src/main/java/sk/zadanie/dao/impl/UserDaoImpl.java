@@ -57,9 +57,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addNewContact(ContactDto contact, UserDto userDto, int userId) {
-        System.out.println("vytvaram novy contact: " + contact);
-        System.out.println("contact getCategory: " + contact.getCategory());
-        String sql = "insert into contacts (FNAME, LNAME, DESCRIPTION, CATEGORY_ID, USER_ID) values(?,?,?,?,?)";
+//        System.out.println("vytvaram novy contact: " + contact);
+//        System.out.println("contact getCategory: " + contact.getCategory());
+        String sql = "insert into contacts (FIRST_NAME, LAST_NAME, DESCRIPTION, CATEGORY_ID, USER_ID) values(?,?,?,?,?)";
         jdbcTemplate.update(sql, new Object[]{contact.getFirstName(),
             contact.getLastName(), contact.getDescription(), contact.getCategory(), userId});
         System.out.println("Kontakt bol pridany");

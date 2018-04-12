@@ -6,6 +6,8 @@
 package sk.zadanie.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -37,6 +39,12 @@ public class NewContactController {
     public ModelAndView viewAddNewContact(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("add-new-contact");
+        
+       /* List<String> categories = new ArrayList<String>();
+        categories.add("A");
+        categories.add("B");
+        categories.add("C");*/
+        
         mav.addObject("categoryList", categoryDao.getAllCategories());
         if (user != null) {
             mav.addObject("user_Id", user.getUserId());
@@ -49,7 +57,7 @@ public class NewContactController {
     @RequestMapping(value = "/newContactProcess", method = RequestMethod.POST)
     public ModelAndView newContactProcess(HttpServletRequest request, HttpServletResponse response,
             @ModelAttribute("contact") ContactDto contact, UserDto userDto, HttpSession httpSession) throws IOException {
-        System.out.println("daj kategoriu " + contact.getCategory());
+        System.out.println("daj kategoriu " + contact);
         User user = (User) httpSession.getAttribute("loggedUser");
         int userId = user.getUserId();
         userServiceImpl.addNewContact(contact, userDto, userId);
