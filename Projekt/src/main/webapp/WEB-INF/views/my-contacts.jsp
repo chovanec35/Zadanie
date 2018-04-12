@@ -16,23 +16,24 @@
         <a href="${path}/my-contacts">My contacts</a>
         <a href="${path}/add-new-contact">Add new contact</a>
         <a href="<c:url value="/logoutProcess" />">Log out</a>
-        <form method="POST">
+        
+        <form method="POST" modelAttribute="contact" action="${path}/searchProcess">
             <table>
                 <tr>
                     <td>First name</td>
-                    <td><input path="firstname" /></td>
+                    <td><input path="firstName" type="text" name="firstName"></td>
 
                 </tr>
                 <tr>
                     <td>Last name</td>
-                    <td><input path="lastname" /></td>
+                    <td><input path="lastName" type="text" name="lastName" /></td>
                 </tr>
                 <tr>
                     <td>Category</td>
-                    <td><select>
-                            <option></option>
+                    <td><select textarea path="category" name="category">
+                            <option value=""></option>
                             <c:forEach items="${categoryList}" var="category">
-                                <option><c:out value="${category.name}" /></option>
+                                <option value="${category.category_id}"><c:out value="${category.name}" /></option>
                             </c:forEach>
                         </select></td>
                 </tr>

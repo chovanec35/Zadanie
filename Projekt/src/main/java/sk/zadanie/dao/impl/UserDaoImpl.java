@@ -2,10 +2,13 @@ package sk.zadanie.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,6 +19,7 @@ import sk.zadanie.dao.UserDao;
 import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.LoginDto;
 import sk.zadanie.dto.UserDto;
+import sk.zadanie.entity.Contact;
 import sk.zadanie.entity.User;
 
 @Repository
@@ -29,13 +33,24 @@ public class UserDaoImpl implements UserDao {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Map<String, Object>> getAllContacts(int userId) { //, String fName, String lName, String role
-        //String sql = "select * from contacts where user_Id=" + userId + "AND FNAME=" + fName + "AND LNAME=" + lName + "AND ROLE=" + role;
-        String sql = "select * from contacts where user_Id=" + userId;
-        System.out.println("SQL-> " + sql);
-        List<Map<String, Object>> contacts = jdbcTemplate.queryForList(sql);
-
-        System.out.println("contacts " + contacts);
+    public List<Contact> getAllContacts(int userId) {
+        System.out.println("som v getAllContacts()");
+        List<Contact> contacts = new ArrayList<Contact>();
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
+//        EntityManager em = emf.createEntityManager();
+//
+//        em.getTransaction().begin();
+//
+//        Query query = em.createNamedQuery("Contacts.findAll");
+//        //query.setParameter(1, "Jack");
+//        
+//        List<Contact> contacts = (List<Contact>) query.getResultList();
+//        System.out.println("Dlho ocakavane NamedQuery---> " + query);
+//
+//        em.getTransaction().commit();
+//        em.close();
+//        emf.close();
+        
         return contacts;
     }
 
@@ -56,13 +71,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addNewContact(ContactDto contact, UserDto userDto, int userId) {
-//        System.out.println("vytvaram novy contact: " + contact);
-//        System.out.println("contact getCategory: " + contact.getCategory());
+    public void addNewContact(ContactDto contact, int userId) {
         String sql = "insert into contacts (FIRST_NAME, LAST_NAME, DESCRIPTION, CATEGORY_ID, USER_ID) values(?,?,?,?,?)";
         jdbcTemplate.update(sql, new Object[]{contact.getFirstName(),
             contact.getLastName(), contact.getDescription(), contact.getCategory(), userId});
-        System.out.println("Kontakt bol pridany");
     }
 
     /*@Override
@@ -95,7 +107,6 @@ class UserMapper implements RowMapper<User> {
 
     public User mapRow(ResultSet rs, int arg1) throws SQLException {
         User user = new User();
-        System.out.println("rs--->" + rs);
         user.setUserId(rs.getInt("USER_ID"));
         user.setFirstName(rs.getString("FIRST_NAME"));
         user.setLastName(rs.getString("LAST_NAME"));

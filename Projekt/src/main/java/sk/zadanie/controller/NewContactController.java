@@ -23,6 +23,8 @@ import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.LoginDto;
 import sk.zadanie.dto.UserDto;
 import sk.zadanie.entity.User;
+import sk.zadanie.service.CategoryService;
+import sk.zadanie.service.UserService;
 import sk.zadanie.service.impl.UserServiceImpl;
 
 @Controller
@@ -30,40 +32,31 @@ import sk.zadanie.service.impl.UserServiceImpl;
 public class NewContactController {
 
     @Autowired
-    UserServiceImpl userServiceImpl;
+    UserService userService;
+    CategoryService categoryService;
     
-    @Autowired
-    CategoryDao categoryDao;
 
     @RequestMapping(value = "/add-new-contact", method = RequestMethod.GET)
     public ModelAndView viewAddNewContact(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("add-new-contact");
         
-       /* List<String> categories = new ArrayList<String>();
-        categories.add("A");
-        categories.add("B");
-        categories.add("C");*/
-        
-        mav.addObject("categoryList", categoryDao.getAllCategories());
+        mav.addObject("categoryList", categoryService.getAllCategories());
         if (user != null) {
             mav.addObject("user_Id", user.getUserId());
         }else {
             mav.addObject("user_Id", "error");
         }
-        return mav;
+        return mav; 
     }
 
     @RequestMapping(value = "/newContactProcess", method = RequestMethod.POST)
     public ModelAndView newContactProcess(HttpServletRequest request, HttpServletResponse response,
-            @ModelAttribute("contact") ContactDto contact, UserDto userDto, HttpSession httpSession) throws IOException {
-        System.out.println("daj kategoriu " + contact);
+            @ModelAttribute("contact") ContactDto contact, HttpSession httpSession) throws IOException {
         User user = (User) httpSession.getAttribute("loggedUser");
-        String selectedvalue  =  request.getParameter("category");
-        System.out.println("selected value " + selectedvalue);
         int userId = user.getUserId();
-        userServiceImpl.addNewContact(contact, userDto, userId);
-        return new ModelAndView("add-new-contact");
+        userService.addNewContact(contact, userId);
+        return new ModelAndView("redirect:add-new-contact");
     }
 }
 
