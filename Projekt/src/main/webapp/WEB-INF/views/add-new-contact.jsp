@@ -44,11 +44,9 @@
                     <td>Category</td>
                     <td><select textarea path="category" name="category">
                             <c:forEach items="${categoryList}" var="category">
-                                <option><c:out value="${category.name}" /></option>
-                                
-                            </c:forEach>                                
-                        </select></td>
-                        
+                                <option value="${category.category_id}"><c:out value="${category.name}" /></option>
+                            </c:forEach>
+                        </select></td>                        
                 </tr>
                 <tr>
                     <td><button type="submit">Add new conntact</button></td>
@@ -56,5 +54,4 @@
             </table>
         </form>
     </body>
-</html>
-
+</html> 
