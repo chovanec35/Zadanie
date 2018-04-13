@@ -48,7 +48,7 @@ public class RegistrationController {
         System.out.println("user---> " + user);
         
         
-        ModelAndView mav = new ModelAndView("Login");
+        ModelAndView mav = new ModelAndView("login");
         //RegistrationValidator registrationValidator = new RegistrationValidator();
         //registrationValidator.validate(userDto, result);
 //
