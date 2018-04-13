@@ -7,6 +7,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <style>
+            .table-contacts, .table-contacts td, .table-contacts tr, .table-contacts th{
+                border: 1px solid black;
+            }
+        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
         <title>My contacts</title>
     </head>
@@ -15,8 +20,9 @@
         <a href="${path}/home">Home</a>
         <a href="${path}/my-contacts">My contacts</a>
         <a href="${path}/add-new-contact">Add new contact</a>
-        <a href="<c:url value="/logoutProcess" />">Log out</a>
+        <a href="<c:url value="/logoutProcess" />">Log out</a><br>
 
+        <label style="color: red"> ${message} </label><br>
         <form method="POST" modelAttribute="contact" action="${path}/searchProcess">
             <table>
                 <tr>
@@ -46,14 +52,16 @@
                 </tr>
             </table>
         </form>
-        tu sleduj co sa deje ${contactsList}
+        
+        <form method="POST" modelAttribute="contact" action="${path}/deleteProcess">
         <c:if test="${!empty contactsList}">
-            <table style="border:1">
+            <table class="table-contacts" >
                 <tr>
                     <th>First name</th>
                     <th>Last name</th>
                     <th>Category</th>
-                    <th></th>
+                    <th>Detail</th>
+                    <th>Delete</th>
                 </tr>
                 <c:forEach items="${contactsList}" var="contact">
 
@@ -61,10 +69,17 @@
                         <td><c:out value="${contact.firstName}" /></td>
                         <td><c:out value="${contact.lastName}" /></td>
                         <td><c:out value="${contact.categoryId.name}" /></td>
+                        <td><button type="submit" name="infoCntact" value=${contact.contactId} >Info</button></td>
+                        <td><button type="submit" name="delContact" value=${contact.contactId} >Delete</button></td>
+                        <!--<td><a href=DeleteContact?contactId= {contact.contactId} > Delete </a></td>-->
+                        <!--<td><a href="delete.jsp?id= %>"><button type="button" class="delete">Delete</button></a></td>-->
                     </tr>
 
                 </c:forEach>
             </table>
         </c:if>
+        </form>
     </body>
 </html>
+
+

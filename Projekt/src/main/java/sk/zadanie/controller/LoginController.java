@@ -30,7 +30,6 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView viewLogin(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView("login");
-        //mav.addObject("login", new Login());
         return mav;
     }
 
@@ -38,7 +37,6 @@ public class LoginController {
     public ModelAndView loginProcess(HttpServletRequest request,
             HttpServletResponse response, @ModelAttribute("login") LoginDto login, HttpSession httpSession) {
         User user = userService.loginUser(login);
-        System.out.println("user" + login);
         ModelAndView mav = new ModelAndView("login");
         if (user != null) {
             httpSession.setAttribute("loggedUser", user);

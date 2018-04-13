@@ -34,7 +34,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c"), 
     @NamedQuery(name = "Contact.findByContactId", query = "SELECT c FROM Contact c WHERE c.contactId = :contactId"),
-    @NamedQuery(name = "Contact.findByUserId", query = "SELECT c FROM Contact c WHERE c.userId = ?1"),
+    @NamedQuery(name = "Contact.deleteByContactId", query = "UPDATE Contact c SET c.flagDel = :flagDel WHERE c.contactId = :contactId"),
+    @NamedQuery(name = "Contact.test", query = "UPDATE Contact c SET c.firstName = :firstName WHERE c.contactId = 1"),
+    @NamedQuery(name = "Contact.findByUserId", query = "SELECT c FROM Contact c WHERE c.userId = :userId AND c.flagDel=false"),
     @NamedQuery(name = "Contact.findByFirstName", query = "SELECT c FROM Contact c WHERE c.firstName = :firstName"),
     @NamedQuery(name = "Contact.findByLastName", query = "SELECT c FROM Contact c WHERE c.lastName = :lastName"),
     @NamedQuery(name = "Contact.findByDescription", query = "SELECT c FROM Contact c WHERE c.description = :description"),

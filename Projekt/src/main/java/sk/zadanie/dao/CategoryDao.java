@@ -14,5 +14,6 @@ import sk.zadanie.entity.Category;
  * @author Lenovo
  */
 public interface CategoryDao {
-        List<Map<String, Object>> getAllCategories();
+
+    List<Map<String, Object>> getAllCategories();
 }

@@ -5,11 +5,15 @@
  */
 package sk.zadanie.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import sk.zadanie.dao.CategoryDao;
+import sk.zadanie.dao.ContactDao;
 import sk.zadanie.dto.ContactDto;
 import sk.zadanie.entity.Contact;
 import sk.zadanie.entity.User;
@@ -33,53 +38,60 @@ public class ContactsControler {
 
     @Autowired
     CategoryDao categoryDao;
-    
+
     @Autowired
     UserService userService;
+
+    @Autowired
+    ContactDao contactDao;
 
     @RequestMapping(value = "/my-contacts", method = RequestMethod.GET)
     public ModelAndView viewLogin(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView("my-contacts");
         mav.addObject("categoryList", categoryDao.getAllCategories());
         return mav;
-    }     
-            
+    }
+
     @RequestMapping(value = "/searchProcess", method = RequestMethod.POST)
     public ModelAndView searchProcess(HttpServletRequest request,
             HttpServletResponse response, @ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("loggedUser");
-        System.out.println("Prihlaseny user ---->  " + user);
         ModelAndView mav = new ModelAndView("my-contacts");
-//        System.out.println("Hladaj podla -> " + user.getUserId());
-//        System.out.println("userService -> " + userService);
-        
+
         List<Contact> contactsList = userService.getAllContacts(user);
         mav.addObject("contactsList", contactsList);
+        mav.addObject("user_Id", user.getUserId());
 //        if (user != null) {
 //            mav.addObject("user_Id", user.getUserId());
 //            System.out.println("USER ID ---> " + user.getUserId());
 //            List<Contact> contactsList = userService.getAllContacts(user);
-            //mav.addObject("contactsList", contactsList);
+        //mav.addObject("contactsList", contactsList);
 //            
 //        } else {
 //            mav.addObject("user_Id", "error");
 //        }
         return mav;
     }
-}
 
-//
-//    @RequestMapping("/my-contacts")
-//    public List<ContactDto> showContacts(HttpSession httpSession) {
-//        User user = (User) httpSession.getAttribute("loggedUser");
-//        int userId = user.getUser_id();
-//        ModelAndView mav = new ModelAndView();
-//        mav.addObject("user_Id", user.getUser_id());
-//        
-//        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-//        Session session = sessionFactory.openSession();
-//        Query query = session.createQuery("from Contacts where id = :id ");
-//        query.setParameter("id", 1);
-//        List<ContactDto> contacts = query.list();
-//        return contacts;
-//}
+    @RequestMapping(value = "/deleteProcess", method = RequestMethod.POST)
+    public ModelAndView deleteProcess(HttpServletRequest request,
+            HttpServletResponse response, @ModelAttribute("contact") Contact contact, HttpSession httpSession) throws IOException, ServletException {
+//        if ("FirstServlet".equals(action)) 
+        User user = (User) httpSession.getAttribute("loggedUser");
+        ModelAndView mav = new ModelAndView("my-contacts");
+        String id = request.getParameter("delContact");
+        contactDao.delContact(Integer.parseInt(id));
+        
+        String[] options = {"abc", "def", "ghi", "jkl"};
+        //Integer[] options = {1, 3, 5, 7, 9, 11};
+        //Double[] options = {3.141, 1.618};
+        //Character[] options = {'a', 'b', 'c', 'd'};
+        int x = JOptionPane.showOptionDialog(null, "Returns the position of your choice on the array",
+                "Click a button",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+        System.out.println(x);
+
+        return mav;
+    }
+
+}

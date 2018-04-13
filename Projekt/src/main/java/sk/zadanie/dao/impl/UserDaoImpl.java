@@ -38,14 +38,16 @@ public class UserDaoImpl implements UserDao {
         em.getTransaction().begin();
 
         Query query = em.createNamedQuery("Contact.findByUserId");
-        query.setParameter(1, user);
+        query.setParameter("userId", user);
         
+//        System.out.println("OK QUERY OK --->" + query);
+
         List<Contact> contacts = (List<Contact>) query.getResultList();
 
         em.getTransaction().commit();
         em.close();
         emf.close();
-        
+
         return contacts;
     }
 
@@ -59,26 +61,26 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User loginUser(LoginDto login) {
-//        String sql = "select * from users where email='" + login.getEmail() + "' and password='" + login.getPassword()
-//                + "'";
-//        List<User> users = jdbcTemplate.query(sql, new UserMapper());
-//        return users.size() > 0 ? users.get(0) : null;
-        
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
-        EntityManager em = emf.createEntityManager();
+        String sql = "select * from users where email='" + login.getEmail() + "' and password='" + login.getPassword()
+                + "'";
+        List<User> users = jdbcTemplate.query(sql, new UserMapper());
+        return users.size() > 0 ? users.get(0) : null;
 
-        em.getTransaction().begin();
-
-        Query query = em.createNamedQuery("Contact.findByUserId");
-        query.setParameter(1, user);
-        
-        List<Contact> contacts = (List<Contact>) query.getResultList();
-
-        em.getTransaction().commit();
-        em.close();
-        emf.close();
-        
-        return contacts;
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
+//        EntityManager em = emf.createEntityManager();
+//
+//        em.getTransaction().begin();
+//
+//        Query query = em.createNamedQuery("Contact.findByUserId");
+//        query.setParameter(1, user);
+//        
+//        List<Contact> contacts = (List<Contact>) query.getResultList();
+//
+//        em.getTransaction().commit();
+//        em.close();
+//        emf.close();
+//        
+//        return contacts;
     }
 
     @Override

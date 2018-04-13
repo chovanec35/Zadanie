@@ -10,6 +10,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sk.zadanie.dao.ContactDao;
 import sk.zadanie.dao.UserDao;
 import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.LoginDto;
@@ -24,6 +25,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private ContactDao contactDao;
+    
     @Transactional
     public void addNewContact(ContactDto contact, int userId) {
         userDao.addNewContact(contact, userId);
@@ -42,6 +46,10 @@ public class UserServiceImpl implements UserService {
 
     public List<Contact> getAllContacts(User user) {
         return userDao.getAllContacts(user);
+    }
+    
+    public void delContact(int contactId){
+        contactDao.delContact(contactId);
     }
 //
 //     @Transactional
