@@ -33,6 +33,8 @@ public class NewContactController {
 
     @Autowired
     UserService userService;
+    
+    @Autowired
     CategoryService categoryService;
     
 

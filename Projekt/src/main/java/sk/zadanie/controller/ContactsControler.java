@@ -33,6 +33,8 @@ public class ContactsControler {
 
     @Autowired
     CategoryDao categoryDao;
+    
+    @Autowired
     UserService userService;
 
     @RequestMapping(value = "/my-contacts", method = RequestMethod.GET)
@@ -43,17 +45,21 @@ public class ContactsControler {
     }     
             
     @RequestMapping(value = "/searchProcess", method = RequestMethod.POST)
-    public ModelAndView loginProcess(HttpServletRequest request,
+    public ModelAndView searchProcess(HttpServletRequest request,
             HttpServletResponse response, @ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("loggedUser");
-        ModelAndView mav = new ModelAndView("redirect:my-contacts");
-        System.out.println("Hladaj podla -> " + user.getUserId());
-        List<Contact> contactsList = userService.getAllContacts(user.getUserId());
+        System.out.println("Prihlaseny user ---->  " + user);
+        ModelAndView mav = new ModelAndView("my-contacts");
+//        System.out.println("Hladaj podla -> " + user.getUserId());
+//        System.out.println("userService -> " + userService);
+        
+        List<Contact> contactsList = userService.getAllContacts(user);
+        mav.addObject("contactsList", contactsList);
 //        if (user != null) {
 //            mav.addObject("user_Id", user.getUserId());
 //            System.out.println("USER ID ---> " + user.getUserId());
-//            List<Contact> contactsList = userService.getAllContacts(user.getUserId());
-//            //mav.addObject("contactsList", contactsList);
+//            List<Contact> contactsList = userService.getAllContacts(user);
+            //mav.addObject("contactsList", contactsList);
 //            
 //        } else {
 //            mav.addObject("user_Id", "error");

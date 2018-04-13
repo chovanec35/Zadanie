@@ -16,7 +16,7 @@
         <a href="${path}/my-contacts">My contacts</a>
         <a href="${path}/add-new-contact">Add new contact</a>
         <a href="<c:url value="/logoutProcess" />">Log out</a>
-        
+
         <form method="POST" modelAttribute="contact" action="${path}/searchProcess">
             <table>
                 <tr>
@@ -46,9 +46,9 @@
                 </tr>
             </table>
         </form>
-
+        tu sleduj co sa deje ${contactsList}
         <c:if test="${!empty contactsList}">
-            <table>
+            <table style="border:1">
                 <tr>
                     <th>First name</th>
                     <th>Last name</th>
@@ -58,9 +58,9 @@
                 <c:forEach items="${contactsList}" var="contact">
 
                     <tr>
-                        <td><c:out value="${contact.fName}" /></td>
-                        <td><c:out value="${contact.lName}" /></td>
-                        <td><c:out value="${contact.role}" /></td>
+                        <td><c:out value="${contact.firstName}" /></td>
+                        <td><c:out value="${contact.lastName}" /></td>
+                        <td><c:out value="${contact.categoryId.name}" /></td>
                     </tr>
 
                 </c:forEach>

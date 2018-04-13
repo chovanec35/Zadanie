@@ -35,14 +35,13 @@ public class UserServiceImpl implements UserService {
     }
 //    
 
-    @Transactional
     public User loginUser(LoginDto login) {
         return userDao.loginUser(login);
     }
 
-    @Transactional
-    public List<Contact> getAllContacts(int userId) {
-        return userDao.getAllContacts(userId);
+
+    public List<Contact> getAllContacts(User user) {
+        return userDao.getAllContacts(user);
     }
 //
 //     @Transactional

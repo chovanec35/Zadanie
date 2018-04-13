@@ -33,13 +33,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "USERS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
-    , @NamedQuery(name = "Users.findByUserId", query = "SELECT u FROM Users u WHERE u.userId = :userId")
-    , @NamedQuery(name = "Users.findByFirstName", query = "SELECT u FROM Users u WHERE u.firstName = :firstName")
-    , @NamedQuery(name = "Users.findByLastName", query = "SELECT u FROM Users u WHERE u.lastName = :lastName")
-    , @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")
-    , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
-    , @NamedQuery(name = "Users.findByBirthdate", query = "SELECT u FROM Users u WHERE u.birthdate = :birthdate")})
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+    , @NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId")
+    , @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName")
+    , @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName")
+    , @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")
+    , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
+    , @NamedQuery(name = "User.findByBirthdate", query = "SELECT u FROM User u WHERE u.birthdate = :birthdate")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -64,6 +64,7 @@ public class User implements Serializable {
     @Column(name = "BIRTHDATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date birthdate;
+    
     @OneToMany(mappedBy = "userId")
     private Set<Contact> contactsSet;
 
@@ -122,14 +123,14 @@ public class User implements Serializable {
         this.birthdate = birthdate;
     }
 
-    @XmlTransient
-    public Set<Contact> getContactsSet() {
-        return contactsSet;
-    }
-
-    public void setContactsSet(Set<Contact> contactsSet) {
-        this.contactsSet = contactsSet;
-    }
+//    @XmlTransient
+//    public Set<Contact> getContactsSet() {
+//        return contactsSet;
+//    }
+//
+//    public void setContactsSet(Set<Contact> contactsSet) {
+//        this.contactsSet = contactsSet;
+//    }
 
     @Override
     public int hashCode() {

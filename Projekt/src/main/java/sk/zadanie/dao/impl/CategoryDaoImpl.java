@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import sk.zadanie.dao.CategoryDao;
-import sk.zadanie.entity.Categorie;
+import sk.zadanie.entity.Category;
 
 @Repository
 public class CategoryDaoImpl implements CategoryDao {

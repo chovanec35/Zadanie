@@ -5,7 +5,7 @@
  */
 package sk.zadanie.dto;
 
-import sk.zadanie.entity.Categorie;
+import sk.zadanie.entity.Category;
 
 /**
  *

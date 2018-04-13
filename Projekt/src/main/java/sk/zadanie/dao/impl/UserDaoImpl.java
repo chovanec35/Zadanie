@@ -33,23 +33,24 @@ public class UserDaoImpl implements UserDao {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Contact> getAllContacts(int userId) {
+    public List<Contact> getAllContacts(User user) {
         System.out.println("som v getAllContacts()");
-        List<Contact> contacts = new ArrayList<Contact>();
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
-//        EntityManager em = emf.createEntityManager();
-//
-//        em.getTransaction().begin();
-//
-//        Query query = em.createNamedQuery("Contacts.findAll");
-//        //query.setParameter(1, "Jack");
-//        
-//        List<Contact> contacts = (List<Contact>) query.getResultList();
-//        System.out.println("Dlho ocakavane NamedQuery---> " + query);
-//
-//        em.getTransaction().commit();
-//        em.close();
-//        emf.close();
+//        List<Contact> contacts = new ArrayList<>();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+
+        Query query = em.createNamedQuery("Contact.findByUserId");
+        query.setParameter(1, user);
+        
+        List<Contact> contacts = (List<Contact>) query.getResultList();
+        System.out.println("Dlho ocakavane NamedQuery---> " + query);
+        System.out.println("Dlho ocakavane contacts---> " + contacts);
+
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
         
         return contacts;
     }

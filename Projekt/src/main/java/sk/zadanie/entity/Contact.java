@@ -32,14 +32,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "CONTACTS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Contacts.findAll", query = "SELECT c FROM Contacts c")
-    , @NamedQuery(name = "Contacts.findByContactId", query = "SELECT c FROM Contacts c WHERE c.contactId = :contactId")
-    , @NamedQuery(name = "Contacts.findByFirstName", query = "SELECT c FROM Contacts c WHERE c.firstName = :firstName")
-    , @NamedQuery(name = "Contacts.findByLastName", query = "SELECT c FROM Contacts c WHERE c.lastName = :lastName")
-    , @NamedQuery(name = "Contacts.findByDescription", query = "SELECT c FROM Contacts c WHERE c.description = :description")
-    , @NamedQuery(name = "Contacts.findByFlagDel", query = "SELECT c FROM Contacts c WHERE c.flagDel = :flagDel")
-    , @NamedQuery(name = "Contacts.findByCreationTs", query = "SELECT c FROM Contacts c WHERE c.creationTs = :creationTs")
-    , @NamedQuery(name = "Contacts.findByBirthdate", query = "SELECT c FROM Contacts c WHERE c.birthdate = :birthdate")})
+    @NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c"), 
+    @NamedQuery(name = "Contact.findByContactId", query = "SELECT c FROM Contact c WHERE c.contactId = :contactId"),
+    @NamedQuery(name = "Contact.findByUserId", query = "SELECT c FROM Contact c WHERE c.userId = ?1"),
+    @NamedQuery(name = "Contact.findByFirstName", query = "SELECT c FROM Contact c WHERE c.firstName = :firstName"),
+    @NamedQuery(name = "Contact.findByLastName", query = "SELECT c FROM Contact c WHERE c.lastName = :lastName"),
+    @NamedQuery(name = "Contact.findByDescription", query = "SELECT c FROM Contact c WHERE c.description = :description"),
+    @NamedQuery(name = "Contact.findByFlagDel", query = "SELECT c FROM Contact c WHERE c.flagDel = :flagDel"),
+    @NamedQuery(name = "Contact.findByCreationTs", query = "SELECT c FROM Contact c WHERE c.creationTs = :creationTs"),
+    @NamedQuery(name = "Contact.findByBirthdate", query = "SELECT c FROM Contact c WHERE c.birthdate = :birthdate")})
 public class Contact implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -67,7 +68,8 @@ public class Contact implements Serializable {
     private Date birthdate;
     @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "CATEGORY_ID")
     @ManyToOne
-    private Categorie categoryId;
+    private Category categoryId;
+    
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     @ManyToOne
     private User userId;
@@ -135,21 +137,21 @@ public class Contact implements Serializable {
         this.birthdate = birthdate;
     }
 
-    public Categorie getCategoryId() {
+    public Category getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Categorie categoryId) {
+    public void setCategoryId(Category categoryId) {
         this.categoryId = categoryId;
     }
 
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
+//    public User getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(User userId) {
+//        this.userId = userId;
+//    }
 
     @Override
     public int hashCode() {

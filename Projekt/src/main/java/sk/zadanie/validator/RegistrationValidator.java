@@ -1,15 +1,16 @@
-package sk.zadanie.service.impl;
+package sk.zadanie.validator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import sk.zadanie.dto.UserDto;
+import sk.zadanie.entity.User;
 
 public class RegistrationValidator implements Validator {
 
     public boolean supports(Class clazz) {
-        return UserDto.class.equals(clazz);
+        return User.class.equals(clazz);
     }
 
     public void validate(Object obj, Errors errors) {
