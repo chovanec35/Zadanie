@@ -69,7 +69,7 @@
                         <td><c:out value="${contact.firstName}" /></td>
                         <td><c:out value="${contact.lastName}" /></td>
                         <td><c:out value="${contact.categoryId.name}" /></td>
-                        <td><button type="submit" name="infoCntact" value=${contact.contactId} >Info</button></td>
+                        <td><button type="submit" name="infoContact" value=${contact.contactId} >Info</button></td>
                         <td><button type="submit" name="delContact" value=${contact.contactId} >Delete</button></td>
                         <!--<td><a href=DeleteContact?contactId= {contact.contactId} > Delete </a></td>-->
                         <!--<td><a href="delete.jsp?id= %>"><button type="button" class="delete">Delete</button></a></td>-->
