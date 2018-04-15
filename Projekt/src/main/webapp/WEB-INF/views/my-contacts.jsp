@@ -27,13 +27,17 @@
             <table>
                 <tr>
                     <td>First name</td>
-                    <td><input path="firstName" type="text" name="firstName"></td>
+                    <td><input path="firstName" type="text" name="firstName" ></td>
 
                 </tr>
                 <tr>
                     <td>Last name</td>
-                    <td><input path="lastName" type="text" name="lastName" /></td>
+                    <td><input path="lastName" type="text" name="lastName" ></td>
                 </tr>
+<!--                <tr>
+                    <td>Birthdate</td> 
+                    <td><input type="date" path="birthdate" name="birthdate" ></td>
+                </tr>-->
                 <tr>
                     <td>Category</td>
                     <td><select textarea path="category" name="category">
@@ -43,39 +47,35 @@
                             </c:forEach>
                         </select></td>
                 </tr>
-                <!--            <tr>    
-                                    <td>Birthdate</td>
-                                    <td><input path="birthdate" /></td>
-                                </tr>-->
                 <tr>
                     <td><button type="submit">Search</button></td>
                 </tr>
             </table>
         </form>
-        
+
         <form method="POST" modelAttribute="contact" action="${path}/deleteProcess">
-        <c:if test="${!empty contactsList}">
-            <table class="table-contacts" >
-                <tr>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>Category</th>
-                    <th>Detail</th>
-                    <th>Delete</th>
-                </tr>
-                <c:forEach items="${contactsList}" var="contact">
-
+            <c:if test="${!empty contactsList}">
+                <table class="table-contacts" >
                     <tr>
-                        <td><c:out value="${contact.firstName}" /></td>
-                        <td><c:out value="${contact.lastName}" /></td>
-                        <td><c:out value="${contact.categoryId.name}" /></td>
-                        <td><button type="submit" name="infoContact" value=${contact.contactId} >Info</button></td>
-                        <td><button type="submit" name="delContact" value=${contact.contactId} >Delete</button></td>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Category</th>
+                        <th>Detail</th>
+                        <th>Delete</th>
                     </tr>
+                    <c:forEach items="${contactsList}" var="contact">
 
-                </c:forEach>
-            </table>
-        </c:if>
+                        <tr>
+                            <td><c:out value="${contact.firstName}" /></td>
+                            <td><c:out value="${contact.lastName}" /></td>
+                            <td><c:out value="${contact.categoryId.name}" /></td>
+                            <td><button type="submit" name="infoContact" value=${contact.contactId} >Info</button></td>
+                            <td><button type="submit" name="delContact" value=${contact.contactId} >Delete</button></td>
+                        </tr>
+
+                    </c:forEach>
+                </table>
+            </c:if>
         </form>
     </body>
 </html>

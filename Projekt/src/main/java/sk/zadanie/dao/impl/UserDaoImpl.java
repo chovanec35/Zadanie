@@ -36,18 +36,28 @@ public class UserDaoImpl implements UserDao {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Contact> getAllContacts(User user) {
+    public List<Contact> getAllContacts(User user, ContactDto contactDto) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
 
         Query query = em.createNamedQuery("Contact.findByUserId");
+
+        if (contactDto.getCategory() != "" && contactDto.getCategory() != null) {
+            Category category = new Category();
+            category.setCategoryId(Integer.parseInt(contactDto.getCategory()));
+            query.setParameter("categoryId", category);
+        } else {
+            query = em.createNamedQuery("Contact.findByUserIdWithoutCategory");
+        }
+
         query.setParameter("userId", user);
+        query.setParameter("firstName", contactDto.getFirstName() + '%');
+        query.setParameter("lastName", contactDto.getLastName() + '%');
 
         List<Contact> contacts = (List<Contact>) query.getResultList();
 
-        em.getTransaction().commit();
         em.close();
         emf.close();
 
@@ -91,8 +101,7 @@ public class UserDaoImpl implements UserDao {
         String sql = "insert into contacts (FIRST_NAME, LAST_NAME, DESCRIPTION, CATEGORY_ID, USER_ID, BIRTHDATE, CREATION_TS) values(?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, new Object[]{contactDto.getFirstName(),
             contactDto.getLastName(), contactDto.getDescription(), contactDto.getCategory(), userId, contactDto.getBirthdate(), contactDto.getCreationTs()});
-        
-        
+
 //        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
 //        EntityManager em = emf.createEntityManager();
 //
@@ -115,9 +124,6 @@ public class UserDaoImpl implements UserDao {
 //        System.out.println("Toto sa zapise do DB --> " + contact);
 //        
 //        em.persist(contact);
-        
-        
-        
 //        Query query = em.createNamedQuery("Contact.addContact");
 //        query.setParameter("firstName", contact.getFirstName());
 //        query.setParameter("userId", userId);
@@ -126,8 +132,6 @@ public class UserDaoImpl implements UserDao {
 //        query.setParameter("lastName", contact.getLastName());
 //        query.setParameter("description", contact.getDescription());
 //        query.setParameter("creationTs", creationTs);
-        
-
 //        em.getTransaction().commit();
 //        em.close();
 //        emf.close();    

@@ -12,7 +12,7 @@ public interface UserDao {
     //User validateUser(Login login);
     public void registration(UserDto user);
 
-    public List<Contact> getAllContacts(User user); //, String fName, String lName, String role
+    public List<Contact> getAllContacts(User user, ContactDto contactDto); //, String fName, String lName, String role
 
     public User loginUser(LoginDto login);
 

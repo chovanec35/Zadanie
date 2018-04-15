@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ContactDao contactDao;
-    
+
     @Transactional
     public void addNewContact(ContactDto contact, int userId) {
         userDao.addNewContact(contact, userId);
@@ -37,24 +37,20 @@ public class UserServiceImpl implements UserService {
     public void registration(UserDto user) {
         userDao.registration(user);
     }
-//    
 
     public User loginUser(LoginDto login) {
         return userDao.loginUser(login);
     }
 
-
-    public List<Contact> getAllContacts(User user) {
-        return userDao.getAllContacts(user);
+    public List<Contact> getAllContacts(User user, ContactDto contactDto) {
+        return userDao.getAllContacts(user, contactDto);
     }
-    
-    public void delContact(int contactId){
+
+    public void delContact(int contactId) {
         contactDao.delContact(contactId);
     }
-//
-//     @Transactional
-//    public List<Map<String, Object>> getAllContacts(int userId){ //, String fName, String lName, String role
-//        return userDao.getAllContacts(userId); //, fName, lName, role
-//    }
 
+    public Contact getContactById(int contactId) {
+        return contactDao.getContactById(contactId);
+    }
 }

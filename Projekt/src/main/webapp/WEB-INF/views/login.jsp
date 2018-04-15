@@ -13,9 +13,8 @@
         <h1>Login</h1>
         <a href="${path}/home">Home</a>
         <a href="${path}/login">Login</a>
-        <a href="${path}/registration">Registration</a><br>
+        <a href="${path}/registration">Registration</a>
 
-        User ID = ${user_Id}
         <label style="color: red"> ${message} </label><br>
         <form method="POST" modelAttribute="login" action="${path}/loginProcess">
             <table>
@@ -36,7 +35,7 @@
             </table>
         </form>
         <table>
-            
+
         </table>
     </body>
 </html>

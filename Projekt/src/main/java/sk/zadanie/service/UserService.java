@@ -18,13 +18,9 @@ import sk.zadanie.entity.User;
  * @author jchovanec
  */
 public interface UserService {
-   /* public void add(User user);
-    public void edit(User user);
-    public void delete(int id);
-    public User getUser(int id);
-    public List getAllUser();*/
     public void addNewContact(ContactDto contact, int userId);
     public void registration(UserDto user);
     public User loginUser(LoginDto login);
-    public List<Contact> getAllContacts(User user);
+    public List<Contact> getAllContacts(User user, ContactDto contactDto);
+    public Contact getContactById(int contactId);
 }

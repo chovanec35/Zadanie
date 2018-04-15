@@ -24,7 +24,7 @@ import sk.zadanie.dto.UserDto;
 import sk.zadanie.entity.User;
 import sk.zadanie.service.CategoryService;
 import sk.zadanie.service.UserService;
-import sk.zadanie.service.utils.UtilService;
+import sk.zadanie.service.impl.UtilService;
 
 @Controller
 @SessionAttributes("loggedUser")

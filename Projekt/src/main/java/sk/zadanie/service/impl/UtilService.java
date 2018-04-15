@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sk.zadanie.service.utils;
+package sk.zadanie.service.impl;
 
 import java.text.DateFormat;
 import java.text.ParseException;

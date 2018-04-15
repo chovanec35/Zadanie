@@ -6,6 +6,7 @@
 package sk.zadanie.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import sk.zadanie.dao.CategoryDao;
 import sk.zadanie.dao.ContactDao;
 import sk.zadanie.dto.ContactDto;
+import sk.zadanie.dto.UserDto;
 import sk.zadanie.entity.Contact;
 import sk.zadanie.entity.User;
 import sk.zadanie.service.UserService;
@@ -51,12 +54,15 @@ public class ContactsControler {
     }
 
     @RequestMapping(value = "/searchProcess", method = RequestMethod.POST)
-    public ModelAndView searchProcess(HttpServletRequest request,
-            HttpServletResponse response, @ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession) {
+    public ModelAndView searchProcess(@ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession,
+            BindingResult result, HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
+
+        System.out.println("Contact " + contactDto);
+        System.out.println("Contact GET ID " + contactDto);
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
 
-        List<Contact> contactsList = userService.getAllContacts(user);
+        List<Contact> contactsList = userService.getAllContacts(user, contactDto);
         mav.addObject("contactsList", contactsList);
         mav.addObject("user_Id", user.getUserId());
 //        if (user != null) {
@@ -72,14 +78,14 @@ public class ContactsControler {
     }
 
     @RequestMapping(params = {"delContact"}, method = RequestMethod.POST)
-    public ModelAndView deleteProcess(HttpServletRequest request,
-            HttpServletResponse response, @ModelAttribute("contact") Contact contact, HttpSession httpSession) throws IOException, ServletException {
+    public ModelAndView delContactProcess(HttpServletRequest request,
+            HttpServletResponse response, @ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession) throws IOException, ServletException {
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
         String id = request.getParameter("delContact");
         contactDao.delContact(Integer.parseInt(id));
 
-        List<Contact> contactsList = userService.getAllContacts(user);
+        List<Contact> contactsList = userService.getAllContacts(user, contactDto);
         mav.addObject("contactsList", contactsList);
         mav.addObject("user_Id", user.getUserId());
 
@@ -90,27 +96,16 @@ public class ContactsControler {
     public ModelAndView infoProcess(HttpServletRequest request, HttpServletResponse response, 
             HttpSession httpSession) throws IOException, ServletException {
 
-        String id = request.getParameter("infoContact");
-        
-        System.out.println("CONTACT --->>>" + id);
-//        if ("FirstServlet".equals(action)) 
-//        User user = (User) httpSession.getAttribute("loggedUser");
+        int contactId = Integer.parseInt(request.getParameter("infoContact"));
+
+        System.out.println("CONTACT --->>>" + contactId);
+        User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
-//        String id = request.getParameter("delContact");
-//        contactDao.delContact(Integer.parseInt(id));
-//        
-//        List<Contact> contactsList = userService.getAllContacts(user);
-//        mav.addObject("contactsList", contactsList);
-//        mav.addObject("user_Id", user.getUserId());
-//        
-//        String[] options = {"OK1","OK2","OK3","OK4"};
-        //Integer[] options = {1, 3, 5, 7, 9, 11};
-        //Double[] options = {3.141, 1.618};
-        //Character[] options = {'a', 'b', 'c', 'd'};
-//        int x = JOptionPane.showOptionDialog(null, "Returns the position of your choice on the array",
-//                "Click a button",
-//                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-//        System.out.println(x);
+        
+        Contact contact = userService.getContactById(contactId);
+        mav.addObject("user_Id", user.getUserId());
+        
+        JOptionPane.showMessageDialog(null, contact.toString(), "Detail Contact",JOptionPane.PLAIN_MESSAGE);
 
         return mav;
     }

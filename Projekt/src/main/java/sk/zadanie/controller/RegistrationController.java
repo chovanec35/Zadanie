@@ -24,7 +24,7 @@ import sk.zadanie.dto.UserDto;
 import sk.zadanie.service.UserService;
 
 //import sk.zadanie.service.impl.RegistrationValidator;
-import sk.zadanie.service.utils.UtilService;
+import sk.zadanie.service.impl.UtilService;
 
 @Controller
 public class RegistrationController {
@@ -48,7 +48,7 @@ public class RegistrationController {
     public ModelAndView registrationProcess(@ModelAttribute("user") UserDto userDto,
             BindingResult result, HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
         Date date = utilService.convertStringToDate(request.getParameter("birthdate"));
-        userDto.setBirthdate(date);
+        userDto.setBirthdate(date); 
 
         ModelAndView mav = new ModelAndView("login");
         //RegistrationValidator registrationValidator = new RegistrationValidator();
