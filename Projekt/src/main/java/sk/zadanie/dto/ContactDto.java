@@ -6,7 +6,6 @@
 package sk.zadanie.dto;
 
 import java.util.Date;
-import sk.zadanie.entity.Category;
 
 /**
  *
@@ -19,16 +18,18 @@ public class ContactDto {
     private String description;
     private String category;
     private Date birthdate;
+    private Date creationTs;
 
     public ContactDto() {
     }
 
-    public ContactDto(String firstName, String lastName, String description, String category, Date birthdate) {
+    public ContactDto(String firstName, String lastName, String description, String category, Date birthdate, Date creationTs) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;
         this.category = category;
         this.birthdate = birthdate;
+        this.creationTs = creationTs;
     }
 
     public String getFirstName() {
@@ -71,10 +72,17 @@ public class ContactDto {
         this.birthdate = birthdate;
     }
 
-    @Override
-    public String toString() {
-        return "ContactDto{" + "firstName=" + firstName + ", lastName=" + lastName + ", description=" + description + ", category=" + category + ", birthdate=" + birthdate + '}';
+    public Date getCreationTs() {
+        return creationTs;
     }
 
-    
+    public void setCreationTs(Date creationTs) {
+        this.creationTs = creationTs;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactDto{" + "firstName=" + firstName + ", lastName=" + lastName + ", description=" + description + ", category=" + category + ", birthdate=" + birthdate + ", creationTs=" + creationTs + '}';
+    }
+
 }

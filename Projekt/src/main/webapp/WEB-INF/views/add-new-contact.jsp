@@ -27,15 +27,15 @@
             <table>
                 <tr>
                     <td>First name *</td> 
-                    <td><input path="firstName" type="text" name="firstName"></td>
+                    <td><input path="firstName" type="text" name="firstName" value=""></td>
                 </tr>
                 <tr>
                     <td>Last name *</td> 
-                    <td><input path="lastName" type="text" name="lastName"></td>
+                    <td><input path="lastName" type="text" name="lastName" value=""></td>
                 </tr>
                 <tr>
                     <td>Birthdate</td> 
-                    <td><input type="date" path="birthdate" name="birthdate"></td>
+                    <td><input type="date" path="birthdate" name="birthdate" value=""></td>
                 </tr>
                 <tr>
                     <td>Description</td> 

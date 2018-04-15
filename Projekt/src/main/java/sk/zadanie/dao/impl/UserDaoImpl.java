@@ -88,9 +88,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addNewContact(ContactDto contactDto, int userId) {
-        String sql = "insert into contacts (FIRST_NAME, LAST_NAME, DESCRIPTION, CATEGORY_ID, USER_ID, BIRTHDATE) values(?,?,?,?,?,?)";
+        String sql = "insert into contacts (FIRST_NAME, LAST_NAME, DESCRIPTION, CATEGORY_ID, USER_ID, BIRTHDATE, CREATION_TS) values(?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, new Object[]{contactDto.getFirstName(),
-            contactDto.getLastName(), contactDto.getDescription(), contactDto.getCategory(), userId, contactDto.getBirthdate()});
+            contactDto.getLastName(), contactDto.getDescription(), contactDto.getCategory(), userId, contactDto.getBirthdate(), contactDto.getCreationTs()});
+        
+        
 //        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
 //        EntityManager em = emf.createEntityManager();
 //
