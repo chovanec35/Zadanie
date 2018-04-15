@@ -26,13 +26,10 @@
                     <td><input path="lastName" type="text" name="lastName" value=""/></td>
                     <td><form:errors path="lastName" class="error" /></td>
                 </tr>
-
-                <!--                               
                 <tr>
-                    <td>Birthdate <input type="date" name="birthdate" value=""/></td>                    
+                    <td>Birthdate</td> 
+                    <td><input type="date" path="birthdate" name="birthdate" value="" /></td>                    
                 </tr>
-                -->
-
                 <tr>
                     <td>E-mail </td>
                     <td><input path="email" type="email" name="email" value=""/></td>

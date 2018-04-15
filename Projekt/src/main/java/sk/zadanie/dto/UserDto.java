@@ -5,6 +5,8 @@
  */
 package sk.zadanie.dto;
 
+import java.util.Date;
+
 /**
  *
  * @author Jozef Chovanec
@@ -16,16 +18,18 @@ public class UserDto {
     private String email;
     private String password;
     private String confirmPassword;
+    private Date birthdate;
 
     public UserDto() {
     }
 
-    public UserDto(String firstName, String lastName, String email, String password, String confirmPassword) {
+    public UserDto(String firstName, String lastName, String email, String password, String confirmPassword, Date birthdate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.confirmPassword = confirmPassword;
+        this.birthdate = birthdate;
     }
 
     public String getFirstName() {
@@ -68,8 +72,19 @@ public class UserDto {
         this.confirmPassword = confirmPassword;
     }
 
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
+
     @Override
     public String toString() {
-        return "UserDto{" + "firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password + ", confirmPassword=" + confirmPassword + '}';
+        return "UserDto{" + "firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password + ", confirmPassword=" + confirmPassword + ", birthdate=" + birthdate + '}';
     }
+    
+
+    
 }

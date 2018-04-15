@@ -33,9 +33,10 @@
                     <td>Last name *</td> 
                     <td><input path="lastName" type="text" name="lastName"></td>
                 </tr>
-                <!--                <tr>
-                                    <td>Birthdate <input type="date" name="birthdate"></td>
-                                </tr>-->
+                <tr>
+                    <td>Birthdate</td> 
+                    <td><input type="date" path="birthdate" name="birthdate"></td>
+                </tr>
                 <tr>
                     <td>Description</td> 
                     <td><textarea path="description" name="description" cols="30" rows="3"></textarea></td>
@@ -49,7 +50,7 @@
                         </select></td>                        
                 </tr>
                 <tr>
-                    <td><button type="submit">Add new conntact</button></td>
+                    <td><button type="submit">Add new contact</button></td>
                 </tr>
             </table>
         </form>

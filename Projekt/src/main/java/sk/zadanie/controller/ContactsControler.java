@@ -87,11 +87,12 @@ public class ContactsControler {
     }
 
     @RequestMapping(params = {"infoContact"}, method = RequestMethod.POST)
-    public ModelAndView infoProcess(HttpServletRequest request,
-            HttpServletResponse response, @ModelAttribute("contact") Contact contact, HttpSession httpSession) throws IOException, ServletException {
+    public ModelAndView infoProcess(HttpServletRequest request, HttpServletResponse response, 
+            HttpSession httpSession) throws IOException, ServletException {
 
-        //System.out.println("CONTACT --->>>" + contact.);
-        System.out.println("INFOOOO");
+        String id = request.getParameter("infoContact");
+        
+        System.out.println("CONTACT --->>>" + id);
 //        if ("FirstServlet".equals(action)) 
 //        User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
@@ -102,14 +103,14 @@ public class ContactsControler {
 //        mav.addObject("contactsList", contactsList);
 //        mav.addObject("user_Id", user.getUserId());
 //        
-        String[] options = {"OK1","OK2","OK3","OK4"};
+//        String[] options = {"OK1","OK2","OK3","OK4"};
         //Integer[] options = {1, 3, 5, 7, 9, 11};
         //Double[] options = {3.141, 1.618};
         //Character[] options = {'a', 'b', 'c', 'd'};
-        int x = JOptionPane.showOptionDialog(null, "Returns the position of your choice on the array",
-                "Click a button",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-        System.out.println(x);
+//        int x = JOptionPane.showOptionDialog(null, "Returns the position of your choice on the array",
+//                "Click a button",
+//                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+//        System.out.println(x);
 
         return mav;
     }

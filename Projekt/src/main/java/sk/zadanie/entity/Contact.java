@@ -35,14 +35,16 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c"), 
     @NamedQuery(name = "Contact.findByContactId", query = "SELECT c FROM Contact c WHERE c.contactId = :contactId"),
     @NamedQuery(name = "Contact.deleteByContactId", query = "UPDATE Contact c SET c.flagDel = :flagDel WHERE c.contactId = :contactId"),
-    @NamedQuery(name = "Contact.test", query = "UPDATE Contact c SET c.firstName = :firstName WHERE c.contactId = 1"),
     @NamedQuery(name = "Contact.findByUserId", query = "SELECT c FROM Contact c WHERE c.userId = :userId AND c.flagDel=false"),
     @NamedQuery(name = "Contact.findByFirstName", query = "SELECT c FROM Contact c WHERE c.firstName = :firstName"),
     @NamedQuery(name = "Contact.findByLastName", query = "SELECT c FROM Contact c WHERE c.lastName = :lastName"),
     @NamedQuery(name = "Contact.findByDescription", query = "SELECT c FROM Contact c WHERE c.description = :description"),
     @NamedQuery(name = "Contact.findByFlagDel", query = "SELECT c FROM Contact c WHERE c.flagDel = :flagDel"),
     @NamedQuery(name = "Contact.findByCreationTs", query = "SELECT c FROM Contact c WHERE c.creationTs = :creationTs"),
-    @NamedQuery(name = "Contact.findByBirthdate", query = "SELECT c FROM Contact c WHERE c.birthdate = :birthdate")})
+    @NamedQuery(name = "Contact.findByBirthdate", query = "SELECT c FROM Contact c WHERE c.birthdate = :birthdate")
+//    @NamedQuery(name = "Contact.addContact", query = "INSERT INTO Contact c values c.contactId = :contactId, c.userId = :userId, c.categoryId = :categoryId, "
+//            + "c.firstName = :firstName, c.lastName = :lastName, c.description = :description, c.creationTs = :creationTs")
+})
 public class Contact implements Serializable {
 
     private static final long serialVersionUID = 1L;

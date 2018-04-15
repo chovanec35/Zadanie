@@ -2,6 +2,10 @@ package sk.zadanie.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,6 +21,7 @@ import sk.zadanie.dao.UserDao;
 import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.LoginDto;
 import sk.zadanie.dto.UserDto;
+import sk.zadanie.entity.Category;
 import sk.zadanie.entity.Contact;
 import sk.zadanie.entity.User;
 
@@ -39,8 +44,6 @@ public class UserDaoImpl implements UserDao {
 
         Query query = em.createNamedQuery("Contact.findByUserId");
         query.setParameter("userId", user);
-        
-//        System.out.println("OK QUERY OK --->" + query);
 
         List<Contact> contacts = (List<Contact>) query.getResultList();
 
@@ -53,10 +56,10 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void registration(UserDto user) {
-        System.out.println("zapisujem do DB");
-        String sql = "insert into users (FIRST_NAME, LAST_NAME, PASSWORD, EMAIL) values(?,?,?,?)";
+        System.out.println("zapisujem do DB" + user.getBirthdate());
+        String sql = "insert into users (FIRST_NAME, LAST_NAME, PASSWORD, EMAIL, BIRTHDATE) values(?,?,?,?,?)";
         jdbcTemplate.update(sql, new Object[]{user.getFirstName(), user.getLastName(),
-            user.getPassword(), user.getEmail()});
+            user.getPassword(), user.getEmail(), user.getBirthdate()});
     }
 
     @Override
@@ -84,10 +87,48 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addNewContact(ContactDto contact, int userId) {
-        String sql = "insert into contacts (FIRST_NAME, LAST_NAME, DESCRIPTION, CATEGORY_ID, USER_ID) values(?,?,?,?,?)";
-        jdbcTemplate.update(sql, new Object[]{contact.getFirstName(),
-            contact.getLastName(), contact.getDescription(), contact.getCategory(), userId});
+    public void addNewContact(ContactDto contactDto, int userId) {
+        String sql = "insert into contacts (FIRST_NAME, LAST_NAME, DESCRIPTION, CATEGORY_ID, USER_ID, BIRTHDATE) values(?,?,?,?,?,?)";
+        jdbcTemplate.update(sql, new Object[]{contactDto.getFirstName(),
+            contactDto.getLastName(), contactDto.getDescription(), contactDto.getCategory(), userId, contactDto.getBirthdate()});
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
+//        EntityManager em = emf.createEntityManager();
+//
+//        em.getTransaction().begin();
+//
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+//        Date creationTs = new Date();
+//        System.out.println("Aktualny cas je: " + dateFormat.format(creationTs));
+//        
+//        Contact contact = new Contact();
+//        contact.setFirstName(contactDto.getFirstName());
+//        contact.setLastName(contactDto.getLastName());
+//        contact.setBirthdate(contactDto.getBirthdate());
+//        Category category = new Category();
+//        category.setCategoryId(Integer.parseInt(contactDto.getCategory()));
+//        contact.setCategoryId(category);
+//        contact.setDescription(contactDto.getDescription());
+//        contact.setCreationTs(creationTs);
+//        
+//        System.out.println("Toto sa zapise do DB --> " + contact);
+//        
+//        em.persist(contact);
+        
+        
+        
+//        Query query = em.createNamedQuery("Contact.addContact");
+//        query.setParameter("firstName", contact.getFirstName());
+//        query.setParameter("userId", userId);
+//        query.setParameter("categoryId", contact.getCategory());
+//        query.setParameter("firstName", contact.getFirstName());
+//        query.setParameter("lastName", contact.getLastName());
+//        query.setParameter("description", contact.getDescription());
+//        query.setParameter("creationTs", creationTs);
+        
+
+//        em.getTransaction().commit();
+//        em.close();
+//        emf.close();    
     }
 }
 
