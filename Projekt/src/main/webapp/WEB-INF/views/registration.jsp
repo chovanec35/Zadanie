@@ -13,13 +13,14 @@
         <h1>Registration form</h1>
         <a href="${path}/home">Home</a>
         <a href="${path}/login">Login</a>
+        <a href="${path}/registration">Registration</a>
 
-        <form method="POST" modelAttribute="user" action="${path}/registrationProcess">
+        <form:form method="POST" modelAttribute="user" action="${path}/registrationProcess">
             <table>
                 <tr>
                     <td>First name</td>
-                    <td><input path="firstName" type="text" name="firstName" value=""/></td>
-                    <td><form:errors path="badfirst" class="error" /></td>
+                    <td><input path="firstName" type="text" name="firstName" value="" /></td>
+                    <td><form:errors path="firstName" class="error" /></td>
                 </tr>
                 <tr>
                     <td>Last name </td>
@@ -37,17 +38,17 @@
                 <tr>
                     <td>Password </td>
                     <td><input path="password" type="password" name="password" value=""/></td>
+                    <td><form:errors path="password" class="error" /></td>
                 </tr>
                 <tr>
                     <td>Confirm Password</td>
                     <td><input type="password" name="confirmPassword" value=""/></td>
-                    <td><form:errors path="password" class="error" /></td>
                 </tr>
                 <tr>
                     <td><button type="submit">Registration</button></td>
                 </tr>
             </table>
-        </form>
+        </form:form>
 
     </body>
 </html>

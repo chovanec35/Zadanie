@@ -17,11 +17,10 @@
     </head>
     <body>
         <h1>My contacts</h1>
-        <a href="${path}/home">Home</a>
         <a href="${path}/my-contacts">My contacts</a>
         <a href="${path}/add-new-contact">Add new contact</a>
         <a href="<c:url value="/logoutProcess" />">Log out</a><br>
-
+        
         <label style="color: red"> ${message} </label><br>
         <form method="POST" modelAttribute="contact" action="${path}/searchProcess">
             <table>
@@ -43,7 +42,7 @@
                     <td><select textarea path="category" name="category">
                             <option value=""></option>
                             <c:forEach items="${categoryList}" var="category">
-                                <option value="${category.category_id}"><c:out value="${category.name}" /></option>
+                                <option value="${category.categoryId}"><c:out value="${category.name}" /></option>
                             </c:forEach>
                         </select></td>
                 </tr>

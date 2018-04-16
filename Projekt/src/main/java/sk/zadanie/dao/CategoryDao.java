@@ -8,6 +8,7 @@ package sk.zadanie.dao;
 import java.util.List;
 import java.util.Map;
 import sk.zadanie.entity.Category;
+import sk.zadanie.entity.Contact;
 
 /**
  *
@@ -15,5 +16,5 @@ import sk.zadanie.entity.Category;
  */
 public interface CategoryDao {
 
-    List<Map<String, Object>> getAllCategories();
+    public List<Category> getAllCategories();
 }

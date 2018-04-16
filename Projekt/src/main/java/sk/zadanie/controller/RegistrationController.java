@@ -22,45 +22,44 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import sk.zadanie.dto.UserDto;
 import sk.zadanie.service.UserService;
-
-//import sk.zadanie.service.impl.RegistrationValidator;
 import sk.zadanie.service.impl.UtilService;
+import sk.zadanie.validator.UserValidator;
 
 @Controller
 public class RegistrationController {
 
     @Autowired
     UserService userService;
-    
+
     @Autowired
     UtilService utilService;
 
-//    RegistrationValidator registrationValidator;
-    //public static final String REGISTRATION_FORM = "user";
+    @Autowired
+    private UserValidator userValidator;
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView viewRegistration(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView("registration");
-//        mav.addObject("user", new UserDto());
         return mav;
     }
 
     @RequestMapping(value = "/registrationProcess", method = RequestMethod.POST)
     public ModelAndView registrationProcess(@ModelAttribute("user") UserDto userDto,
             BindingResult result, HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
-        Date date = utilService.convertStringToDate(request.getParameter("birthdate"));
-        userDto.setBirthdate(date); 
-
-        ModelAndView mav = new ModelAndView("login");
-        //RegistrationValidator registrationValidator = new RegistrationValidator();
-        //registrationValidator.validate(userDto, result);
-//
+        ModelAndView mav = new ModelAndView("registration");
+        userValidator.validate(userDto, result);
 //        if (result.hasErrors()) {
-//            return new ModelAndView("registration", "user", user);
+//            System.out.println(result.getErrorCount() +" Som Error " + result.getAllErrors());
+//            return mav;
 //        }
+        
+        Date date = utilService.convertStringToDate(request.getParameter("birthdate"));
+        userDto.setBirthdate(date);
+
         userService.registration(userDto);
-        //return new ModelAndView("Login", "user", user);
+        
+        mav = new ModelAndView("login");
         return mav;
     }
 
-    
 }

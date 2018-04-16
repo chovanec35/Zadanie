@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import sk.zadanie.dao.CategoryDao;
 import sk.zadanie.dto.ContactDto;
-import sk.zadanie.dto.UserDto;
 import sk.zadanie.entity.User;
 import sk.zadanie.service.CategoryService;
 import sk.zadanie.service.UserService;
@@ -38,18 +38,19 @@ public class NewContactController {
 
     @Autowired
     UtilService utilService;
+    
+    @Autowired
+    CategoryDao categoryDao;
 
     @RequestMapping(value = "/add-new-contact", method = RequestMethod.GET)
     public ModelAndView viewAddNewContact(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("add-new-contact");
-
-        mav.addObject("categoryList", categoryService.getAllCategories());
         if (user != null) {
-            mav.addObject("user_Id", user.getUserId());
-        } else {
-            mav.addObject("user_Id", "error");
+            mav.addObject("categoryList", categoryDao.getAllCategories());
+            return mav;
         }
+        mav = new ModelAndView("not-found");
         return mav;
     }
 
@@ -58,10 +59,10 @@ public class NewContactController {
             BindingResult result, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws IOException, ParseException {
         User user = (User) httpSession.getAttribute("loggedUser");
         Date date = utilService.convertStringToDate(request.getParameter("birthdate"));
-        
+
         Date dateTs = new Date();
         contactDto.setCreationTs(dateTs);
-        
+
         contactDto.setBirthdate(date);
         ModelAndView mav = new ModelAndView("redirect:add-new-contact");
         userService.addNewContact(contactDto, user.getUserId());

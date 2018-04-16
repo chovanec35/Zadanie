@@ -24,9 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 import sk.zadanie.dao.CategoryDao;
 import sk.zadanie.dao.ContactDao;
 import sk.zadanie.dto.ContactDto;
-import sk.zadanie.dto.UserDto;
 import sk.zadanie.entity.Contact;
 import sk.zadanie.entity.User;
+import sk.zadanie.service.CategoryService;
 import sk.zadanie.service.UserService;
 
 /**
@@ -38,7 +38,7 @@ import sk.zadanie.service.UserService;
 public class ContactsControler {
 
     @Autowired
-    CategoryDao categoryDao;
+    CategoryService categoryService;
 
     @Autowired
     UserService userService;
@@ -47,9 +47,14 @@ public class ContactsControler {
     ContactDao contactDao;
 
     @RequestMapping(value = "/my-contacts", method = RequestMethod.GET)
-    public ModelAndView viewLogin(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView viewLogin(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
+        User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
-        mav.addObject("categoryList", categoryDao.getAllCategories());
+        if (user != null) {
+            mav.addObject("categoryList", categoryService.getAllCategories());
+            return mav;
+        }
+        mav = new ModelAndView("not-found");
         return mav;
     }
 
@@ -57,23 +62,18 @@ public class ContactsControler {
     public ModelAndView searchProcess(@ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession,
             BindingResult result, HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
 
-        System.out.println("Contact " + contactDto);
-        System.out.println("Contact GET ID " + contactDto);
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
 
-        List<Contact> contactsList = userService.getAllContacts(user, contactDto);
-        mav.addObject("contactsList", contactsList);
-        mav.addObject("user_Id", user.getUserId());
-//        if (user != null) {
-//            mav.addObject("user_Id", user.getUserId());
-//            System.out.println("USER ID ---> " + user.getUserId());
-//            List<Contact> contactsList = userService.getAllContacts(user);
-        //mav.addObject("contactsList", contactsList);
-//            
-//        } else {
-//            mav.addObject("user_Id", "error");
-//        }
+        if (user != null) {
+            List<Contact> contactsList = userService.getAllContacts(user, contactDto);
+            mav.addObject("contactsList", contactsList);
+            mav.addObject("user_Id", user.getUserId());
+            mav.addObject("contactsList", contactsList);
+
+        } else {
+            mav.addObject("notFound");
+        }
         return mav;
     }
 
@@ -93,19 +93,18 @@ public class ContactsControler {
     }
 
     @RequestMapping(params = {"infoContact"}, method = RequestMethod.POST)
-    public ModelAndView infoProcess(HttpServletRequest request, HttpServletResponse response, 
+    public ModelAndView infoProcess(HttpServletRequest request, HttpServletResponse response,
             HttpSession httpSession) throws IOException, ServletException {
 
         int contactId = Integer.parseInt(request.getParameter("infoContact"));
 
-        System.out.println("CONTACT --->>>" + contactId);
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
-        
+
         Contact contact = userService.getContactById(contactId);
         mav.addObject("user_Id", user.getUserId());
-        
-        JOptionPane.showMessageDialog(null, contact.toString(), "Detail Contact",JOptionPane.PLAIN_MESSAGE);
+
+        JOptionPane.showMessageDialog(null, contact.toString(), "Detail Contact", JOptionPane.PLAIN_MESSAGE);
 
         return mav;
     }

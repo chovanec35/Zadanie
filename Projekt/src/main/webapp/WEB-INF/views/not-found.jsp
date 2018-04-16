@@ -1,8 +1,9 @@
 <%-- 
-    Document   : welcome
-    Created on : 14.3.2018, 14:39:42
+    Document   : notfound
+    Created on : 13.3.2018, 11:02:31
     Author     : jchovanec
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,10 +13,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
-        Welcome!!! ${email}
+        <h1>Page not found!</h1>
     </body>
 </html>

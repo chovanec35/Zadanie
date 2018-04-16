@@ -38,6 +38,7 @@ public class LoginController {
             HttpServletResponse response, @ModelAttribute("login") LoginDto login, HttpSession httpSession) {
         User user = userService.loginUser(login);
         ModelAndView mav = new ModelAndView("login");
+        
         if (user != null) {
             httpSession.setAttribute("loggedUser", user);
             mav = new ModelAndView("redirect:my-contacts");

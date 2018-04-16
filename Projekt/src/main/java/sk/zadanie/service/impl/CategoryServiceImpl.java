@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sk.zadanie.dao.CategoryDao;
+import sk.zadanie.entity.Category;
 import sk.zadanie.service.CategoryService;
 
 /**
@@ -23,7 +24,7 @@ public class CategoryServiceImpl implements CategoryService{
     private CategoryDao categoryDao;
 
     @Transactional
-    public List getAllCategories() {
+    public List<Category> getAllCategories() {
         return categoryDao.getAllCategories();
     }
     

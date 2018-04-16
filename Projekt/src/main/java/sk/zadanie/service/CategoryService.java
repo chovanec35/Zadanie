@@ -6,11 +6,12 @@
 package sk.zadanie.service;
 
 import java.util.List;
+import sk.zadanie.entity.Category;
 
 /**
  *
  * @author Lenovo
  */
 public interface CategoryService {
-    public List getAllCategories();
+    public List<Category> getAllCategories();
 }
