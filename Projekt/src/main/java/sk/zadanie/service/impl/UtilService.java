@@ -17,7 +17,7 @@ public class UtilService {
     public Date convertStringToDate(String dateString) throws ParseException {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date d = df.parse(dateString);
-
+        
         return d;
     }
 

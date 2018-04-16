@@ -1,5 +1,6 @@
 package sk.zadanie.dao;
 
+import java.util.Date;
 import java.util.List;
 import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.LoginDto;
@@ -10,7 +11,7 @@ import sk.zadanie.entity.User;
 public interface UserDao {
 
     //User validateUser(Login login);
-    public void registration(UserDto user);
+    public void registration(UserDto user, Date date);
 
     public List<Contact> getAllContacts(User user, ContactDto contactDto); //, String fName, String lName, String role
 

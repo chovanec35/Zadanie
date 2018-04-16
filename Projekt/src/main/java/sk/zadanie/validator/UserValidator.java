@@ -12,12 +12,12 @@ import sk.zadanie.entity.User;
 public class UserValidator implements Validator {
 
     public boolean supports(Class clazz) {
-        return User.class.equals(clazz);
+        return UserDto.class.equals(clazz);
     }
 
     public void validate(Object obj, Errors errors) {
         UserDto userDto = (UserDto) obj;
-
+        System.out.println("Erroors:"+ errors.hasErrors());
         String regex = "^[a-zA-Z]+$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcherFirstname = pattern.matcher(userDto.getFirstName());

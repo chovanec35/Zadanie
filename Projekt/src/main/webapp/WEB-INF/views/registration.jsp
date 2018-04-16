@@ -19,30 +19,30 @@
             <table>
                 <tr>
                     <td>First name</td>
-                    <td><input path="firstName" type="text" name="firstName" value="" /></td>
+                    <td><input path="firstName" type="text" name="firstName" value="" required="true" /></td>
                     <td><form:errors path="firstName" class="error" /></td>
                 </tr>
                 <tr>
                     <td>Last name </td>
-                    <td><input path="lastName" type="text" name="lastName" value=""/></td>
+                    <td><input path="lastName" type="text" name="lastName" value="" required="true" /></td>
                     <td><form:errors path="lastName" class="error" /></td>
                 </tr>
                 <tr>
                     <td>Birthdate</td> 
-                    <td><input type="date" path="birthdate" name="birthdate" value="" /></td>                    
+                    <td><input type="date" path="birthdate" name="birthdate" value="" required="true" /></td>                    
                 </tr>
                 <tr>
                     <td>E-mail </td>
-                    <td><input path="email" type="email" name="email" value=""/></td>
+                    <td><input path="email" type="email" name="email" value="" required="true" /></td>
                 </tr> 
                 <tr>
                     <td>Password </td>
-                    <td><input path="password" type="password" name="password" value=""/></td>
+                    <td><input path="password" type="password" name="password" value="" required="true" /></td>
                     <td><form:errors path="password" class="error" /></td>
                 </tr>
                 <tr>
                     <td>Confirm Password</td>
-                    <td><input type="password" name="confirmPassword" value=""/></td>
+                    <td><input type="password" name="confirmPassword" value="" required="true" /></td>
                 </tr>
                 <tr>
                     <td><button type="submit">Registration</button></td>

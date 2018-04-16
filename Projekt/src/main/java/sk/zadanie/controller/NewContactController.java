@@ -62,7 +62,7 @@ public class NewContactController {
 
         Date dateTs = new Date();
         contactDto.setCreationTs(dateTs);
-
+        System.out.println("date"+ date);
         contactDto.setBirthdate(date);
         ModelAndView mav = new ModelAndView("redirect:add-new-contact");
         userService.addNewContact(contactDto, user.getUserId());

@@ -67,6 +67,7 @@ public class ContactsControler {
 
         if (user != null) {
             List<Contact> contactsList = userService.getAllContacts(user, contactDto);
+            mav.addObject("categoryList", categoryService.getAllCategories());
             mav.addObject("contactsList", contactsList);
             mav.addObject("user_Id", user.getUserId());
             mav.addObject("contactsList", contactsList);
@@ -82,6 +83,7 @@ public class ContactsControler {
             HttpServletResponse response, @ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession) throws IOException, ServletException {
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
+        mav.addObject("categoryList", categoryService.getAllCategories());
         String id = request.getParameter("delContact");
         contactDao.delContact(Integer.parseInt(id));
 
@@ -100,7 +102,8 @@ public class ContactsControler {
 
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
-
+        mav.addObject("categoryList", categoryService.getAllCategories());
+        
         Contact contact = userService.getContactById(contactId);
         mav.addObject("user_Id", user.getUserId());
 

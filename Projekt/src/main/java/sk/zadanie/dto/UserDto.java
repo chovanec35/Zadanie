@@ -18,12 +18,12 @@ public class UserDto {
     private String email;
     private String password;
     private String confirmPassword;
-    private Date birthdate;
+    private String birthdate;
 
     public UserDto() {
     }
 
-    public UserDto(String firstName, String lastName, String email, String password, String confirmPassword, Date birthdate) {
+    public UserDto(String firstName, String lastName, String email, String password, String confirmPassword, String birthdate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -72,11 +72,11 @@ public class UserDto {
         this.confirmPassword = confirmPassword;
     }
 
-    public Date getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 

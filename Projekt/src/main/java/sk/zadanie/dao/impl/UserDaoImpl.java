@@ -1,10 +1,5 @@
 package sk.zadanie.dao.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -14,7 +9,6 @@ import javax.persistence.Query;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import sk.zadanie.dao.UserDao;
@@ -24,6 +18,8 @@ import sk.zadanie.dto.UserDto;
 import sk.zadanie.entity.Category;
 import sk.zadanie.entity.Contact;
 import sk.zadanie.entity.User;
+import sk.zadanie.service.impl.UtilService;
+import sk.zadanie.validator.UserValidator;
 
 @Repository
 @SessionAttributes("loggedUser")
@@ -31,6 +27,12 @@ public class UserDaoImpl implements UserDao {
 
     @Autowired
     DataSource datasource;
+
+    @Autowired
+    UserValidator userValidator;
+    
+    @Autowired
+    UtilService utilService;
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -63,8 +65,8 @@ public class UserDaoImpl implements UserDao {
 
         return contacts;
     }
-    
-        @Override
+
+    @Override
     public User loginUser(LoginDto login) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
@@ -80,17 +82,24 @@ public class UserDaoImpl implements UserDao {
 
         em.close();
         emf.close();
-
+        
+        System.out.println("loginUser()" + logins);
+        if (logins.size() == 0){
+            User user = null;
+            return user;
+        }
+        
         return logins.get(0);
     }
 
     @Override
-    public void registration(UserDto user) {
+    public void registration(UserDto user, Date date) {
+        
         String sql = "insert into users (FIRST_NAME, LAST_NAME, PASSWORD, EMAIL, BIRTHDATE) values(?,?,?,?,?)";
         jdbcTemplate.update(sql, new Object[]{user.getFirstName(), user.getLastName(),
-            user.getPassword(), user.getEmail(), user.getBirthdate()});
+            user.getPassword(), user.getEmail(), date});
     }
-    
+
     @Override
     public void addNewContact(ContactDto contactDto, int userId) {
         String sql = "insert into contacts (FIRST_NAME, LAST_NAME, DESCRIPTION, CATEGORY_ID, USER_ID, BIRTHDATE, CREATION_TS) values(?,?,?,?,?,?,?)";

@@ -5,6 +5,7 @@
  */
 package sk.zadanie.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public void registration(UserDto user) {
-        userDao.registration(user);
+    public void registration(UserDto user, Date date) {
+        userDao.registration(user, date);
     }
 
     public User loginUser(LoginDto login) {

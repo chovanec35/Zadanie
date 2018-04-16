@@ -5,6 +5,7 @@
  */
 package sk.zadanie.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import sk.zadanie.dto.ContactDto;
@@ -19,7 +20,7 @@ import sk.zadanie.entity.User;
  */
 public interface UserService {
     public void addNewContact(ContactDto contact, int userId);
-    public void registration(UserDto user);
+    public void registration(UserDto user, Date date);
     public User loginUser(LoginDto login);
     public List<Contact> getAllContacts(User user, ContactDto contactDto);
     public Contact getContactById(int contactId);
