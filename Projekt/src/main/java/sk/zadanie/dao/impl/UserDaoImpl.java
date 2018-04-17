@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Contact> getAllContacts(User user, ContactDto contactDto) {
+    public List<Contact> getAllContacts(User user, ContactDto contactDto, Date date) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
 
@@ -57,6 +57,7 @@ public class UserDaoImpl implements UserDao {
         query.setParameter("userId", user);
         query.setParameter("firstName", contactDto.getFirstName() + '%');
         query.setParameter("lastName", contactDto.getLastName() + '%');
+        //query.setParameter("birthdate", date);
 
         List<Contact> contacts = (List<Contact>) query.getResultList();
 
@@ -101,9 +102,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addNewContact(ContactDto contactDto, int userId) {
+    public void addNewContact(ContactDto contactDto, int userId, Date date) {
         String sql = "insert into contacts (FIRST_NAME, LAST_NAME, DESCRIPTION, CATEGORY_ID, USER_ID, BIRTHDATE, CREATION_TS) values(?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, new Object[]{contactDto.getFirstName(),
-            contactDto.getLastName(), contactDto.getDescription(), contactDto.getCategory(), userId, contactDto.getBirthdate(), contactDto.getCreationTs()});
+            contactDto.getLastName(), contactDto.getDescription(), contactDto.getCategory(), userId, date, contactDto.getCreationTs()});
     }
 }

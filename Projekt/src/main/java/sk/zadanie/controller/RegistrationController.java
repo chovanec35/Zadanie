@@ -50,7 +50,6 @@ public class RegistrationController {
         userValidator.validate(userDto, result);
         
         if (result.hasErrors()) {
-            System.out.println(result.getErrorCount() +" Som Error " + result.getAllErrors());
             return mav;
         }
 

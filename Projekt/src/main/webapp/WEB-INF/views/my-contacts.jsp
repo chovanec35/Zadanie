@@ -33,10 +33,10 @@
                     <td>Last name</td>
                     <td><input path="lastName" type="text" name="lastName" ></td>
                 </tr>
-<!--                <tr>
+                <tr>
                     <td>Birthdate</td> 
                     <td><input type="date" path="birthdate" name="birthdate" ></td>
-                </tr>-->
+                </tr>
                 <tr>
                     <td>Category</td>
                     <td><select textarea path="category" name="category">

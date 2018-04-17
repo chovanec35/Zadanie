@@ -58,14 +58,15 @@ public class NewContactController {
     public ModelAndView newContactProcess(@ModelAttribute("contact") ContactDto contactDto,
             BindingResult result, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws IOException, ParseException {
         User user = (User) httpSession.getAttribute("loggedUser");
-        Date date = utilService.convertStringToDate(request.getParameter("birthdate"));
+        
+        Date date = utilService.convertStringToDate(contactDto.getBirthdate());
 
         Date dateTs = new Date();
         contactDto.setCreationTs(dateTs);
-        System.out.println("date"+ date);
-        contactDto.setBirthdate(date);
+        
+        //contactDto.setBirthdate(date);
         ModelAndView mav = new ModelAndView("redirect:add-new-contact");
-        userService.addNewContact(contactDto, user.getUserId());
+        userService.addNewContact(contactDto, user.getUserId(), date);
         return mav;
     }
 }

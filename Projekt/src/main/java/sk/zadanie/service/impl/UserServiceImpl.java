@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
     private ContactDao contactDao;
 
     @Transactional
-    public void addNewContact(ContactDto contact, int userId) {
-        userDao.addNewContact(contact, userId);
+    public void addNewContact(ContactDto contact, int userId, Date date) {
+        userDao.addNewContact(contact, userId, date);
     }
 
     @Transactional
@@ -43,8 +43,8 @@ public class UserServiceImpl implements UserService {
         return userDao.loginUser(login);
     }
 
-    public List<Contact> getAllContacts(User user, ContactDto contactDto) {
-        return userDao.getAllContacts(user, contactDto);
+    public List<Contact> getAllContacts(User user, ContactDto contactDto, Date date) {
+        return userDao.getAllContacts(user, contactDto, date);
     }
 
     public void delContact(int contactId) {

@@ -7,6 +7,7 @@ package sk.zadanie.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,13 +22,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import sk.zadanie.dao.CategoryDao;
 import sk.zadanie.dao.ContactDao;
 import sk.zadanie.dto.ContactDto;
 import sk.zadanie.entity.Contact;
 import sk.zadanie.entity.User;
 import sk.zadanie.service.CategoryService;
 import sk.zadanie.service.UserService;
+import sk.zadanie.service.impl.UtilService;
 
 /**
  *
@@ -45,6 +46,9 @@ public class ContactsControler {
 
     @Autowired
     ContactDao contactDao;
+    
+    @Autowired
+    UtilService utilService;
 
     @RequestMapping(value = "/my-contacts", method = RequestMethod.GET)
     public ModelAndView viewLogin(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
@@ -64,14 +68,18 @@ public class ContactsControler {
 
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
-
+        String dateString = contactDto.getBirthdate();
         if (user != null) {
-            List<Contact> contactsList = userService.getAllContacts(user, contactDto);
+            if (dateString == ""){
+                dateString = "01-04-9991";
+            }
+            System.out.println("sk.zadanie.controller.ContactsControler.searchProcess()" + contactDto.getBirthdate());
+            Date date = utilService.convertStringToDate(dateString);
+            List<Contact> contactsList = userService.getAllContacts(user, contactDto, date);
             mav.addObject("categoryList", categoryService.getAllCategories());
             mav.addObject("contactsList", contactsList);
             mav.addObject("user_Id", user.getUserId());
             mav.addObject("contactsList", contactsList);
-
         } else {
             mav.addObject("notFound");
         }
@@ -80,14 +88,15 @@ public class ContactsControler {
 
     @RequestMapping(params = {"delContact"}, method = RequestMethod.POST)
     public ModelAndView delContactProcess(HttpServletRequest request,
-            HttpServletResponse response, @ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession) throws IOException, ServletException {
+            HttpServletResponse response, @ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession) throws IOException, ServletException, ParseException {
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
         mav.addObject("categoryList", categoryService.getAllCategories());
         String id = request.getParameter("delContact");
         contactDao.delContact(Integer.parseInt(id));
-
-        List<Contact> contactsList = userService.getAllContacts(user, contactDto);
+        Date date = utilService.convertStringToDate(contactDto.getBirthdate());
+        
+        List<Contact> contactsList = userService.getAllContacts(user, contactDto, date);
         mav.addObject("contactsList", contactsList);
         mav.addObject("user_Id", user.getUserId());
 
@@ -101,7 +110,7 @@ public class ContactsControler {
         int contactId = Integer.parseInt(request.getParameter("infoContact"));
 
         User user = (User) httpSession.getAttribute("loggedUser");
-        ModelAndView mav = new ModelAndView("my-contacts");
+        ModelAndView mav = new ModelAndView("redirect:my-contacts");
         mav.addObject("categoryList", categoryService.getAllCategories());
         
         Contact contact = userService.getContactById(contactId);

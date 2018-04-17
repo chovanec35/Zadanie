@@ -17,13 +17,13 @@ public class ContactDto {
     private String lastName;
     private String description;
     private String category;
-    private Date birthdate;
+    private String birthdate;
     private Date creationTs;
 
     public ContactDto() {
     }
 
-    public ContactDto(String firstName, String lastName, String description, String category, Date birthdate, Date creationTs) {
+    public ContactDto(String firstName, String lastName, String description, String category, String birthdate, Date creationTs) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;
@@ -64,11 +64,11 @@ public class ContactDto {
         this.category = category;
     }
 
-    public Date getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 

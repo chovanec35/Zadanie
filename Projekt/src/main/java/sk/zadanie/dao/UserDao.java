@@ -13,10 +13,10 @@ public interface UserDao {
     //User validateUser(Login login);
     public void registration(UserDto user, Date date);
 
-    public List<Contact> getAllContacts(User user, ContactDto contactDto); //, String fName, String lName, String role
+    public List<Contact> getAllContacts(User user, ContactDto contactDto, Date date); //, String fName, String lName, String role
 
     public User loginUser(LoginDto login);
 
-    public void addNewContact(ContactDto contact, int userId);
+    public void addNewContact(ContactDto contact, int userId, Date date);
 
 }
