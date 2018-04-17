@@ -7,7 +7,10 @@
 
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
         <title>Home</title>
+        <!--<link href="${path}/resources/css/theme/style.css" rel="stylesheet">-->
+        <link href="<c:url value="/resources/css/theme/style.css" />" rel="stylesheet">
     </head>
     <body>
         <h1>Welcome to Home Page!</h1>
