@@ -15,7 +15,7 @@
     
     <mvc:annotation-driven validator="validator" />
     <mvc:resources mapping="/resources/**" location="/resources/theme/" cache-period="31556926" />
-
+    <mvc:default-servlet-handler/>
     <mvc:annotation-driven />
 
     <bean id="userService" class="sk.zadanie.service.impl.UserServiceImpl" />
@@ -36,10 +36,6 @@
         <property name="username" value="jozko" />
         <property name="password" value="jozko" />
     </bean>
-<!--    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="valiadation" />
-    </bean>-->
-
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
         <property name="validationMessageSource" ref="messageSource"/>
     </bean>

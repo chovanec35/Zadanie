@@ -18,6 +18,6 @@ public interface UserDao {
 
     public User loginUser(LoginDto login);
 
-    public void addNewContact(ContactDto contact, int userId, Date date);
+    public void addNewContact(ContactDto contact, User user, Date date);
 
 }

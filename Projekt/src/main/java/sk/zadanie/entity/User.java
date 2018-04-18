@@ -23,8 +23,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -74,6 +72,16 @@ public class User implements Serializable {
 
     public User() {
     }
+
+    public User(String firstName, String lastName, String password, String email, Date birthdate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+        this.birthdate = birthdate;
+    }
+    
+    
 
     public User(Integer userId) {
         this.userId = userId;

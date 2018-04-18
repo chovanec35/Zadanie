@@ -8,7 +8,6 @@ package sk.zadanie.service;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.LoginDto;
 import sk.zadanie.dto.UserDto;
@@ -20,7 +19,7 @@ import sk.zadanie.entity.User;
  * @author jchovanec
  */
 public interface UserService {
-    public void addNewContact(ContactDto contact, int userId, Date date);
+    public void addNewContact(ContactDto contact, User user, Date date);
     public void registration(UserDto user, Date date);
     public User loginUser(LoginDto login);
     public List<Contact> getAllContacts(User user, ContactDto contactDto)throws ParseException;

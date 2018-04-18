@@ -8,7 +8,6 @@ package sk.zadanie.service.impl;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,8 +30,8 @@ public class UserServiceImpl implements UserService {
     private ContactDao contactDao;
 
     @Transactional
-    public void addNewContact(ContactDto contact, int userId, Date date) {
-        userDao.addNewContact(contact, userId, date);
+    public void addNewContact(ContactDto contact, User user, Date date) {
+        userDao.addNewContact(contact, user, date);
     }
 
     @Transactional

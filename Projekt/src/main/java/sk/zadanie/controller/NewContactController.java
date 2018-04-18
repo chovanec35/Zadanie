@@ -38,7 +38,7 @@ public class NewContactController {
 
     @Autowired
     UtilService utilService;
-    
+
     @Autowired
     CategoryDao categoryDao;
 
@@ -58,15 +58,14 @@ public class NewContactController {
     public ModelAndView newContactProcess(@ModelAttribute("contact") ContactDto contactDto,
             BindingResult result, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws IOException, ParseException {
         User user = (User) httpSession.getAttribute("loggedUser");
-        
-        Date date = utilService.convertStringToDate(contactDto.getBirthdate());
 
-        Date dateTs = new Date();
-        contactDto.setCreationTs(dateTs);
+        Date date = null;
+        if (!contactDto.getBirthdate().isEmpty()) {
+            date = utilService.convertStringToDate(contactDto.getBirthdate());
+        } 
         
-        //contactDto.setBirthdate(date);
         ModelAndView mav = new ModelAndView("redirect:add-new-contact");
-        userService.addNewContact(contactDto, user.getUserId(), date);
+        userService.addNewContact(contactDto, user, date);
         return mav;
     }
 }

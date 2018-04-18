@@ -23,7 +23,7 @@
         <a href="${path}/add-new-contact">Add new contact</a>
         <a href="<c:url value="/logoutProcess" />">Log out</a><br>
 
-        <form method="POST" modelAttribute="contact" action="${path}/newContactProcess">
+        <form:form method="POST" modelAttribute="contact" action="${path}/newContactProcess">
             <table>
                 <tr>
                     <td>First name *</td> 
@@ -36,6 +36,7 @@
                 <tr>
                     <td>Birthdate</td> 
                     <td><input type="date" path="birthdate" name="birthdate" value="" ></td>
+                    <td><form:errors path="date" class="error" /></td>
                 </tr>
                 <tr>
                     <td>Description</td> 
@@ -53,6 +54,6 @@
                     <td><button type="submit">Add new contact</button></td>
                 </tr>
             </table>
-        </form>
+        </form:form>
     </body>
 </html> 

@@ -2,22 +2,27 @@ package sk.zadanie.validator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import sk.zadanie.dto.UserDto;
-import sk.zadanie.entity.User;
+import sk.zadanie.service.impl.UtilService;
 
 @Component
 public class UserValidator implements Validator {
+
+    @Autowired
+    UtilService utilService;
 
     public boolean supports(Class clazz) {
         return UserDto.class.equals(clazz);
     }
 
     public void validate(Object obj, Errors errors) {
+
         UserDto userDto = (UserDto) obj;
-        System.out.println("Erroors:"+ errors.hasErrors());
+
         String regex = "^[a-zA-Z]+$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcherFirstname = pattern.matcher(userDto.getFirstName());
@@ -43,5 +48,6 @@ public class UserValidator implements Validator {
         if (!userDto.getConfirmPassword().equals(userDto.getPassword())) {
             errors.rejectValue("password", "error.passwordConfDiff");
         }
+
     }
 }

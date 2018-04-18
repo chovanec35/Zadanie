@@ -29,7 +29,8 @@
                 </tr>
                 <tr>
                     <td>Birthdate</td> 
-                    <td><input type="date" path="birthdate" name="birthdate" value="" required="true" /></td>                    
+                    <td><input type="date" path="birthdate" name="birthdate" value="" required="true" /></td>       
+                    <td><form:errors path="date" class="error" /></td>
                 </tr>
                 <tr>
                     <td>E-mail </td>

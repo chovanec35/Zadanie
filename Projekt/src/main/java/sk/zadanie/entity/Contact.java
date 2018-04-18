@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sk.zadanie.entity;
 
 import java.io.Serializable;
@@ -32,21 +31,31 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "CONTACTS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c"), 
-    @NamedQuery(name = "Contact.findByContactId", query = "SELECT c FROM Contact c WHERE c.contactId = :contactId"),
-    @NamedQuery(name = "Contact.deleteByContactId", query = "UPDATE Contact c SET c.flagDel = :flagDel WHERE c.contactId = :contactId"),
-    @NamedQuery(name = "Contact.findByUserId", query = "SELECT c FROM Contact c WHERE c.userId = :userId AND c.flagDel=false AND c.firstName LIKE :firstName AND c.lastName LIKE :lastName"),
+    @NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c")
+    , 
+    @NamedQuery(name = "Contact.findByContactId", query = "SELECT c FROM Contact c WHERE c.contactId = :contactId")
+    ,
+    @NamedQuery(name = "Contact.deleteByContactId", query = "UPDATE Contact c SET c.flagDel = :flagDel WHERE c.contactId = :contactId")
+    ,
+    @NamedQuery(name = "Contact.findByUserId", query = "SELECT c FROM Contact c WHERE c.userId = :userId AND c.flagDel=false AND c.firstName LIKE :firstName AND c.lastName LIKE :lastName")
+    ,
     // AND c.categoryId = :categoryId AND c.birthdate = :birthdate
-    @NamedQuery(name = "Contact.findByFirstName", query = "SELECT c FROM Contact c WHERE c.firstName = :firstName"),
-    @NamedQuery(name = "Contact.findByLastName", query = "SELECT c FROM Contact c WHERE c.lastName = :lastName"),
-    @NamedQuery(name = "Contact.findByDescription", query = "SELECT c FROM Contact c WHERE c.description = :description"),
-    @NamedQuery(name = "Contact.findByFlagDel", query = "SELECT c FROM Contact c WHERE c.categoryId = :categoryId"),
-    @NamedQuery(name = "Contact.findByCreationTs", query = "SELECT c FROM Contact c WHERE c.creationTs = :creationTs"),
-    @NamedQuery(name = "Contact.findByBirthdate", query = "SELECT c FROM Contact c WHERE c.birthdate = :birthdate"),
+    @NamedQuery(name = "Contact.findByFirstName", query = "SELECT c FROM Contact c WHERE c.firstName = :firstName")
+    ,
+    @NamedQuery(name = "Contact.findByLastName", query = "SELECT c FROM Contact c WHERE c.lastName = :lastName")
+    ,
+    @NamedQuery(name = "Contact.findByDescription", query = "SELECT c FROM Contact c WHERE c.description = :description")
+    ,
+    @NamedQuery(name = "Contact.findByFlagDel", query = "SELECT c FROM Contact c WHERE c.categoryId = :categoryId")
+    ,
+    @NamedQuery(name = "Contact.findByCreationTs", query = "SELECT c FROM Contact c WHERE c.creationTs = :creationTs")
+    ,
+    @NamedQuery(name = "Contact.findByBirthdate", query = "SELECT c FROM Contact c WHERE c.birthdate = :birthdate")
+    ,
     @NamedQuery(name = "Contact.findByCategoryId", query = "SELECT c FROM Contact c WHERE c.categoryId = :categoryId")
 })
 public class Contact implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,10 +82,21 @@ public class Contact implements Serializable {
     @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "CATEGORY_ID")
     @ManyToOne
     private Category categoryId;
-    
+
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     @ManyToOne
     private User userId;
+
+    public Contact(String firstName, String lastName, String description, Date birthdate, Date creationTs, Category categoryId, User userId, boolean flagDel) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.description = description;
+        this.birthdate = birthdate;
+        this.creationTs = creationTs;
+        this.categoryId = categoryId;
+        this.userId = userId;
+        this.flagDel = flagDel;
+    }
 
     public Contact() {
     }
@@ -156,7 +176,6 @@ public class Contact implements Serializable {
 //    public void setUserId(User userId) {
 //        this.userId = userId;
 //    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -181,7 +200,5 @@ public class Contact implements Serializable {
     public String toString() {
         return "First name: " + firstName + "\n Last name: " + lastName + "\n Description: " + description + "\n Creation date: " + creationTs + "\n Birthdate: " + birthdate;
     }
-
-   
 
 }
