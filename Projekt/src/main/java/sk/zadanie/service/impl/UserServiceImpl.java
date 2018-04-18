@@ -5,6 +5,7 @@
  */
 package sk.zadanie.service.impl;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -43,8 +44,8 @@ public class UserServiceImpl implements UserService {
         return userDao.loginUser(login);
     }
 
-    public List<Contact> getAllContacts(User user, ContactDto contactDto, Date date) {
-        return userDao.getAllContacts(user, contactDto, date);
+    public List<Contact> getAllContacts(User user, ContactDto contactDto) throws ParseException {
+        return userDao.getAllContacts(user, contactDto);
     }
 
     public void delContact(int contactId) {

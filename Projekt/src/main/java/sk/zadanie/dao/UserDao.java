@@ -1,5 +1,6 @@
 package sk.zadanie.dao;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import sk.zadanie.dto.ContactDto;
@@ -13,7 +14,7 @@ public interface UserDao {
     //User validateUser(Login login);
     public void registration(UserDto user, Date date);
 
-    public List<Contact> getAllContacts(User user, ContactDto contactDto, Date date); //, String fName, String lName, String role
+    public List<Contact> getAllContacts(User user, ContactDto contactDto) throws ParseException; //, String fName, String lName, String role
 
     public User loginUser(LoginDto login);
 

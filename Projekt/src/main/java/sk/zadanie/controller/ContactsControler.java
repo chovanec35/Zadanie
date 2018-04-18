@@ -70,12 +70,8 @@ public class ContactsControler {
         ModelAndView mav = new ModelAndView("my-contacts");
         String dateString = contactDto.getBirthdate();
         if (user != null) {
-            if (dateString == ""){
-                dateString = "01-04-9991";
-            }
-            System.out.println("sk.zadanie.controller.ContactsControler.searchProcess()" + contactDto.getBirthdate());
-            Date date = utilService.convertStringToDate(dateString);
-            List<Contact> contactsList = userService.getAllContacts(user, contactDto, date);
+            //Date date = utilService.convertStringToDate(dateString);
+            List<Contact> contactsList = userService.getAllContacts(user, contactDto);
             mav.addObject("categoryList", categoryService.getAllCategories());
             mav.addObject("contactsList", contactsList);
             mav.addObject("user_Id", user.getUserId());
@@ -94,9 +90,9 @@ public class ContactsControler {
         mav.addObject("categoryList", categoryService.getAllCategories());
         String id = request.getParameter("delContact");
         contactDao.delContact(Integer.parseInt(id));
-        Date date = utilService.convertStringToDate(contactDto.getBirthdate());
+        //Date date = utilService.convertStringToDate(contactDto.getBirthdate());
         
-        List<Contact> contactsList = userService.getAllContacts(user, contactDto, date);
+        List<Contact> contactsList = userService.getAllContacts(user, contactDto);
         mav.addObject("contactsList", contactsList);
         mav.addObject("user_Id", user.getUserId());
 
