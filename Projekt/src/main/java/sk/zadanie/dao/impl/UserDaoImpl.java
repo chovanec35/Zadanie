@@ -49,13 +49,13 @@ public class UserDaoImpl implements UserDao {
     public List<Contact> getAllContacts(User user, ContactDto contactDto) throws ParseException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+//        em.getTransaction().begin();
         String query = "SELECT c "
                 + "FROM Contact c "
-                + "WHERE c.userId.userId = '" + user.getUserId() + "'";
+                + "WHERE c.userId = :userId";
 
         if (!contactDto.getFirstName().isEmpty()) {
-            query += " AND c.firstName LIKE '%" + contactDto.getFirstName() + "%'";
+            query += " AND c.firstName = :firstName";
         }
         if (!contactDto.getLastName().isEmpty()) {
             query += " AND c.lastName LIKE '%" + contactDto.getLastName() + "%'";
@@ -66,8 +66,12 @@ public class UserDaoImpl implements UserDao {
         if (!contactDto.getCategory().isEmpty()) {
             query += " AND c.categoryId.categoryId = '" + contactDto.getCategory() + "'";
         }
-
-        List<Contact> contacts = em.createQuery(query).getResultList();
+//        em.close();
+//        emf.close();
+//        em.createQuery(query).setParameter("firstName" , contactDto.getFirstName());
+        em.createQuery(query).setParameter("userId" , user);
+                return em.createQuery(query).getResultList();
+//        List<Contact> contacts = em.createQuery(query).getResultList();
 
 //        CriteriaBuilder cb = em.getCriteriaBuilder(); 
         //        
@@ -80,10 +84,9 @@ public class UserDaoImpl implements UserDao {
         //                (cb.like(contactRoot.get(Contact_.lastName), '%' + contactDto.getLastName()+ '%')) 
         //        );
         //        List<Contact> contacts = em.createQuery(cq).getResultList();
-        em.close();
-        emf.close();
+        
 
-        return contacts;
+//        return contacts;
     }
 
     @Override
@@ -129,11 +132,9 @@ public class UserDaoImpl implements UserDao {
         EntityManager em = emf.createEntityManager();
         Category category = new Category();
         category.setCategoryId(Integer.parseInt(contactDto.getCategory()));
-
         Date dateTs = new Date();
-
         Contact contact = new Contact(contactDto.getFirstName(), contactDto.getLastName(), contactDto.getDescription(), date, dateTs, category, user, false);
-        System.out.println("CONTACT DO DB -->" + contact);
+        
         em.getTransaction().begin();
         em.persist(contact);
         em.getTransaction().commit();

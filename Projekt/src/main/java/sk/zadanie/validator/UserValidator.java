@@ -46,6 +46,7 @@ public class UserValidator implements Validator {
         }
 
         if (!userDto.getConfirmPassword().equals(userDto.getPassword())) {
+            System.out.println("nezhodne hesla ");
             errors.rejectValue("password", "error.passwordConfDiff");
         }
 

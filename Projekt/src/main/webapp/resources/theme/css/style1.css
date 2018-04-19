@@ -8,10 +8,9 @@ body {
     color: white;
     margin: 30px;
     background-color: rgba(0, 0, 0, 0.63);
-    border-radius: 30px;
+    border-radius: 10px;
 }
 * {box-sizing: border-box}
-
 ul {
     list-style-type: none;
     margin: 0;
@@ -19,6 +18,7 @@ ul {
     overflow: hidden;
     background-color: #333;
     font-size: 20px;
+    border-radius: 10px;
 }
 
 li {
@@ -36,18 +36,18 @@ li a {
 
 
 li a:hover:not(.active) {
-    background-color: #4CAF50;
+    background-color: #84aebb;
 }
 
 .active {
-    background-color: #4CAF50;
+    background-color: #84aebb;
 }
 td{
     font-size:20px;
 }
 .text{
+    padding-right: 10px;
     text-align:right;
-    padding-bottom:5px;
 }
 
 /* Full-width input fields */

@@ -23,24 +23,24 @@
         <form:form  class="form" method="POST" modelAttribute="contact" action="${path}/newContactProcess">
             <table>
                 <tr>
-                    <td>First name *</td> 
+                    <td class="text">First name *</td> 
                     <td><input path="firstName" type="text" name="firstName" value="" required="true"></td>
                 </tr>
                 <tr>
-                    <td>Last name *</td> 
+                    <td class="text">Last name *</td> 
                     <td><input path="lastName" type="text" name="lastName" value="" required="true"></td>
                 </tr>
                 <tr>
-                    <td>Birthdate</td> 
+                    <td class="text">Birthdate</td> 
                     <td><input type="date" path="birthdate" name="birthdate" value="" ></td>
                     <td><form:errors path="date" class="error" /></td>
                 </tr>
                 <tr>
-                    <td>Description</td> 
+                    <td class="text">Description</td> 
                     <td><textarea path="description" name="description" cols="30" rows="3"></textarea></td>
                 </tr>              
                 <tr>
-                    <td>Category</td>
+                    <td class="text">Category</td>
                     <td><select textarea path="category" name="category">
                             <c:forEach items="${categoryList}" var="category">
                                 <option value="${category.categoryId}"><c:out value="${category.name}" /></option>

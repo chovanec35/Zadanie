@@ -47,16 +47,17 @@ public class RegistrationController {
             BindingResult result, HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
         ModelAndView mav = new ModelAndView("registration");
         mav.addObject("title", "Registration");
-        
+
         userValidator.validate(userDto, result);
-        
+        System.out.println("USERTDTO ---> " + userDto);
         if (result.hasErrors()) {
+            System.out.println("som v errore RegisterCController");
             return mav;
         }
-
+        System.out.println("som pred dateom ");
         Date date = utilService.convertStringToDate(userDto.getBirthdate());
         userService.registration(userDto, date);
-        
+        System.out.println("tento date uz nema byt " + date);
         mav = new ModelAndView("login");
         mav.addObject("title", "Login");
         return mav;

@@ -18,16 +18,16 @@
         </div>
         <label style="color: red"> ${message} </label><br>
         <div class="form">
-            <form class ="login-form" method="POST" modelAttribute="login" action="${path}/loginProcess">
+            <form method="POST" modelAttribute="login" action="${path}/loginProcess">
 
                 <div class="container">
                     <table> 
                         <tr>
-                            <td>E-mail</td>
+                            <td class="text">E-mail</td>
                             <td><input path="email" name="email" type="text" placeholder="E-mail"/></td>
                         </tr>
                         <tr>
-                            <td>Password</td>
+                            <td class="text">Password</td>
                             <td><input  path="password" name="password" type="password" placeholder="Password"/></td>
                         </tr>
                         <tr>

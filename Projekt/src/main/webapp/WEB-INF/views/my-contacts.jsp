@@ -9,68 +9,76 @@
     <%@ include file="parts/header.jsp"%> 
     <body>
         <h1>My contacts</h1>
-        <ul>
-            <li><a href="${path}/my-contacts">My contacts</a></li>
-            <li><a href="${path}/add-new-contact">Add new contact</a></li>
-            <li><a href="<c:url value="/logoutProcess" />">Log out</a></li>
-        </ul>
-        
+        <div class="nav">
+            <ul>
+                <li><a href="${path}/my-contacts">My contacts</a></li>
+                <li><a href="${path}/add-new-contact">Add new contact</a></li>
+                <li><a href="<c:url value="/logoutProcess" />">Log out</a></li>
+            </ul>
+        </div>
         <label style="color: red"> ${message} </label><br>
-        <form  class="form" method="POST" modelAttribute="contact" action="${path}/searchProcess">
-            <table>
-                <tr>
-                    <td class="text">First name</td>
-                    <td><input path="firstName" type="text" name="firstName" ></td>
-
-                </tr>
-                <tr>
-                    <td class="text">Last name</td>
-                    <td><input path="lastName" type="text" name="lastName" ></td>
-                </tr>
-                <tr>
-                    <td class="text">Birthdate</td> 
-                    <td><input type="date" path="birthdate" name="birthdate" ></td>
-                </tr>
-                <tr>
-                    <td class="text">Category</td>
-                    <td><select textarea path="category" name="category">
-                            <option value=""></option>
-                            <c:forEach items="${categoryList}" var="category">
-                                <option value="${category.categoryId}"><c:out value="${category.name}" /></option>
-                            </c:forEach>
-                        </select></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><button type="submit">Search</button></td>
-                </tr>
-            </table>
-        </form>
-
-        <form method="POST" modelAttribute="contact" action="${path}/deleteProcess">
-            <c:if test="${!empty contactsList}">
-                <table  class="form" class="table-contacts" >
-                    <tr>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Category</th>
-                        <th>Detail</th>
-                        <th>Delete</th>
-                    </tr>
-                    <c:forEach items="${contactsList}" var="contact">
-
+        <div class="form">
+            <form  class="form" method="POST" modelAttribute="contact" action="${path}/searchProcess">
+                <div class="container">
+                    <table>
                         <tr>
-                            <td><c:out value="${contact.firstName}" /></td>
-                            <td><c:out value="${contact.lastName}" /></td>
-                            <td><c:out value="${contact.categoryId.name}" /></td>
-                            <td><button type="submit" name="infoContact" value=${contact.contactId} >Info</button></td>
-                            <td><button type="submit" name="delContact" value=${contact.contactId} >Delete</button></td>
-                        </tr>
+                            <td class="text">First name</td>
+                            <td><input path="firstName" type="text" name="firstName" ></td>
 
-                    </c:forEach>
-                </table>
-            </c:if>
-        </form>
+                        </tr>
+                        <tr>
+                            <td class="text">Last name</td>
+                            <td><input path="lastName" type="text" name="lastName" ></td>
+                        </tr>
+                        <tr>
+                            <td class="text">Birthdate</td> 
+                            <td><input type="date" path="birthdate" name="birthdate" ></td>
+                        </tr>
+                        <tr>
+                            <td class="text">Category</td>
+                            <td><select textarea path="category" name="category">
+                                    <option value=""></option>
+                                    <c:forEach items="${categoryList}" var="category">
+                                        <option value="${category.categoryId}"><c:out value="${category.name}" /></option>
+                                    </c:forEach>
+                                </select></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><button type="submit">Search</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </div>
+        <div class="form">
+            <form method="POST" modelAttribute="contact" action="${path}/deleteProcess">
+                <c:if test="${!empty contactsList}">
+                    <div class="container">
+                        <table class="table-contacts" >
+                            <tr>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Category</th>
+                                <th>Detail</th>
+                                <th>Delete</th>
+                            </tr>
+                            <c:forEach items="${contactsList}" var="contact">
+
+                                <tr>
+                                    <td><c:out value="${contact.firstName}" /></td>
+                                    <td><c:out value="${contact.lastName}" /></td>
+                                    <td><c:out value="${contact.categoryId.name}" /></td>
+                                    <td><button type="submit" name="infoContact" value=${contact.contactId} >Info</button></td>
+                                    <td><button type="submit" name="delContact" value=${contact.contactId} >Delete</button></td>
+                                </tr>
+
+                            </c:forEach>
+                        </table>
+                    </div>
+                </c:if>
+            </form>
+        </div>
     </body>
 </html>
 

@@ -80,6 +80,7 @@ public class UserDto {
         this.birthdate = birthdate;
     }
 
+    
     @Override
     public String toString() {
         return "UserDto{" + "firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password + ", confirmPassword=" + confirmPassword + ", birthdate=" + birthdate + '}';
