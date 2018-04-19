@@ -12,11 +12,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
-        <title>New contact</title>
-
-    </head>
+    <%@ include file="parts/header.jsp"%> 
     <body>
         <h1>New contact</h1>
         <a href="${path}/my-contacts">My contacts</a>

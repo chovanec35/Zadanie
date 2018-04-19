@@ -6,9 +6,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <html>
-    <head>
-        <title>Registration</title>
-    </head>
+    <%@ include file="parts/header.jsp"%> 
     <body>
         <h1>Registration form</h1>
         <a href="${path}/home">Home</a>

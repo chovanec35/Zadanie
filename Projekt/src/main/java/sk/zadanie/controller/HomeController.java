@@ -20,6 +20,7 @@ public class HomeController {
     public ModelAndView loggUser(HttpSession httpSession) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("home");
+        mav.addObject("title", "Home");
         return mav;
     }
 

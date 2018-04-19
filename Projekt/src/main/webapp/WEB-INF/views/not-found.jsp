@@ -12,11 +12,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        
-    </head>
+    <%@ include file="parts/header.jsp"%> 
     <body>
         <h1>Page not found!</h1>
     </body>

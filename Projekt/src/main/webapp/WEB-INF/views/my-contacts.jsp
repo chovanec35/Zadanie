@@ -6,15 +6,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
-    <head>
-        <style>
-            .table-contacts, .table-contacts td, .table-contacts tr, .table-contacts th{
-                border: 1px solid black;
-            }
-        </style>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
-        <title>My contacts</title>
-    </head>
+    <%@ include file="parts/header.jsp"%> 
     <body>
         <h1>My contacts</h1>
         <a href="${path}/my-contacts">My contacts</a>

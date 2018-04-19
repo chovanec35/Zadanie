@@ -30,6 +30,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView viewLogin(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView("login");
+        mav.addObject("title", "Login");
         return mav;
     }
 
@@ -42,8 +43,10 @@ public class LoginController {
         if (user != null) {
             httpSession.setAttribute("loggedUser", user);
             mav = new ModelAndView("redirect:my-contacts");
+            mav.addObject("title", "Contacts");
         } else {
             mav.addObject("message", "Username or Password is wrong!!");
+            mav.addObject("title", "Login");
         }
         return mav;
     }

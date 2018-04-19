@@ -56,6 +56,7 @@ public class ContactsControler {
         ModelAndView mav = new ModelAndView("my-contacts");
         if (user != null) {
             mav.addObject("categoryList", categoryService.getAllCategories());
+            mav.addObject("title", "Contacts");
             return mav;
         }
         mav = new ModelAndView("not-found");
@@ -76,7 +77,9 @@ public class ContactsControler {
             mav.addObject("contactsList", contactsList);
             mav.addObject("user_Id", user.getUserId());
             mav.addObject("contactsList", contactsList);
+            mav.addObject("title", "Contacts");
         } else {
+            mav.addObject("title", "Not found");
             mav.addObject("notFound");
         }
         return mav;
@@ -95,6 +98,7 @@ public class ContactsControler {
         List<Contact> contactsList = userService.getAllContacts(user, contactDto);
         mav.addObject("contactsList", contactsList);
         mav.addObject("user_Id", user.getUserId());
+        mav.addObject("title", "Contacts");
 
         return mav;
     }
@@ -111,6 +115,7 @@ public class ContactsControler {
         
         Contact contact = userService.getContactById(contactId);
         mav.addObject("user_Id", user.getUserId());
+        mav.addObject("title", "Contacts");
 
         JOptionPane.showMessageDialog(null, contact.toString(), "Detail Contact", JOptionPane.PLAIN_MESSAGE);
 

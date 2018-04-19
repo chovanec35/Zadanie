@@ -38,6 +38,7 @@ public class RegistrationController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView viewRegistration(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView("registration");
+        mav.addObject("title", "Registration");
         return mav;
     }
 
@@ -45,6 +46,7 @@ public class RegistrationController {
     public ModelAndView registrationProcess(@ModelAttribute("user") UserDto userDto,
             BindingResult result, HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
         ModelAndView mav = new ModelAndView("registration");
+        mav.addObject("title", "Registration");
         
         userValidator.validate(userDto, result);
         
@@ -56,6 +58,7 @@ public class RegistrationController {
         userService.registration(userDto, date);
         
         mav = new ModelAndView("login");
+        mav.addObject("title", "Login");
         return mav;
     }
 

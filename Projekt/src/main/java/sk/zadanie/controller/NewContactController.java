@@ -48,9 +48,11 @@ public class NewContactController {
         ModelAndView mav = new ModelAndView("add-new-contact");
         if (user != null) {
             mav.addObject("categoryList", categoryDao.getAllCategories());
+            mav.addObject("title", "New Contact");
             return mav;
         }
         mav = new ModelAndView("not-found");
+        mav.addObject("title", "Not found");
         return mav;
     }
 
@@ -65,6 +67,7 @@ public class NewContactController {
         } 
         
         ModelAndView mav = new ModelAndView("redirect:add-new-contact");
+        mav.addObject("title", "New Contact");
         userService.addNewContact(contactDto, user, date);
         return mav;
     }
