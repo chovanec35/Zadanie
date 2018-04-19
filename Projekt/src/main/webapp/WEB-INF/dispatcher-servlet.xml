@@ -14,7 +14,7 @@
     <context:annotation-config />
     
     <mvc:annotation-driven validator="validator" />
-    <mvc:resources mapping="/resources/**" location="/resources/theme/" cache-period="31556926" />
+    <mvc:resources mapping="/resources//theme**" location="/resources/theme" cache-period="31556926" />
     <mvc:default-servlet-handler/>
     <mvc:annotation-driven />
 
