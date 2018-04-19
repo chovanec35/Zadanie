@@ -1,0 +1,1 @@
+<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">

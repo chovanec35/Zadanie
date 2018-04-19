@@ -9,17 +9,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
         <title>Home</title>
-        <spring:url value="/resources/theme/css/style.css" var="styles" />
-        <link href="${styles}" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" media="screen" href="${path}/resources/theme/css/style.css" />
     </head>
     <body>
         ${path}<br>
-        
+
         <h1>Welcome to Home Page!</h1>
         <a href="${path}/home">Home</a>
         <a href="${path}/login">Login</a>
         <a href="${path}/registration">Registration</a>
-         <a href=" ${path}/resources/theme/css/styles.css">test</a>
+        <a href=" ${path}/resources/theme/css/styles.css">test</a>
         <c:if test="${user_Id} == 13">
             <a href="<c:url value="/logoutProcess" />">Log out</a>
         </c:if>
