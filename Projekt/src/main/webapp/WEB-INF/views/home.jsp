@@ -9,9 +9,11 @@
     <%@ include file="parts/header.jsp"%> 
     <body>
         <h1>Welcome to Home Page!</h1>
-        <a href="${path}/home">Home</a>
-        <a href="${path}/login">Login</a>
-        <a href="${path}/registration">Registration</a>
+        <ul>
+            <li><a href="${path}/home">Home</a></li>
+            <li><a href="${path}/login">Login</a></li>
+            <li><a href="${path}/registration">Registration</a></li>
+        </ul>
         <section>
         <h2>"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."</h2>
         

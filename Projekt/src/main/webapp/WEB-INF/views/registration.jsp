@@ -9,11 +9,13 @@
     <%@ include file="parts/header.jsp"%> 
     <body>
         <h1>Registration form</h1>
-        <a href="${path}/home">Home</a>
-        <a href="${path}/login">Login</a>
-        <a href="${path}/registration">Registration</a>
+        <ul>
+            <li><a href="${path}/home">Home</a></li>
+            <li><a href="${path}/login">Login</a></li>
+            <li><a href="${path}/registration">Registration</a></li>
+        </ul>
 
-        <form:form method="POST" modelAttribute="user" action="${path}/registrationProcess">
+        <form:form  class="form" method="POST" modelAttribute="user" action="${path}/registrationProcess">
             <table>
                 <tr>
                     <td>First name</td>
@@ -44,6 +46,7 @@
                     <td><input type="password" name="confirmPassword" value="" required="true" /></td>
                 </tr>
                 <tr>
+                    <td></td>
                     <td><button type="submit">Registration</button></td>
                 </tr>
             </table>

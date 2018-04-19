@@ -15,11 +15,12 @@
     <%@ include file="parts/header.jsp"%> 
     <body>
         <h1>New contact</h1>
-        <a href="${path}/my-contacts">My contacts</a>
-        <a href="${path}/add-new-contact">Add new contact</a>
-        <a href="<c:url value="/logoutProcess" />">Log out</a><br>
-
-        <form:form method="POST" modelAttribute="contact" action="${path}/newContactProcess">
+        <ul>
+            <li><a href="${path}/my-contacts">My contacts</a></li>
+            <li><a href="${path}/add-new-contact">Add new contact</a></li>
+            <li><a href="<c:url value="/logoutProcess" />">Log out</a></li>
+        </ul>
+        <form:form  class="form" method="POST" modelAttribute="contact" action="${path}/newContactProcess">
             <table>
                 <tr>
                     <td>First name *</td> 
@@ -47,6 +48,7 @@
                         </select></td>                        
                 </tr>
                 <tr>
+                    <td></td>
                     <td><button type="submit">Add new contact</button></td>
                 </tr>
             </table>

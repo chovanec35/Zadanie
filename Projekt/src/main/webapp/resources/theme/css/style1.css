@@ -1,0 +1,83 @@
+html{
+    background-color: #b4e0ca;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    padding:25 25;
+    background-color: white;
+    color: white;
+    margin: 30px;
+    background-color: rgba(0, 0, 0, 0.63);
+    border-radius: 30px;
+}
+* {box-sizing: border-box}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 5;
+    overflow: hidden;
+    background-color: #333;
+    font-size: 20px;
+}
+
+li {
+    float: left;
+    border-right:1px solid #bbb;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+
+li a:hover:not(.active) {
+    background-color: #4CAF50;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+td{
+    font-size:20px;
+}
+.text{
+    text-align:right;
+    padding-bottom:5px;
+}
+
+/* Full-width input fields */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 2px 0 2px 0;
+    display: inline-block;
+    border: none;
+    background-color: #ddd;
+    font-size:20px;
+}
+
+input:focus {
+    position: static;
+    border: 3px solid #73AD21;
+}
+button {
+    background-color: #84aebb;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    font-size:20px;
+}
+
+#account{
+text-decoration: none;
+color:#8d8eff;
+}

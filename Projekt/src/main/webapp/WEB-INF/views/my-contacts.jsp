@@ -9,28 +9,30 @@
     <%@ include file="parts/header.jsp"%> 
     <body>
         <h1>My contacts</h1>
-        <a href="${path}/my-contacts">My contacts</a>
-        <a href="${path}/add-new-contact">Add new contact</a>
-        <a href="<c:url value="/logoutProcess" />">Log out</a><br>
+        <ul>
+            <li><a href="${path}/my-contacts">My contacts</a></li>
+            <li><a href="${path}/add-new-contact">Add new contact</a></li>
+            <li><a href="<c:url value="/logoutProcess" />">Log out</a></li>
+        </ul>
         
         <label style="color: red"> ${message} </label><br>
-        <form method="POST" modelAttribute="contact" action="${path}/searchProcess">
+        <form  class="form" method="POST" modelAttribute="contact" action="${path}/searchProcess">
             <table>
                 <tr>
-                    <td>First name</td>
+                    <td class="text">First name</td>
                     <td><input path="firstName" type="text" name="firstName" ></td>
 
                 </tr>
                 <tr>
-                    <td>Last name</td>
+                    <td class="text">Last name</td>
                     <td><input path="lastName" type="text" name="lastName" ></td>
                 </tr>
                 <tr>
-                    <td>Birthdate</td> 
+                    <td class="text">Birthdate</td> 
                     <td><input type="date" path="birthdate" name="birthdate" ></td>
                 </tr>
                 <tr>
-                    <td>Category</td>
+                    <td class="text">Category</td>
                     <td><select textarea path="category" name="category">
                             <option value=""></option>
                             <c:forEach items="${categoryList}" var="category">
@@ -39,6 +41,7 @@
                         </select></td>
                 </tr>
                 <tr>
+                    <td></td>
                     <td><button type="submit">Search</button></td>
                 </tr>
             </table>
@@ -46,7 +49,7 @@
 
         <form method="POST" modelAttribute="contact" action="${path}/deleteProcess">
             <c:if test="${!empty contactsList}">
-                <table class="table-contacts" >
+                <table  class="form" class="table-contacts" >
                     <tr>
                         <th>First name</th>
                         <th>Last name</th>

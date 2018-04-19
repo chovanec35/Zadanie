@@ -1,15 +1,22 @@
-html{
-    background-color: red;
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
-body{
-	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
-	color: white;
-	font-weight: bold;
-	margin: 20px;
-	background-color:rgba(0,0,0, 0.6);
-	border-radius: 30px;
-        background-image: url("images/background.jpg");
+li a {
+    display: block;
+    width: 60px;
 }
-h1{
-    color: red;
+
+.login { 
+  height:110px;
+  width:190px;
+  margin:auto;
+  border:1px #CCC solid;
+  padding:10px;
 }
+
+.login input { 
+  padding:5px;
+  margin:5px
+ }
