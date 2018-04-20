@@ -69,7 +69,7 @@
                                     <td><c:out value="${contact.firstName}" /></td>
                                     <td><c:out value="${contact.lastName}" /></td>
                                     <td><c:out value="${contact.categoryId.name}" /></td>
-                                    <td><button class="contactBtn" type="submit" name="infoContact" value=${contact.contactId} >Info</button></td>
+                                    <td><div onclick="showInfo()">Detail</div></td>
                                     <td><button class="contactBtn" type="submit" name="delContact" value=${contact.contactId} >Delete</button></td>
                                 </tr>
 
@@ -78,6 +78,19 @@
                     </div>
                 </c:if>
             </form>
+        </div>
+        <div class="infoContact" id="modal">
+            <div class="content">
+                <span onclick="close()" class="close">&times;</span>
+                <table>
+                    <tr>
+                        <td>first name</td>
+                        <td>last name</td>
+                        <td>birthDate</td>
+                        <td>decription</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </body>
 </html>

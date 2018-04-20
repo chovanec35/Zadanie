@@ -8,4 +8,5 @@
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
     <title>${title}</title>
     <link rel="stylesheet" type="text/css" media="screen" href="${path}/resources/theme/css/style1.css" />   
+    <script src="resources/theme/js/info.js"></script>   
 </head>
