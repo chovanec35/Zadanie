@@ -1,20 +1,14 @@
 package sk.zadanie.dao.impl;
 
-import com.sun.jndi.toolkit.ctx.Continuation;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,7 +20,6 @@ import sk.zadanie.dto.LoginDto;
 import sk.zadanie.dto.UserDto;
 import sk.zadanie.entity.Category;
 import sk.zadanie.entity.Contact;
-import sk.zadanie.entity.Contact_;
 import sk.zadanie.entity.User;
 import sk.zadanie.service.impl.UtilService;
 import sk.zadanie.validator.UserValidator;
@@ -53,34 +46,39 @@ public class UserDaoImpl implements UserDao {
         EntityManager em = emf.createEntityManager();
         Map<String, Object> mapObj = new HashMap<String, Object>();
         Map<String, String> mapStr = new HashMap<String, String>();
-        
+
         String hql = "SELECT c FROM Contact c "
                 + "WHERE c.userId.userId = :userId AND c.flagDel = false";
         mapObj.put("userId", user.getUserId());
-  
+
         if (!contactDto.getFirstName().isEmpty()) {
             hql += " AND c.firstName LIKE :firstName";
-            mapStr.put("firstName", "%"+contactDto.getFirstName()+"%");
+            mapStr.put("firstName", "%" + contactDto.getFirstName() + "%");
         }
         if (!contactDto.getLastName().isEmpty()) {
             hql += " AND c.lastName LIKE :lastName";
-            mapStr.put("lastName", "%"+contactDto.getLastName()+"%");
+            mapStr.put("lastName", "%" + contactDto.getLastName() + "%");
         }
         if (!contactDto.getBirthdate().isEmpty()) {
             hql += " AND c.birthdate = :birthdate";
-            mapStr.put("birthdate", contactDto.getBirthdate());
+            Date date = utilService.convertStringToDate(contactDto.getBirthdate());
+            mapObj.put("birthdate", date);
         }
         if (!contactDto.getCategory().isEmpty()) {
-            hql += " AND c.categoryId.categoryId = :categoryId";
-            mapStr.put("categoryId", contactDto.getCategory());
+            hql += " AND c.categoryId = :categoryId";
+            Category category = new Category();
+            category.setCategoryId(Integer.parseInt(contactDto.getCategory()));
+            mapObj.put("categoryId", category);
         }
+
         Query query = em.createQuery(hql);
-        for (Map.Entry me : mapStr.entrySet()){
+        
+        for (Map.Entry me : mapStr.entrySet()) {
             query.setParameter((String) me.getKey(), me.getValue());
         }
-        for (Map.Entry me : mapObj.entrySet()){
+        for (Map.Entry me : mapObj.entrySet()) {
             query.setParameter((String) me.getKey(), me.getValue());
-        }        
+        }
         return query.getResultList();
     }
 
@@ -108,6 +106,24 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public boolean emailExist(UserDto userDto) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+
+        Query query = em.createNamedQuery("User.findByEmail");
+        query.setParameter("email", userDto.getEmail());
+        List<User> email = (List<User>) query.getResultList();
+
+        em.close();
+        emf.close();
+        if (email.size() == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public void registration(UserDto userDto, Date date) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
@@ -127,7 +143,7 @@ public class UserDaoImpl implements UserDao {
         category.setCategoryId(Integer.parseInt(contactDto.getCategory()));
         Date dateTs = new Date();
         Contact contact = new Contact(contactDto.getFirstName(), contactDto.getLastName(), contactDto.getDescription(), date, dateTs, category, user, false);
-        
+
         em.getTransaction().begin();
         em.persist(contact);
         em.getTransaction().commit();

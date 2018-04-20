@@ -86,7 +86,7 @@ public class ContactsControler {
     }
 
     @RequestMapping(params = {"delContact"}, method = RequestMethod.POST)
-    public ModelAndView delContactProcess(HttpServletRequest request,
+    public ModelAndView contactListProcess(HttpServletRequest request,
             HttpServletResponse response, @ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession) throws IOException, ServletException, ParseException {
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");

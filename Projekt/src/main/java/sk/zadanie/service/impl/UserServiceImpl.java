@@ -54,4 +54,8 @@ public class UserServiceImpl implements UserService {
     public Contact getContactById(int contactId) {
         return contactDao.getContactById(contactId);
     }
+    
+    public boolean emailExist(UserDto userDto){
+        return userDao.emailExist(userDto);
+    }
 }

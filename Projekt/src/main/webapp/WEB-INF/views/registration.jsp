@@ -31,11 +31,12 @@
                 <tr>
                     <td class="text">Birthdate</td> 
                     <td><input type="date" path="birthdate" name="birthdate" value="" required="true" /></td>       
-                    <td><form:errors path="date" class="error" /></td>
+                    <td><form:errors path="birthdate" class="error" /></td>
                 </tr>
                 <tr>
                     <td class="text">E-mail </td>
                     <td><input path="email" type="email" name="email" value="" required="true" /></td>
+                    <td><form:errors path="email" class="error" /></td>
                 </tr> 
                 <tr>
                     <td class="text">Password </td>
@@ -45,6 +46,7 @@
                 <tr>
                     <td class="text">Confirm Password</td>
                     <td><input path="confirmPassword" type="password" name="confirmPassword" value="" required="true" /></td>
+                    <td><form:errors path="confirmPassword" class="error" /></td>
                 </tr>
                 <tr>
                     <td></td>

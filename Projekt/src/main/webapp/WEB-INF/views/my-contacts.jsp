@@ -52,7 +52,7 @@
             </form>
         </div>
         <div class="form">
-            <form method="POST" modelAttribute="contact" action="${path}/deleteProcess">
+            <form method="POST" modelAttribute="contact" action="${path}/contactListProcess">
                 <c:if test="${!empty contactsList}">
                     <div class="container">
                         <table class="table-contacts" >

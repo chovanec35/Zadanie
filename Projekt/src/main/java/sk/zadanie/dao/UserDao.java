@@ -20,4 +20,5 @@ public interface UserDao {
 
     public void addNewContact(ContactDto contact, User user, Date date);
 
+    public boolean emailExist(UserDto userDto);
 }
