@@ -54,6 +54,7 @@ public class RegistrationController {
             System.out.println("som v errore RegisterCController");
             return mav;
         }
+        
         System.out.println("som pred dateom ");
         Date date = utilService.convertStringToDate(userDto.getBirthdate());
         userService.registration(userDto, date);

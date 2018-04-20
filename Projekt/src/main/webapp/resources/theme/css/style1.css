@@ -3,7 +3,7 @@ html{
 }
 body {
     font-family: Arial, Helvetica, sans-serif;
-    padding:25 25;
+    padding:25px 25px;
     background-color: white;
     color: white;
     margin: 30px;
@@ -14,7 +14,7 @@ body {
 ul {
     list-style-type: none;
     margin: 0;
-    padding: 5;
+    padding: 5px;
     overflow: hidden;
     background-color: #333;
     font-size: 20px;
@@ -38,6 +38,20 @@ li a {
 li a:hover:not(.active) {
     background-color: #84aebb;
 }
+th{
+    font-size:20px;
+    border: 1px solid white;
+}
+.table-contacts{
+    border: 1px solid white;
+    text-align:center;
+}
+.table-contacts td, tr{
+    border: 1px solid white;
+}
+.table-contacts tr:hover{
+    background-color: #a4c2cc;
+}
 
 .active {
     background-color: #84aebb;
@@ -50,7 +64,6 @@ td{
     text-align:right;
 }
 
-/* Full-width input fields */
 input, select {
     width: 100%;
     padding: 12px;
@@ -61,10 +74,6 @@ input, select {
     font-size:20px;
 }
 
-input:focus {
-    position: static;
-    border: 3px solid #73AD21;
-}
 button {
     background-color: #84aebb;
     color: white;
@@ -75,6 +84,20 @@ button {
     width: 100%;
     opacity: 0.9;
     font-size:20px;
+}
+.contactBtn {
+    background-color: #84aebb;
+    color: white;
+    padding: 1px 20px;
+    margin: 0px 0px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    font-size:20px;
+}
+.contactBtn:hover {
+   background-color: #34606d;
 }
 
 #account{

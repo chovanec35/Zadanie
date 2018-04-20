@@ -3,7 +3,9 @@ package sk.zadanie.dao.impl;
 import com.sun.jndi.toolkit.ctx.Continuation;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -49,51 +51,43 @@ public class UserDaoImpl implements UserDao {
     public List<Contact> getAllContacts(User user, ContactDto contactDto) throws ParseException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
-//        em.getTransaction().begin();
-        String query = "SELECT c "
-                + "FROM Contact c "
-                + "WHERE c.userId = :userId";
-
+        Map<String, Object> mapObj = new HashMap<String, Object>();
+        Map<String, String> mapStr = new HashMap<String, String>();
+        
+        String hql = "SELECT c FROM Contact c "
+                + "WHERE c.userId.userId = :userId AND c.flagDel = false";
+        mapObj.put("userId", user.getUserId());
+  
         if (!contactDto.getFirstName().isEmpty()) {
-            query += " AND c.firstName = :firstName";
+            hql += " AND c.firstName LIKE :firstName";
+            mapStr.put("firstName", "%"+contactDto.getFirstName()+"%");
         }
         if (!contactDto.getLastName().isEmpty()) {
-            query += " AND c.lastName LIKE '%" + contactDto.getLastName() + "%'";
+            hql += " AND c.lastName LIKE :lastName";
+            mapStr.put("lastName", "%"+contactDto.getLastName()+"%");
         }
         if (!contactDto.getBirthdate().isEmpty()) {
-            query += " AND c.birthdate = '" + contactDto.getBirthdate() + "'";
+            hql += " AND c.birthdate = :birthdate";
+            mapStr.put("birthdate", contactDto.getBirthdate());
         }
         if (!contactDto.getCategory().isEmpty()) {
-            query += " AND c.categoryId.categoryId = '" + contactDto.getCategory() + "'";
+            hql += " AND c.categoryId.categoryId = :categoryId";
+            mapStr.put("categoryId", contactDto.getCategory());
         }
-//        em.close();
-//        emf.close();
-//        em.createQuery(query).setParameter("firstName" , contactDto.getFirstName());
-        em.createQuery(query).setParameter("userId" , user);
-                return em.createQuery(query).getResultList();
-//        List<Contact> contacts = em.createQuery(query).getResultList();
-
-//        CriteriaBuilder cb = em.getCriteriaBuilder(); 
-        //        
-        //        CriteriaQuery<Contact> cq = cb.createQuery(Contact.class); 
-        //        Root<Contact> contactRoot = cq.from(Contact.class);        
-        //        cq.select(contactRoot);
-        //        
-        //        cq.where(cb.and
-        //                (cb.like(contactRoot.get(Contact_.firstName), '%' + contactDto.getFirstName() + '%')),
-        //                (cb.like(contactRoot.get(Contact_.lastName), '%' + contactDto.getLastName()+ '%')) 
-        //        );
-        //        List<Contact> contacts = em.createQuery(cq).getResultList();
-        
-
-//        return contacts;
+        Query query = em.createQuery(hql);
+        for (Map.Entry me : mapStr.entrySet()){
+            query.setParameter((String) me.getKey(), me.getValue());
+        }
+        for (Map.Entry me : mapObj.entrySet()){
+            query.setParameter((String) me.getKey(), me.getValue());
+        }        
+        return query.getResultList();
     }
 
     @Override
     public User loginUser(LoginDto login) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
-
         em.getTransaction().begin();
 
         Query query = em.createNamedQuery("User.findByEmailPassword");
@@ -110,7 +104,6 @@ public class UserDaoImpl implements UserDao {
             User user = null;
             return user;
         }
-
         return logins.get(0);
     }
 

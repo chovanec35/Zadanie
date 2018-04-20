@@ -92,11 +92,11 @@ public class ContactsControler {
         ModelAndView mav = new ModelAndView("my-contacts");
         mav.addObject("categoryList", categoryService.getAllCategories());
         String id = request.getParameter("delContact");
-        contactDao.delContact(Integer.parseInt(id));
-        //Date date = utilService.convertStringToDate(contactDto.getBirthdate());
         
-        List<Contact> contactsList = userService.getAllContacts(user, contactDto);
-        mav.addObject("contactsList", contactsList);
+        contactDao.delContact(Integer.parseInt(id));
+        
+        //List<Contact> contactsList = userService.getAllContacts(user, contactDto);
+        //mav.addObject("contactsList", contactsList);
         mav.addObject("user_Id", user.getUserId());
         mav.addObject("title", "Contacts");
 

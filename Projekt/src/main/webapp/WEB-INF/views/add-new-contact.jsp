@@ -1,9 +1,3 @@
-<%-- 
-    Document   : add-new-contact
-    Created on : 13.3.2018, 9:05:13
-    Author     : jchovanec
---%>
-
 <%@page contentType="text/html" pageEncoding="windows-1250"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
