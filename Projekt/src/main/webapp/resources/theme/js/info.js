@@ -2,6 +2,9 @@ var modal = document.getElementsByClassName("modal")[0];
 var span = document.getElementsByClassName("close")[0];
 var details = document.getElementsByClassName("details");
 
+
+
+
 span.onclick = function () {
     modal.style.display = "none";
 }
