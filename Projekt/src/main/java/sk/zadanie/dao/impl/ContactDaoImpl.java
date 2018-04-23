@@ -7,6 +7,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import sk.zadanie.dao.ContactDao;
+import sk.zadanie.dto.ContactDto;
 import sk.zadanie.entity.Contact;
 
 @Repository
@@ -31,6 +32,7 @@ public class ContactDaoImpl implements ContactDao {
         emf.close();
     }
 
+    @Override
     public Contact getContactById(int contactId) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
@@ -39,12 +41,21 @@ public class ContactDaoImpl implements ContactDao {
 
         Query query = em.createNamedQuery("Contact.findByContactId");
         query.setParameter("contactId", contactId);
-        
+
         List<Contact> contacts = (List<Contact>) query.getResultList();
-        
+
         em.close();
         emf.close();
         return contacts.get(0);
+    }
+
+    public ContactDto setParamertersNull() {
+        ContactDto contactDto = new ContactDto();
+        contactDto.setFirstName("");
+        contactDto.setLastName("");
+        contactDto.setBirthdate("");
+        contactDto.setCategory("");
+        return contactDto;
     }
 
 }

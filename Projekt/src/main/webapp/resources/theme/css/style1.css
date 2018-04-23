@@ -34,7 +34,6 @@ li a {
     text-decoration: none;
 }
 
-
 li a:hover:not(.active) {
     background-color: #84aebb;
 }
@@ -97,12 +96,33 @@ button {
     font-size:20px;
 }
 .contactBtn:hover {
-   background-color: #34606d;
+    background-color: #34606d;
 }
 
 #account{
-text-decoration: none;
-color:#8d8eff;
+    text-decoration: none;
+    color:#8d8eff;
+}
+
+.modal{
+    display: none;
+    width: 50%;
+    margin: 0 25%;
+    padding: 10px;
+    background-color: #ffffff;
+    z-index: 99999999;
+    position: absolute;
+    top: 25%;
+    box-shadow: 0 0 10px rgb(50,50,50);
+    color: black;
+}
+
+.close{
+    position: absolute;
+    top: 5%;
+    right: 1%;
+    text-decoration: none;
+    color:#8d8eff;
 }
 
 .infoContact{
@@ -126,13 +146,6 @@ color:#8d8eff;
     border: 1px solid #888;
     width: 80%;
     border-radius: 10px;
-}
-
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
 }
 
 .close:hover, .close:focus {

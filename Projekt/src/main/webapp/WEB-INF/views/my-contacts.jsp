@@ -64,35 +64,50 @@
                                 <th>Delete</th>
                             </tr>
                             <c:forEach items="${contactsList}" var="contact">
-
                                 <tr>
                                     <td><c:out value="${contact.firstName}" /></td>
                                     <td><c:out value="${contact.lastName}" /></td>
                                     <td><c:out value="${contact.categoryId.name}" /></td>
-                                    <td><div onclick="showInfo()">Detail</div></td>
+                                    <td><button type="buton" name="infoContact" class="btn btn-primary details contactBtn" value=${contact.contactId} >
+                                            Detail
+                                        </button></td>
                                     <td><button class="contactBtn" type="submit" name="delContact" value=${contact.contactId} >Delete</button></td>
                                 </tr>
-
                             </c:forEach>
                         </table>
                     </div>
                 </c:if>
             </form>
         </div>
-        <div class="infoContact" id="modal">
-            <div class="content">
-                <span onclick="close()" class="close">&times;</span>
-                <table>
-                    <tr>
-                        <td>first name</td>
-                        <td>last name</td>
-                        <td>birthDate</td>
-                        <td>decription</td>
-                    </tr>
-                </table>
-            </div>
+        <!-- Modal -->
+        <div class="modal">
+            <h2>Contact detail</h2>
+            --> ${contactL}
+            <span class="close">&times</span>
+            <table>
+                <tr>
+                    <td>First name: </td>
+                    <td>${contact.firstName}</td>
+                </tr>
+                <tr>
+                    <td>Last name: </td>
+                    <td>${contact.lastName}</td>
+                </tr>
+                <tr>
+                    <td>Decription: </td>
+                    <td>${contact.description}</td>
+                </tr>
+                <tr>
+                    <td>Birthdate: </td>
+                    <td>${contact.birthdate}</td>
+                </tr>
+                <tr>
+                    <td>Creation Date: </td>
+                    <td>${contact.creationTs}</td>
+                </tr>
+            </table>
         </div>
+        <script src="resources/theme/js/info.js"></script> 
+
     </body>
 </html>
-
-

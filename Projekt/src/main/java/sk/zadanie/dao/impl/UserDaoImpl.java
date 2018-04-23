@@ -46,25 +46,29 @@ public class UserDaoImpl implements UserDao {
         EntityManager em = emf.createEntityManager();
         Map<String, Object> mapObj = new HashMap<String, Object>();
         Map<String, String> mapStr = new HashMap<String, String>();
-
+        
+            
         String hql = "SELECT c FROM Contact c "
                 + "WHERE c.userId.userId = :userId AND c.flagDel = false";
         mapObj.put("userId", user.getUserId());
 
-        if (!contactDto.getFirstName().isEmpty()) {
+        if (contactDto.getFirstName() != "") {
             hql += " AND c.firstName LIKE :firstName";
             mapStr.put("firstName", "%" + contactDto.getFirstName() + "%");
         }
-        if (!contactDto.getLastName().isEmpty()) {
+        if (contactDto.getLastName() != "") {
+            System.out.println("OK-2");
             hql += " AND c.lastName LIKE :lastName";
             mapStr.put("lastName", "%" + contactDto.getLastName() + "%");
         }
-        if (!contactDto.getBirthdate().isEmpty()) {
+        if (contactDto.getBirthdate() != "") {
+            System.out.println("OK-3");
             hql += " AND c.birthdate = :birthdate";
             Date date = utilService.convertStringToDate(contactDto.getBirthdate());
             mapObj.put("birthdate", date);
         }
-        if (!contactDto.getCategory().isEmpty()) {
+        if (contactDto.getCategory() != "") {
+            System.out.println("OK-4");
             hql += " AND c.categoryId = :categoryId";
             Category category = new Category();
             category.setCategoryId(Integer.parseInt(contactDto.getCategory()));
@@ -72,7 +76,7 @@ public class UserDaoImpl implements UserDao {
         }
 
         Query query = em.createQuery(hql);
-        
+
         for (Map.Entry me : mapStr.entrySet()) {
             query.setParameter((String) me.getKey(), me.getValue());
         }

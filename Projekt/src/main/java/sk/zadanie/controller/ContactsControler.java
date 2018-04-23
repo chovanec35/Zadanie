@@ -51,10 +51,14 @@ public class ContactsControler {
     UtilService utilService;
 
     @RequestMapping(value = "/my-contacts", method = RequestMethod.GET)
-    public ModelAndView viewLogin(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
+    public ModelAndView viewLogin(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws ParseException {
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
         if (user != null) {
+            ContactDto contactDto = contactDao.setParamertersNull();
+            System.out.println("ContactDto()" + contactDto);
+//            List<Contact> contactsList = userService.getAllContacts(user, contactDto);
+            mav.addObject("contactsList", userService.getAllContacts(user, contactDto));
             mav.addObject("categoryList", categoryService.getAllCategories());
             mav.addObject("title", "Contacts");
             return mav;
@@ -66,37 +70,36 @@ public class ContactsControler {
     @RequestMapping(value = "/searchProcess", method = RequestMethod.POST)
     public ModelAndView searchProcess(@ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession,
             BindingResult result, HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
-
+        
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
         String dateString = contactDto.getBirthdate();
         if (user != null) {
-            //Date date = utilService.convertStringToDate(dateString);
+            System.out.println("Contact z Formu" + contactDto);
             List<Contact> contactsList = userService.getAllContacts(user, contactDto);
             mav.addObject("categoryList", categoryService.getAllCategories());
             mav.addObject("contactsList", contactsList);
             mav.addObject("user_Id", user.getUserId());
-            mav.addObject("contactsList", contactsList);
             mav.addObject("title", "Contacts");
         } else {
             mav.addObject("title", "Not found");
-            mav.addObject("notFound");
+            mav.addObject("not-found");
         }
         return mav;
     }
 
     @RequestMapping(params = {"delContact"}, method = RequestMethod.POST)
     public ModelAndView contactListProcess(HttpServletRequest request,
-            HttpServletResponse response, @ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession) throws IOException, ServletException, ParseException {
+            HttpServletResponse response, HttpSession httpSession) throws IOException, ServletException, ParseException {
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
-        mav.addObject("categoryList", categoryService.getAllCategories());
         String id = request.getParameter("delContact");
+        ContactDto contactDto = contactDao.setParamertersNull();
         
         contactDao.delContact(Integer.parseInt(id));
         
-        //List<Contact> contactsList = userService.getAllContacts(user, contactDto);
-        //mav.addObject("contactsList", contactsList);
+        mav.addObject("categoryList", categoryService.getAllCategories());
+        mav.addObject("contactsList", userService.getAllContacts(user, contactDto));
         mav.addObject("user_Id", user.getUserId());
         mav.addObject("title", "Contacts");
 
@@ -110,14 +113,18 @@ public class ContactsControler {
         int contactId = Integer.parseInt(request.getParameter("infoContact"));
 
         User user = (User) httpSession.getAttribute("loggedUser");
-        ModelAndView mav = new ModelAndView("redirect:my-contacts");
+        ModelAndView mav = new ModelAndView("my-contacts");
         mav.addObject("categoryList", categoryService.getAllCategories());
         
         Contact contact = userService.getContactById(contactId);
+        System.out.println("TU JE ---> " + contact);
+        mav.addObject("contactL", contact);
+        
         mav.addObject("user_Id", user.getUserId());
         mav.addObject("title", "Contacts");
-
-        JOptionPane.showMessageDialog(null, contact.toString(), "Detail Contact", JOptionPane.PLAIN_MESSAGE);
+        
+        
+        //JOptionPane.showMessageDialog(null, contact.toString(), "Detail Contact", JOptionPane.PLAIN_MESSAGE);
 
         return mav;
     }

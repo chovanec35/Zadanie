@@ -11,7 +11,6 @@ import sk.zadanie.entity.User;
 
 public interface UserDao {
 
-    //User validateUser(Login login);
     public void registration(UserDto user, Date date);
 
     public List<Contact> getAllContacts(User user, ContactDto contactDto) throws ParseException; //, String fName, String lName, String role
