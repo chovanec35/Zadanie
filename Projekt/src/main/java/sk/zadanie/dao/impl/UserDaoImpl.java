@@ -57,18 +57,15 @@ public class UserDaoImpl implements UserDao {
             mapStr.put("firstName", "%" + contactDto.getFirstName() + "%");
         }
         if (contactDto.getLastName() != "") {
-            System.out.println("OK-2");
             hql += " AND c.lastName LIKE :lastName";
             mapStr.put("lastName", "%" + contactDto.getLastName() + "%");
         }
         if (contactDto.getBirthdate() != "") {
-            System.out.println("OK-3");
             hql += " AND c.birthdate = :birthdate";
             Date date = utilService.convertStringToDate(contactDto.getBirthdate());
             mapObj.put("birthdate", date);
         }
         if (contactDto.getCategory() != "") {
-            System.out.println("OK-4");
             hql += " AND c.categoryId = :categoryId";
             Category category = new Category();
             category.setCategoryId(Integer.parseInt(contactDto.getCategory()));

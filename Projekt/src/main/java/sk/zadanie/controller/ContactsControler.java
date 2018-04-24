@@ -8,7 +8,9 @@ package sk.zadanie.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +22,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import sk.zadanie.dao.ContactDao;
@@ -46,7 +49,7 @@ public class ContactsControler {
 
     @Autowired
     ContactDao contactDao;
-    
+
     @Autowired
     UtilService utilService;
 
@@ -56,8 +59,6 @@ public class ContactsControler {
         ModelAndView mav = new ModelAndView("my-contacts");
         if (user != null) {
             ContactDto contactDto = contactDao.setParamertersNull();
-            System.out.println("ContactDto()" + contactDto);
-//            List<Contact> contactsList = userService.getAllContacts(user, contactDto);
             mav.addObject("contactsList", userService.getAllContacts(user, contactDto));
             mav.addObject("categoryList", categoryService.getAllCategories());
             mav.addObject("title", "Contacts");
@@ -70,12 +71,11 @@ public class ContactsControler {
     @RequestMapping(value = "/searchProcess", method = RequestMethod.POST)
     public ModelAndView searchProcess(@ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession,
             BindingResult result, HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
-        
+
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
         String dateString = contactDto.getBirthdate();
         if (user != null) {
-            System.out.println("Contact z Formu" + contactDto);
             List<Contact> contactsList = userService.getAllContacts(user, contactDto);
             mav.addObject("categoryList", categoryService.getAllCategories());
             mav.addObject("contactsList", contactsList);
@@ -95,9 +95,9 @@ public class ContactsControler {
         ModelAndView mav = new ModelAndView("my-contacts");
         String id = request.getParameter("delContact");
         ContactDto contactDto = contactDao.setParamertersNull();
-        
+
         contactDao.delContact(Integer.parseInt(id));
-        
+
         mav.addObject("categoryList", categoryService.getAllCategories());
         mav.addObject("contactsList", userService.getAllContacts(user, contactDto));
         mav.addObject("user_Id", user.getUserId());
@@ -108,25 +108,38 @@ public class ContactsControler {
 
     @RequestMapping(params = {"infoContact"}, method = RequestMethod.POST)
     public ModelAndView infoProcess(HttpServletRequest request, HttpServletResponse response,
-            HttpSession httpSession) throws IOException, ServletException {
-
+            HttpSession httpSession) throws IOException, ServletException, ParseException {
+        ContactDto contactDto = contactDao.setParamertersNull();
         int contactId = Integer.parseInt(request.getParameter("infoContact"));
 
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
         mav.addObject("categoryList", categoryService.getAllCategories());
-        
+
         Contact contact = userService.getContactById(contactId);
-        System.out.println("TU JE ---> " + contact);
         mav.addObject("contactL", contact);
-        
+        mav.addObject("contactsList", userService.getAllContacts(user, contactDto));
         mav.addObject("user_Id", user.getUserId());
         mav.addObject("title", "Contacts");
         
-        
-        //JOptionPane.showMessageDialog(null, contact.toString(), "Detail Contact", JOptionPane.PLAIN_MESSAGE);
-
         return mav;
     }
+//    @RequestMapping(value = "/list", method = RequestMethod.POST, produces = "application/json")
+//    public @ResponseBody Map<String, Object> infoProcess(Contact contact) {
+//        Map<String, Object> map = new HashMap<String, Object>();
+//        Contact list = userService.getContactById(1);
+// 
+//        if (list != null) {
+//            map.put("status", "200");
+//            map.put("message", "Data found");
+//            map.put("data", list);
+//        } else {
+//            map.put("status", "404");
+//            map.put("message", "Data not found");
+// 
+//        }
+// 
+//        return map;
+//    }
 
 }

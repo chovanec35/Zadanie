@@ -23,6 +23,6 @@ public class LogoutController {
     @RequestMapping(value = "/logoutProcess", method = RequestMethod.GET)
     public String logoutProcess(SessionStatus sessionStatus) {
         sessionStatus.setComplete();
-        return "home";
+        return "login";
     }
 }

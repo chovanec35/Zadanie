@@ -103,8 +103,14 @@ button {
     text-decoration: none;
     color:#8d8eff;
 }
-
+/*#modal{
+    display: none;
+}
 .modal{
+    display: none;
+}*/
+
+/*.modal{
     display: none;
     width: 50%;
     margin: 0 25%;
@@ -115,8 +121,8 @@ button {
     top: 25%;
     box-shadow: 0 0 10px rgb(50,50,50);
     color: black;
-}
-
+}*/
+/*
 .close{
     position: absolute;
     top: 5%;
@@ -152,4 +158,4 @@ button {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-}
+}*/

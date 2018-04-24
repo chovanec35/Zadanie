@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
     <%@ include file="parts/header.jsp"%> 
+    <script src="resources/theme/js/info.js"></script>
     <body>
         <h1>My contacts</h1>
         <div class="nav">
@@ -68,7 +69,7 @@
                                     <td><c:out value="${contact.firstName}" /></td>
                                     <td><c:out value="${contact.lastName}" /></td>
                                     <td><c:out value="${contact.categoryId.name}" /></td>
-                                    <td><button type="buton" name="infoContact" class="btn btn-primary details contactBtn" value=${contact.contactId} >
+                                    <td><button id="openDialog" type="buton" name="infoContact" class="btn btn-primary details contactBtn" value=${contact.contactId} >
                                             Detail
                                         </button></td>
                                     <td><button class="contactBtn" type="submit" name="delContact" value=${contact.contactId} >Delete</button></td>
@@ -80,34 +81,32 @@
             </form>
         </div>
         <!-- Modal -->
-        <div class="modal">
+        <div class="modal" id="modal">
             <h2>Contact detail</h2>
-            --> ${contactL}
-            <span class="close">&times</span>
             <table>
                 <tr>
                     <td>First name: </td>
-                    <td>${contact.firstName}</td>
+                    <td>${contactL.firstName}</td>
                 </tr>
                 <tr>
                     <td>Last name: </td>
-                    <td>${contact.lastName}</td>
+                    <td>${contactL.lastName}</td>
                 </tr>
                 <tr>
                     <td>Decription: </td>
-                    <td>${contact.description}</td>
+                    <td>${contactL.description}</td>
                 </tr>
                 <tr>
                     <td>Birthdate: </td>
-                    <td>${contact.birthdate}</td>
+                    <td>${contactL.birthdate}</td>
                 </tr>
                 <tr>
                     <td>Creation Date: </td>
-                    <td>${contact.creationTs}</td>
+                    <td>${contactL.creationTs}</td>
                 </tr>
             </table>
         </div>
-        <script src="resources/theme/js/info.js"></script> 
+         
 
     </body>
 </html>
