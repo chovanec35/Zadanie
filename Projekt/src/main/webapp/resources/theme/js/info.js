@@ -1,14 +1,14 @@
-
-document.getElementById("modal").style.visibility = "hidden";
-$("#openDialog").button().on("click", function () {
-    document.getElementById("modal").style.visibility = "none";
-    dialog.dialog("open");
-});
-
-$(function () {
-    document.getElementById("modal").style.visibility = "none";
-    $("#modal").dialog();
-});
+//
+//document.getElementById("modal").style.visibility = "hidden";
+//$("#openDialog").button().on("click", function () {
+//    document.getElementById("modal").style.visibility = "none";
+//    dialog.dialog("open");
+//});
+//
+//$(function () {
+//    document.getElementById("modal").style.visibility = "none";
+//    $("#modal").dialog();
+//});
 //
 //data = "";
 //load = function () {
@@ -34,3 +34,23 @@ $(function () {
 //    });
 //
 //}
+
+
+//  $( function() {
+//    $( "#dialog" ).dialog({
+//        
+//      autoOpen: false,
+//      show: {
+//        //effect: "blind",
+//        duration: 1000
+//      },
+//      hide: {
+//        //effect: "explode",
+//        duration: 1000
+//      }
+//    });
+// 
+//    $( "#opener" ).on( "click", function() {
+//      $( "#dialog" ).dialog( "open" );
+//    });
+//  } );

@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
     <%@ include file="parts/header.jsp"%> 
@@ -53,35 +54,37 @@
             </form>
         </div>
         <div class="form">
-            <form method="POST" modelAttribute="contact" action="${path}/contactListProcess">
-                <c:if test="${!empty contactsList}">
-                    <div class="container">
-                        <table class="table-contacts" >
+            <!--<form method="POST" modelAttribute="contact" action="${path}/contactListProcess">-->
+            <c:if test="${!empty contactsList}">
+                <div class="container">
+                    <table class="table-contacts" >
+                        <tr>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Category</th>
+                            <th>Detail</th>
+                            <th>Delete</th>
+                        </tr>
+                        <c:forEach items="${contactsList}" var="contact">
                             <tr>
-                                <th>First name</th>
-                                <th>Last name</th>
-                                <th>Category</th>
-                                <th>Detail</th>
-                                <th>Delete</th>
+                                <td><c:out value="${contact.firstName}" /></td>
+                                <td><c:out value="${contact.lastName}" /></td>
+                                <td><c:out value="${contact.categoryId.name}" /></td>
+                                <td><button id="opener" type="submit" name="infoContact" class="btn btn-primary details contactBtn" value=${contact.contactId} >
+                                        Detail
+                                    </button></td>
+                                <td><button class="contactBtn" type="submit" name="delContact" value=${contact.contactId} >Delete</button></td>
                             </tr>
-                            <c:forEach items="${contactsList}" var="contact">
-                                <tr>
-                                    <td><c:out value="${contact.firstName}" /></td>
-                                    <td><c:out value="${contact.lastName}" /></td>
-                                    <td><c:out value="${contact.categoryId.name}" /></td>
-                                    <td><button id="openDialog" type="buton" name="infoContact" class="btn btn-primary details contactBtn" value=${contact.contactId} >
-                                            Detail
-                                        </button></td>
-                                    <td><button class="contactBtn" type="submit" name="delContact" value=${contact.contactId} >Delete</button></td>
-                                </tr>
-                            </c:forEach>
-                        </table>
-                    </div>
-                </c:if>
-            </form>
+                        </c:forEach>
+                    </table>
+                </div>
+            </c:if>
+            <!--</form>-->
         </div>
+            
+            test ---> ${test}
         <!-- Modal -->
-        <div class="modal" id="modal">
+        <div class="modal" id="dialog">
             <h2>Contact detail</h2>
             <table>
                 <tr>
@@ -106,7 +109,7 @@
                 </tr>
             </table>
         </div>
-         
+
 
     </body>
 </html>
