@@ -54,3 +54,13 @@
 //      $( "#dialog" ).dialog( "open" );
 //    });
 //  } );
+
+function crunchifyAjax() {
+    console.log("Tu som ");
+        $.ajax({
+            url : 'ajaxtest',
+//            success : function(data) {
+//                $('#result').html(data);
+//            }
+        });
+    }

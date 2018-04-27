@@ -70,7 +70,7 @@
                                 <td><c:out value="${contact.firstName}" /></td>
                                 <td><c:out value="${contact.lastName}" /></td>
                                 <td><c:out value="${contact.categoryId.name}" /></td>
-                                <td><button id="opener" type="submit" name="infoContact" class="btn btn-primary details contactBtn" value=${contact.contactId} >
+                                <td><button onclick="crunchifyAjax()" id="opener" type="submit" name="infoContact" class="btn btn-primary details contactBtn" value=${contact.contactId} >
                                         Detail
                                     </button></td>
                                 <td><button class="contactBtn" type="submit" name="delContact" value=${contact.contactId} >Delete</button></td>

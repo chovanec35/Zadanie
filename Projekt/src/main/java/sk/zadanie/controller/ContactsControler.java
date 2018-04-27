@@ -14,10 +14,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import sk.zadanie.dao.ContactDao;
@@ -97,22 +101,33 @@ public class ContactsControler {
         return mav;
     }
 
-//    @RequestMapping(params = {"infoContact"}, method = RequestMethod.POST)
-//    public ModelAndView infoProcess(HttpServletRequest request, HttpServletResponse response,
-//            HttpSession httpSession) throws IOException, ServletException, ParseException {
-//        ContactDto contactDto = contactDao.setParamertersNull();
-//        int contactId = Integer.parseInt(request.getParameter("infoContact"));
-//
-//        User user = (User) httpSession.getAttribute("loggedUser");
-//        ModelAndView mav = new ModelAndView("my-contacts");
-//        mav.addObject("categoryList", categoryService.getAllCategories());
-//
+    @RequestMapping(params = {"infoContact"}, method = RequestMethod.POST)
+    public ModelAndView infoProcess(HttpServletRequest request, HttpServletResponse response,
+            HttpSession httpSession) throws IOException, ServletException, ParseException {
+        ContactDto contactDto = contactDao.setParamertersNull();
+        int contactId = Integer.parseInt(request.getParameter("infoContact"));
+
+        User user = (User) httpSession.getAttribute("loggedUser");
+        ModelAndView mav = new ModelAndView("my-contacts");
+        mav.addObject("categoryList", categoryService.getAllCategories());
+
+        Contact contact = userService.getContactById(contactId);
+        mav.addObject("contactL", contact);
+        mav.addObject("contactsList", userService.getAllContacts(user, contactDto));
+        mav.addObject("user_Id", user.getUserId());
+        mav.addObject("title", "Contacts");
+        
+        return mav;
+    }
+//    @RequestMapping(value = {"/get-details"}, method=RequestMethod.GET)
+//    @ResponseBody
+//    public ModelAndView getDetails(@PathVariable String id) {
+//        System.out.println("ID --> " + id);
+//        int contactId = Integer.parseInt(id);
 //        Contact contact = userService.getContactById(contactId);
-//        mav.addObject("contactL", contact);
-//        mav.addObject("contactsList", userService.getAllContacts(user, contactDto));
-//        mav.addObject("user_Id", user.getUserId());
-//        mav.addObject("title", "Contacts");
-//        
-//        return mav;
+//        ModelAndView mav = new ModelAndView("get-details");
+//        mav.addObject("contact",contact);
+        
+//        return mav; //return the object not the view name
 //    }
 }
