@@ -22,7 +22,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -30,7 +29,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "USERS")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId"),
@@ -135,15 +133,6 @@ public class User implements Serializable {
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
-
-//    @XmlTransient
-//    public Set<Contact> getContactsSet() {
-//        return contactsSet;
-//    }
-//
-//    public void setContactsSet(Set<Contact> contactsSet) {
-//        this.contactsSet = contactsSet;
-//    }
 
     @Override
     public int hashCode() {

@@ -70,9 +70,7 @@
                                 <td><c:out value="${contact.firstName}" /></td>
                                 <td><c:out value="${contact.lastName}" /></td>
                                 <td><c:out value="${contact.categoryId.name}" /></td>
-                                <td><button onclick="crunchifyAjax()" id="opener" type="submit" name="infoContact" class="btn btn-primary details contactBtn" value=${contact.contactId} >
-                                        Detail
-                                    </button></td>
+                                <td><input onclick="crunchifyAjax(${contact.contactId})" id="opener" value="Detail" type="submit" name="infoContact" class="btn btn-primary details contactBtn" ></td>
                                 <td><button class="contactBtn" type="submit" name="delContact" value=${contact.contactId} >Delete</button></td>
                             </tr>
                         </c:forEach>
@@ -81,15 +79,13 @@
             </c:if>
             <!--</form>-->
         </div>
-            
-            test ---> ${test}
         <!-- Modal -->
-        <div class="modal" id="dialog">
+        <div class="modal" id="result">
             <h2>Contact detail</h2>
             <table>
                 <tr>
                     <td>First name: </td>
-                    <td>${contactL.firstName}</td>
+                    <td id="fName"></td>
                 </tr>
                 <tr>
                     <td>Last name: </td>

@@ -101,33 +101,23 @@ public class ContactsControler {
         return mav;
     }
 
-    @RequestMapping(params = {"infoContact"}, method = RequestMethod.POST)
-    public ModelAndView infoProcess(HttpServletRequest request, HttpServletResponse response,
-            HttpSession httpSession) throws IOException, ServletException, ParseException {
-        ContactDto contactDto = contactDao.setParamertersNull();
-        int contactId = Integer.parseInt(request.getParameter("infoContact"));
-
-        User user = (User) httpSession.getAttribute("loggedUser");
-        ModelAndView mav = new ModelAndView("my-contacts");
-        mav.addObject("categoryList", categoryService.getAllCategories());
-
-        Contact contact = userService.getContactById(contactId);
-        mav.addObject("contactL", contact);
-        mav.addObject("contactsList", userService.getAllContacts(user, contactDto));
-        mav.addObject("user_Id", user.getUserId());
-        mav.addObject("title", "Contacts");
-        
-        return mav;
-    }
-//    @RequestMapping(value = {"/get-details"}, method=RequestMethod.GET)
-//    @ResponseBody
-//    public ModelAndView getDetails(@PathVariable String id) {
-//        System.out.println("ID --> " + id);
-//        int contactId = Integer.parseInt(id);
+//    @RequestMapping(params = {"infoContact"}, method = RequestMethod.POST)
+//    public ModelAndView infoProcess(HttpServletRequest request, HttpServletResponse response,
+//            HttpSession httpSession) throws IOException, ServletException, ParseException {
+//        System.out.println("Som tu");
+//        ContactDto contactDto = contactDao.setParamertersNull();
+//        int contactId = Integer.parseInt(request.getParameter("infoContact"));
+//
+//        User user = (User) httpSession.getAttribute("loggedUser");
+//        ModelAndView mav = new ModelAndView("my-contacts");
+//        mav.addObject("categoryList", categoryService.getAllCategories());
+//
 //        Contact contact = userService.getContactById(contactId);
-//        ModelAndView mav = new ModelAndView("get-details");
-//        mav.addObject("contact",contact);
-        
-//        return mav; //return the object not the view name
+//        mav.addObject("contactL", contact);
+//        mav.addObject("contactsList", userService.getAllContacts(user, contactDto));
+//        mav.addObject("user_Id", user.getUserId());
+//        mav.addObject("title", "Contacts");
+//
+//        return mav;
 //    }
 }

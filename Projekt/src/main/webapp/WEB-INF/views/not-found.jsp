@@ -14,6 +14,13 @@
 <html>
     <%@ include file="parts/header.jsp"%> 
     <body>
-        <h1>Please sign in</h1>
+        <h1>Please login</h1>
+        <div class="nav">
+            <ul>
+                <li><a href="${path}/home">Home</a></li>
+                <li><a href="${path}/login">Login</a></li>
+                <li><a href="${path}/registration">Registration</a></li>
+            </ul>
+        </div>
     </body>
-</html>"
+</html>
