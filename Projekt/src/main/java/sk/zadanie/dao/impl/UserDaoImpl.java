@@ -42,46 +42,10 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<Contact> getAllContacts(User user, ContactDto contactDto, int page) throws ParseException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
-        EntityManager em = emf.createEntityManager();
-        Map<String, Object> mapObj = new HashMap<String, Object>();
-        Map<String, String> mapStr = new HashMap<String, String>();
-        int start = page * 5;
+        
+        Query query = utilService.createQuery(user, contactDto);
 
-        String hql = "SELECT c FROM Contact c "
-                + "WHERE c.userId.userId = :userId AND c.flagDel = false";
-        mapObj.put("userId", user.getUserId());
-
-        if (contactDto.getFirstName() != "") {
-            hql += " AND c.firstName LIKE :firstName";
-            mapStr.put("firstName", "%" + contactDto.getFirstName() + "%");
-        }
-        if (contactDto.getLastName() != "") {
-            hql += " AND c.lastName LIKE :lastName";
-            mapStr.put("lastName", "%" + contactDto.getLastName() + "%");
-        }
-        if (contactDto.getBirthdate() != "") {
-            hql += " AND c.birthdate = :birthdate";
-            Date date = utilService.convertStringToDate(contactDto.getBirthdate());
-            mapObj.put("birthdate", date);
-        }
-        if (contactDto.getCategory() != "") {
-            hql += " AND c.categoryId = :categoryId";
-            Category category = new Category();
-            category.setCategoryId(Integer.parseInt(contactDto.getCategory()));
-            mapObj.put("categoryId", category);
-        }
-
-        Query query = em.createQuery(hql);
-
-        for (Map.Entry me : mapStr.entrySet()) {
-            query.setParameter((String) me.getKey(), me.getValue());
-        }
-        for (Map.Entry me : mapObj.entrySet()) {
-            query.setParameter((String) me.getKey(), me.getValue());
-        }
-
-        query.setFirstResult(start);
+        query.setFirstResult(0);
         query.setMaxResults(5);
         return query.getResultList();
     }
