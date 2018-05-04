@@ -13,7 +13,7 @@ public interface UserDao {
 
     public void registration(UserDto user, Date date);
 
-    public List<Contact> getAllContacts(User user, ContactDto contactDto) throws ParseException; //, String fName, String lName, String role
+    public List<Contact> getAllContacts(User user, ContactDto contactDto, int page) throws ParseException; //, String fName, String lName, String role
 
     public User loginUser(LoginDto login);
 

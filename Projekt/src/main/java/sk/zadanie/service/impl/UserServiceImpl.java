@@ -43,8 +43,8 @@ public class UserServiceImpl implements UserService {
         return userDao.loginUser(login);
     }
 
-    public List<Contact> getAllContacts(User user, ContactDto contactDto) throws ParseException {
-        return userDao.getAllContacts(user, contactDto);
+    public List<Contact> getAllContacts(User user, ContactDto contactDto, int page) throws ParseException {
+        return userDao.getAllContacts(user, contactDto, page);
     }
 
     public void delContact(int contactId) {

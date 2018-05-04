@@ -41,13 +41,13 @@ public class UserDaoImpl implements UserDao {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Contact> getAllContacts(User user, ContactDto contactDto) throws ParseException {
+    public List<Contact> getAllContacts(User user, ContactDto contactDto, int page) throws ParseException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
         Map<String, Object> mapObj = new HashMap<String, Object>();
         Map<String, String> mapStr = new HashMap<String, String>();
-        
-            
+        int start = page * 5;
+
         String hql = "SELECT c FROM Contact c "
                 + "WHERE c.userId.userId = :userId AND c.flagDel = false";
         mapObj.put("userId", user.getUserId());
@@ -80,6 +80,9 @@ public class UserDaoImpl implements UserDao {
         for (Map.Entry me : mapObj.entrySet()) {
             query.setParameter((String) me.getKey(), me.getValue());
         }
+
+        query.setFirstResult(start);
+        query.setMaxResults(5);
         return query.getResultList();
     }
 

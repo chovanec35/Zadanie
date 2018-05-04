@@ -22,7 +22,7 @@ public interface UserService {
     public void addNewContact(ContactDto contact, User user, Date date);
     public void registration(UserDto user, Date date);
     public User loginUser(LoginDto login);
-    public List<Contact> getAllContacts(User user, ContactDto contactDto)throws ParseException;
+    public List<Contact> getAllContacts(User user, ContactDto contactDto, int page)throws ParseException;
     public Contact getContactById(int contactId);
     public boolean emailExist(UserDto userDto);
 }

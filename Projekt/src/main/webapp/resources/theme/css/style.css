@@ -46,7 +46,7 @@ th{
     text-align:center;
 }
 .table-contacts td, tr{
-    border: 1px solid white;
+    border: 1px solid white; 
 }
 .table-contacts tr:hover{
     background-color: #a4c2cc;
@@ -103,14 +103,8 @@ button {
     text-decoration: none;
     color:#8d8eff;
 }
-/*#modal{
-    display: none;
-}
-.modal{
-    display: none;
-}*/
 
-/*.modal{
+.modal{
     display: none;
     width: 50%;
     margin: 0 25%;
@@ -121,16 +115,38 @@ button {
     top: 25%;
     box-shadow: 0 0 10px rgb(50,50,50);
     color: black;
-}*/
-/*
+}
 .close{
+    padding: 0 10px;
+    margin: 5px 0px;
+    font-size: 35px;
     position: absolute;
-    top: 5%;
+    top: 2%;
     right: 1%;
     text-decoration: none;
-    color:#8d8eff;
+    background-color: white;
+    color:black;
+}
+.close:hover, .close:focus {
+    font-size: 35px;
+    color: white;
+    text-decoration: none; 
+    cursor: pointer;
+    background-color: red;
+} 
+
+.form1 {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
+/*
 .infoContact{
     display: none;
     position: fixed; 
@@ -153,9 +169,4 @@ button {
     width: 80%;
     border-radius: 10px;
 }
-
-.close:hover, .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}*/
+*/

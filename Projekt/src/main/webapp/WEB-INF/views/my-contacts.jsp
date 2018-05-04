@@ -19,9 +19,10 @@
             </ul>
         </div>
         <label style="color: red"> ${message} </label><br>
-        <div class="form">
-            <form  class="form" method="POST" modelAttribute="contact" action="${path}/searchProcess">
+        <div class="row">
+            <form  class="form1" method="POST" modelAttribute="contact" action="${path}/searchProcess">
                 <div class="container">
+                    <h2>Filter</h2>
                     <table>
                         <tr>
                             <td class="text">First name</td>
@@ -52,35 +53,46 @@
                     </table>
                 </div>
             </form>
-        </div>
-        <div class="form">
-            <!--<form method="POST" modelAttribute="contact" action="${path}/contactListProcess">-->
-            <c:if test="${!empty contactsList}">
-                <div class="container">
-                    <table class="table-contacts" >
-                        <tr>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>Category</th>
-                            <th>Detail</th>
-                            <th>Delete</th>
-                        </tr>
-                        <c:forEach items="${contactsList}" var="contact">
+
+            <div class="form1">
+                <h2>Contacts:</h2>
+                <!--<form method="POST" modelAttribute="contact" action="${path}/contactListProcess">-->
+                <c:if test="${!empty contactsList}">
+                    <div class="container">
+                        <table class="table-contacts" >
                             <tr>
-                                <td><c:out value="${contact.firstName}" /></td>
-                                <td><c:out value="${contact.lastName}" /></td>
-                                <td><c:out value="${contact.categoryId.name}" /></td>
-                                <td><input onclick="crunchifyAjax(${contact.contactId})" id="opener" value="Detail" type="submit" name="infoContact" class="btn btn-primary details contactBtn" ></td>
-                                <td><button class="contactBtn" type="submit" name="delContact" value=${contact.contactId} >Delete</button></td>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Category</th>
+                                <th>Detail</th>
+                                <th>Delete</th>
                             </tr>
-                        </c:forEach>
-                    </table>
-                </div>
-            </c:if>
-            <!--</form>-->
+                            <c:forEach items="${contactsList}" var="contact">
+                                <tr>
+                                    <td><c:out value="${contact.firstName}" /></td>
+                                    <td><c:out value="${contact.lastName}" /></td>
+                                    <td><c:out value="${contact.categoryId.name}" /></td>
+                                    <td><input onclick="detailAjax(${contact.contactId})" id="opener" value="Detail" type="submit" name="infoContact" class="btn btn-primary details contactBtn" ></td>
+                                    <td><input onclick="deleteAjax(${contact.contactId})" id="opener" value="Delete" type="submit" name="deleteContact" class="btn btn-primary details contactBtn" ></td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                        <ul id="pagin">
+                            <li><a href="#">prev</a></li>
+                            <li><a class="current" href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">next</a></li>
+                        </ul>
+                    </div>
+                </c:if>
+                <!--</form>-->
+            </div>
         </div>
         <!-- Modal -->
         <div class="modal" id="result">
+            <span class="close" onclick="closeModal()" >&times;</span>
             <h2>Contact detail</h2>
             <table>
                 <tr>
@@ -89,21 +101,21 @@
                 </tr>
                 <tr>
                     <td>Last name: </td>
-                    <td>${contactL.lastName}</td>
+                    <td id="lName"></td>
                 </tr>
                 <tr>
-                    <td>Decription: </td>
-                    <td>${contactL.description}</td>
+                    <td>Description: </td>
+                    <td id="description"></td>
                 </tr>
                 <tr>
                     <td>Birthdate: </td>
-                    <td>${contactL.birthdate}</td>
+                    <td id="birthdate"></td>
                 </tr>
                 <tr>
                     <td>Creation Date: </td>
-                    <td>${contactL.creationTs}</td>
+                    <td id="creationTs"></td>
                 </tr>
-            </table>
+            </table>            
         </div>
 
 
