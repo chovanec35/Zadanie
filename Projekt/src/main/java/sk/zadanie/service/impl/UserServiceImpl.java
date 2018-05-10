@@ -5,18 +5,14 @@
  */
 package sk.zadanie.service.impl;
 
-import java.text.ParseException;
 import java.util.Date;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sk.zadanie.dao.ContactDao;
 import sk.zadanie.dao.UserDao;
-import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.LoginDto;
 import sk.zadanie.dto.UserDto;
-import sk.zadanie.entity.Contact;
 import sk.zadanie.entity.User;
 import sk.zadanie.service.UserService;
 
@@ -25,14 +21,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
-
-    @Autowired
-    private ContactDao contactDao;
-
-    @Transactional
-    public void addNewContact(ContactDto contact, User user, Date date) {
-        userDao.addNewContact(contact, user, date);
-    }
 
     @Transactional
     public void registration(UserDto user, Date date) {
@@ -43,19 +31,7 @@ public class UserServiceImpl implements UserService {
         return userDao.loginUser(login);
     }
 
-    public List<Contact> getAllContacts(User user, ContactDto contactDto, int page) throws ParseException {
-        return userDao.getAllContacts(user, contactDto, page);
-    }
-
-    public void delContact(int contactId) {
-        contactDao.delContact(contactId);
-    }
-
-    public Contact getContactById(int contactId) {
-        return contactDao.getContactById(contactId);
-    }
-    
-    public boolean emailExist(UserDto userDto){
+    public boolean emailExist(UserDto userDto) {
         return userDao.emailExist(userDto);
     }
 }

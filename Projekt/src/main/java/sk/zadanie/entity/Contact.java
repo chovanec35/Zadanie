@@ -22,35 +22,21 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author Jozef Chovanec
- */
 @Entity
 @Table(name = "CONTACTS")
 @NamedQueries({
-    @NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c")
-    , 
-    @NamedQuery(name = "Contact.findByContactId", query = "SELECT c FROM Contact c WHERE c.contactId = :contactId")
-    ,
-    @NamedQuery(name = "Contact.deleteByContactId", query = "UPDATE Contact c SET c.flagDel = :flagDel WHERE c.contactId = :contactId")
-    ,
-    @NamedQuery(name = "Contact.findByUserId", query = "SELECT c FROM Contact c WHERE c.userId = :userId AND c.flagDel=false AND c.firstName LIKE :firstName AND c.lastName LIKE :lastName")
-    ,
-    // AND c.categoryId = :categoryId AND c.birthdate = :birthdate
-    @NamedQuery(name = "Contact.findByFirstName", query = "SELECT c FROM Contact c WHERE c.firstName = :firstName")
-    ,
-    @NamedQuery(name = "Contact.findByLastName", query = "SELECT c FROM Contact c WHERE c.lastName = :lastName")
-    ,
-    @NamedQuery(name = "Contact.findByDescription", query = "SELECT c FROM Contact c WHERE c.description = :description")
-    ,
-    @NamedQuery(name = "Contact.findByFlagDel", query = "SELECT c FROM Contact c WHERE c.categoryId = :categoryId")
-    ,
-    @NamedQuery(name = "Contact.findByCreationTs", query = "SELECT c FROM Contact c WHERE c.creationTs = :creationTs")
-    ,
-    @NamedQuery(name = "Contact.findByBirthdate", query = "SELECT c FROM Contact c WHERE c.birthdate = :birthdate")
-    ,
-    @NamedQuery(name = "Contact.findByCategoryId", query = "SELECT c FROM Contact c WHERE c.categoryId = :categoryId")
+    @NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c"), 
+    @NamedQuery(name = "Contact.findByContactId", query = "SELECT c FROM Contact c WHERE c.contactId = :contactId"),
+    @NamedQuery(name = "Contact.deleteByContactId", query = "UPDATE Contact c SET c.flagDel = :flagDel WHERE c.contactId = :contactId"),
+    @NamedQuery(name = "Contact.findByUserId", query = "SELECT c FROM Contact c WHERE c.userId = :userId AND c.flagDel=false AND c.firstName LIKE :firstName AND c.lastName LIKE :lastName"),
+    @NamedQuery(name = "Contact.findByFirstName", query = "SELECT c FROM Contact c WHERE c.firstName = :firstName"),
+    @NamedQuery(name = "Contact.findByLastName", query = "SELECT c FROM Contact c WHERE c.lastName = :lastName"),
+    @NamedQuery(name = "Contact.findByDescription", query = "SELECT c FROM Contact c WHERE c.description = :description"),
+    @NamedQuery(name = "Contact.findByFlagDel", query = "SELECT c FROM Contact c WHERE c.categoryId = :categoryId"),
+    @NamedQuery(name = "Contact.findByCreationTs", query = "SELECT c FROM Contact c WHERE c.creationTs = :creationTs"),
+    @NamedQuery(name = "Contact.findByBirthdate", query = "SELECT c FROM Contact c WHERE c.birthdate = :birthdate"),
+    @NamedQuery(name = "Contact.findByCategoryId", query = "SELECT c FROM Contact c WHERE c.categoryId = :categoryId"),
+    @NamedQuery(name = "Contact.countByUserId", query = "SELECT COUNT(c) FROM Contact c WHERE c.userId.userId = :userId AND c.flagDel=false")
 })
 public class Contact implements Serializable {
 

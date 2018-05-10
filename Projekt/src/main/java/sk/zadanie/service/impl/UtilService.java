@@ -15,7 +15,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.zadanie.dto.ContactDto;
 import sk.zadanie.entity.Category;
@@ -26,36 +25,35 @@ public class UtilService {
 
     public static Date convertStringToDate(String dateString) throws ParseException {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        Date d = df.parse(dateString);
-        
-        return d;
+        Date date = df.parse(dateString);
+
+        return date;
     }
-    
-    public static Query createQuery(User user, ContactDto contactDto) throws ParseException{
+
+    public static Query createQuery(User user, ContactDto contactDto) throws ParseException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
-        Map<String, Object> mapObj = new HashMap<String, Object>();
-        Map<String, String> mapStr = new HashMap<String, String>();
-        
+        Map<String, Object> mapObj = new HashMap<>();
+        Map<String, String> mapStr = new HashMap<>();
 
         String hql = "SELECT c FROM Contact c "
                 + "WHERE c.userId.userId = :userId AND c.flagDel = false";
         mapObj.put("userId", user.getUserId());
 
-        if (contactDto.getFirstName() != "") {
+        if (!"".equals(contactDto.getFirstName())) {
             hql += " AND c.firstName LIKE :firstName";
             mapStr.put("firstName", "%" + contactDto.getFirstName() + "%");
         }
-        if (contactDto.getLastName() != "") {
+        if (!"".equals(contactDto.getLastName())) {
             hql += " AND c.lastName LIKE :lastName";
             mapStr.put("lastName", "%" + contactDto.getLastName() + "%");
         }
-        if (contactDto.getBirthdate() != "") {
+        if (!"".equals(contactDto.getBirthdate())) {
             hql += " AND c.birthdate = :birthdate";
             Date date = UtilService.convertStringToDate(contactDto.getBirthdate());
             mapObj.put("birthdate", date);
         }
-        if (contactDto.getCategory() != "") {
+        if (!"".equals(contactDto.getCategory())) {
             hql += " AND c.categoryId = :categoryId";
             Category category = new Category();
             category.setCategoryId(Integer.parseInt(contactDto.getCategory()));
@@ -64,13 +62,31 @@ public class UtilService {
 
         Query query = em.createQuery(hql);
 
-        for (Map.Entry me : mapStr.entrySet()) {
+        mapStr.entrySet().forEach((me) -> {
             query.setParameter((String) me.getKey(), me.getValue());
-        }
-        for (Map.Entry me : mapObj.entrySet()) {
+        });
+        mapObj.entrySet().forEach((me) -> {
             query.setParameter((String) me.getKey(), me.getValue());
-        }
+        });
         return query;
+    }
+
+    public int contactListSize(User user) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+
+        Query query = em.createNamedQuery("Contact.countByUserId");
+        query.setParameter("userId", user.getUserId());
+
+        int count = ((Number)query.getSingleResult()).intValue();
+        
+        count = (count / 5) + 1;
+        System.out.println("count ---> " + count);
+        em.close();
+        emf.close();
+        return count;
     }
 
 }

@@ -1,18 +1,26 @@
 package sk.zadanie.dao.impl;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import sk.zadanie.dao.ContactDao;
 import sk.zadanie.dto.ContactDto;
+import sk.zadanie.entity.Category;
 import sk.zadanie.entity.Contact;
+import sk.zadanie.entity.User;
+import sk.zadanie.service.impl.UtilService;
 
 @Repository
-//@SessionAttributes("loggedUser")
 public class ContactDaoImpl implements ContactDao {
+    
+    @Autowired
+    UtilService utilService;
 
     @Override
     public void delContact(int contactId) {
@@ -56,6 +64,30 @@ public class ContactDaoImpl implements ContactDao {
         contactDto.setBirthdate("");
         contactDto.setCategory("");
         return contactDto;
+    }
+
+    public void addNewContact(ContactDto contactDto, User user, Date date) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
+        EntityManager em = emf.createEntityManager();
+        Category category = new Category();
+        category.setCategoryId(Integer.parseInt(contactDto.getCategory()));
+        Date dateTs = new Date();
+        Contact contact = new Contact(contactDto.getFirstName(), contactDto.getLastName(), contactDto.getDescription(), date, dateTs, category, user, false);
+
+        em.getTransaction().begin();
+        em.persist(contact);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+    }
+    
+    public List<Contact> getAllContacts(User user, ContactDto contactDto, int page) throws ParseException {
+
+        Query query = utilService.createQuery(user, contactDto);
+
+        query.setFirstResult(page);
+        query.setMaxResults(5);
+        return query.getResultList();
     }
 
 }

@@ -1,10 +1,7 @@
 package sk.zadanie.dao.impl;
 
-import java.text.ParseException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -15,13 +12,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import sk.zadanie.dao.UserDao;
-import sk.zadanie.dto.ContactDto;
 import sk.zadanie.dto.LoginDto;
 import sk.zadanie.dto.UserDto;
-import sk.zadanie.entity.Category;
-import sk.zadanie.entity.Contact;
 import sk.zadanie.entity.User;
-import sk.zadanie.service.impl.UtilService;
 import sk.zadanie.validator.UserValidator;
 
 @Repository
@@ -35,20 +28,7 @@ public class UserDaoImpl implements UserDao {
     UserValidator userValidator;
 
     @Autowired
-    UtilService utilService;
-
-    @Autowired
     JdbcTemplate jdbcTemplate;
-
-    @Override
-    public List<Contact> getAllContacts(User user, ContactDto contactDto, int page) throws ParseException {
-        
-        Query query = utilService.createQuery(user, contactDto);
-
-        query.setFirstResult(0);
-        query.setMaxResults(5);
-        return query.getResultList();
-    }
 
     @Override
     public User loginUser(LoginDto login) {
@@ -103,19 +83,4 @@ public class UserDaoImpl implements UserDao {
         emf.close();
     }
 
-    @Override
-    public void addNewContact(ContactDto contactDto, User user, Date date) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
-        EntityManager em = emf.createEntityManager();
-        Category category = new Category();
-        category.setCategoryId(Integer.parseInt(contactDto.getCategory()));
-        Date dateTs = new Date();
-        Contact contact = new Contact(contactDto.getFirstName(), contactDto.getLastName(), contactDto.getDescription(), date, dateTs, category, user, false);
-
-        em.getTransaction().begin();
-        em.persist(contact);
-        em.getTransaction().commit();
-        em.close();
-        emf.close();
-    }
 }

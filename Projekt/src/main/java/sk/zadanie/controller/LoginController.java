@@ -43,7 +43,6 @@ public class LoginController {
         if (user != null) {
             httpSession.setAttribute("loggedUser", user);
             mav = new ModelAndView("redirect:my-contacts");
-            mav.addObject("title", "Contacts");
         } else {
             mav.addObject("message", "Username or Password is wrong!!");
             mav.addObject("title", "Login");

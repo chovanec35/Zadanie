@@ -56,7 +56,6 @@
 
             <div class="form1">
                 <h2>Contacts:</h2>
-                <!--<form method="POST" modelAttribute="contact" action="${path}/contactListProcess">-->
                 <c:if test="${!empty contactsList}">
                     <div class="container">
                         <table class="table-contacts" >
@@ -79,15 +78,13 @@
                         </table>
                         <ul id="pagin">
                             <li><a href="#">prev</a></li>
-                            <li><a class="current" href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
+                            <c:forEach var = "i" begin = "1" end = "${size}">
+                                <li><a href="${path}/my-contacts?page=${i}">${i}</a></li>
+                            </c:forEach>
                             <li><a href="#">next</a></li>
                         </ul>
                     </div>
                 </c:if>
-                <!--</form>-->
             </div>
         </div>
         <!-- Modal -->
