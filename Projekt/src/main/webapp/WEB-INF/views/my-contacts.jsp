@@ -76,11 +76,13 @@
                                 </tr>
                             </c:forEach>
                         </table>
+
+                        <ul id="pagination-demo" class="pagination-sm"></ul>
                         <ul id="pagin">
                             <li><a href="#">prev</a></li>
-                            <c:forEach var = "i" begin = "1" end = "${size}">
+                                <c:forEach var = "i" begin = "1" end = "${size}">
                                 <li><a href="${path}/my-contacts?page=${i}">${i}</a></li>
-                            </c:forEach>
+                                </c:forEach>
                             <li><a href="#">next</a></li>
                         </ul>
                     </div>

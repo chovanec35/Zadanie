@@ -62,12 +62,12 @@ public class UtilService {
 
         Query query = em.createQuery(hql);
 
-        mapStr.entrySet().forEach((me) -> {
+        for (Map.Entry me : mapStr.entrySet()) {
             query.setParameter((String) me.getKey(), me.getValue());
-        });
-        mapObj.entrySet().forEach((me) -> {
+        };
+        for (Map.Entry me : mapObj.entrySet()) {
             query.setParameter((String) me.getKey(), me.getValue());
-        });
+        };
         return query;
     }
 
@@ -80,10 +80,9 @@ public class UtilService {
         Query query = em.createNamedQuery("Contact.countByUserId");
         query.setParameter("userId", user.getUserId());
 
-        int count = ((Number)query.getSingleResult()).intValue();
-        
+        int count = ((Number) query.getSingleResult()).intValue();
+
         count = (count / 5) + 1;
-        System.out.println("count ---> " + count);
         em.close();
         emf.close();
         return count;

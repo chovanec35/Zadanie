@@ -53,7 +53,6 @@ public class ContactsControler {
         mav.addObject("page", page);
         if (user != null) {
             ContactDto contactDto = contactDao.setParamertersNull();
-            System.out.println("toto " + Integer.parseInt(page));
 //            mav.addObject("size", 10);
             mav.addObject("size", utilService.contactListSize(user));
             mav.addObject("contactsList", contactService.getAllContacts(user, contactDto, Integer.parseInt(page)));
@@ -130,7 +129,6 @@ public class ContactsControler {
         detail.add(contact);
 
         map.put("data", detail);
-        System.out.println("map " + map);
         return map;
     }
 }
