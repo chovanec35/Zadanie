@@ -38,7 +38,7 @@ public class ContactsControler {
 
     @Autowired
     ContactService contactService;
-    
+
     @Autowired
     UtilService utilService;
 
@@ -46,14 +46,14 @@ public class ContactsControler {
     ContactDao contactDao;
 
     @RequestMapping(value = "/my-contacts", method = RequestMethod.GET)
-    public ModelAndView viewLogin(@RequestParam(value = "page", defaultValue = "1") String page, HttpServletRequest request,
+    public @ResponseBody
+    ModelAndView viewLogin(@RequestParam(value = "page", defaultValue = "1") String page, HttpServletRequest request,
             HttpServletResponse response, HttpSession httpSession, Model model) throws ParseException {
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
         mav.addObject("page", page);
         if (user != null) {
             ContactDto contactDto = contactDao.setParamertersNull();
-//            mav.addObject("size", 10);
             mav.addObject("size", utilService.contactListSize(user));
             mav.addObject("contactsList", contactService.getAllContacts(user, contactDto, Integer.parseInt(page)));
             mav.addObject("categoryList", categoryService.getAllCategories());
@@ -101,9 +101,9 @@ public class ContactsControler {
 
         return mav;
     }
-    
-     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ModelAndView deleteContact(@RequestParam("id") String id, HttpServletRequest request, 
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public ModelAndView deleteContact(@RequestParam("id") String id, HttpServletRequest request,
             HttpSession httpSession) throws IOException, ServletException, ParseException {
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
@@ -124,7 +124,7 @@ public class ContactsControler {
     Map<String, Object> getContactDetail(@RequestParam("id") String id) {
         Map<String, Object> map = new HashMap<String, Object>();
         List<Contact> detail = new ArrayList<>();
-        
+
         Contact contact = contactService.getContactById(Integer.parseInt(id));
         detail.add(contact);
 

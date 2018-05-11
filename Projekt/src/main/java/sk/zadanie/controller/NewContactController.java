@@ -55,8 +55,8 @@ public class NewContactController {
             mav.addObject("title", "New Contact");
             return mav;
         }
-        mav = new ModelAndView("not-found");
-        mav.addObject("title", "Not found");
+        mav = new ModelAndView("login");
+        mav.addObject("title", "Login");
         return mav;
     }
 
@@ -70,7 +70,7 @@ public class NewContactController {
             date = utilService.convertStringToDate(contactDto.getBirthdate());
         } 
         
-        ModelAndView mav = new ModelAndView("redirect:add-new-contact");
+        ModelAndView mav = new ModelAndView("add-new-contact");
         mav.addObject("title", "New Contact");
         contactDao.addNewContact(contactDto, user, date);
         return mav;

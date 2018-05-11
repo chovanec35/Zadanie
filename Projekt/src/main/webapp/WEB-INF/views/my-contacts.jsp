@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="size" value="${size}"/>
 
 <!DOCTYPE html>
 <html>
@@ -76,15 +77,11 @@
                                 </tr>
                             </c:forEach>
                         </table>
-
-                        <ul id="pagination-demo" class="pagination-sm"></ul>
-                        <ul id="pagin">
-                            <li><a href="#">prev</a></li>
-                                <c:forEach var = "i" begin = "1" end = "${size}">
-                                <li><a href="${path}/my-contacts?page=${i}">${i}</a></li>
-                                </c:forEach>
-                            <li><a href="#">next</a></li>
-                        </ul>
+                        <div class="container">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination" id="pagination"></ul>
+                            </nav>
+                        </div>
                     </div>
                 </c:if>
             </div>
@@ -116,7 +113,11 @@
                 </tr>
             </table>            
         </div>
-
-
     </body>
 </html>
+
+<script>
+    <%@ include file="/resources/theme/js/info.js" %>
+    <%@ include file="/resources/theme/js/jquery.simplePagination.js" %>
+</script>
+

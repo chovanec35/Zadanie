@@ -39,10 +39,17 @@ function closeModal() {
     $("#result").css("display", "none");
 }
 
-$('#pagination-demo').twbsPagination({
-        totalPages: 35,
-        visiblePages: 7,
-        onPageClick: function (event, page) {
-            $('#page-content').text('Page ' + page);
-        }
+
+var totalPages = '${size}';
+$(function () { 
+    $('#pagination').pagination({
+        pages: totalPages,
+        displayedPages: 3,
+        hrefTextPrefix: "${path}/my-contacts?page=",
+        onPageClick: function (page, evt) {
+            console.log("PAGE", page);
+            console.log("EVT", evt);
+            $('#pagination').pagination('drawPage', page); 
+        } 
     });
+}); 
