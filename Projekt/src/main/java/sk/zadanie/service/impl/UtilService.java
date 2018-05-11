@@ -79,13 +79,14 @@ public class UtilService {
 
         Query query = em.createNamedQuery("Contact.countByUserId");
         query.setParameter("userId", user.getUserId());
-
-        int count = ((Number) query.getSingleResult()).intValue();
-
-        count = (count / 5) + 1;
         em.close();
         emf.close();
-        return count;
+        int count = ((Number) query.getSingleResult()).intValue();
+        if (count % 5 == 0) {
+            return (count / 5);
+        } else {
+            return (count / 5) + 1;
+        }
     }
 
 }
