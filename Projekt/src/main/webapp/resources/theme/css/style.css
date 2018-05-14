@@ -21,6 +21,10 @@ ul {
     border-radius: 10px;
 }
 
+#pagination{
+    background-color: transparent;
+}
+
 li {
     float: left;
     border-right:1px solid #bbb;
@@ -52,9 +56,6 @@ th{
     background-color: #a4c2cc;
 }
 
-.active {
-    background-color: #84aebb;
-}
 td{
     font-size:20px;
 }

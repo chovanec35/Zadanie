@@ -43,9 +43,15 @@ function closeModal() {
 var totalPages = '${size}';
 $(function () { 
     $('#pagination').pagination({
+//        items: "2",
+//        itemsOnPage: "2",
         pages: totalPages,
-        displayedPages: 3,
+        displayedPages: "3",
         hrefTextPrefix: "${path}/my-contacts?page=",
+        currentPage: window.location.href.split('=')[1],
+        edges: "0",
+        
+        
         onPageClick: function (page, evt) {
             console.log("PAGE", page);
             console.log("EVT", evt);
