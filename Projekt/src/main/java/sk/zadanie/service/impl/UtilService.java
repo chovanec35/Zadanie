@@ -40,20 +40,20 @@ public class UtilService {
                 + "WHERE c.userId.userId = :userId AND c.flagDel = false";
         mapObj.put("userId", user.getUserId());
 
-        if (!"".equals(contactDto.getFirstName())) {
+        if (contactDto.getFirstName() != "") {
             hql += " AND c.firstName LIKE :firstName";
             mapStr.put("firstName", "%" + contactDto.getFirstName() + "%");
         }
-        if (!"".equals(contactDto.getLastName())) {
+        if (contactDto.getLastName() != "") {
             hql += " AND c.lastName LIKE :lastName";
             mapStr.put("lastName", "%" + contactDto.getLastName() + "%");
         }
-        if (!"".equals(contactDto.getBirthdate())) {
+        if (contactDto.getBirthdate() != "") {
             hql += " AND c.birthdate = :birthdate";
             Date date = UtilService.convertStringToDate(contactDto.getBirthdate());
             mapObj.put("birthdate", date);
         }
-        if (!"".equals(contactDto.getCategory())) {
+        if (contactDto.getCategory() != "") {
             hql += " AND c.categoryId = :categoryId";
             Category category = new Category();
             category.setCategoryId(Integer.parseInt(contactDto.getCategory()));
@@ -71,7 +71,7 @@ public class UtilService {
         return query;
     }
 
-    public int contactListSize(User user) {
+    public int countPages(User user) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
 
@@ -84,7 +84,29 @@ public class UtilService {
         em.close();
         emf.close();
         
-        return (count / 5) + 1;
+        if (count % 5 == 0){
+            count /= 5;
+        }
+        else{
+            count = (count / 5) + 1;
+        }
+        return count;
+    }
+    
+    public int countContacts(User user) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+
+        Query query = em.createNamedQuery("Contact.countByUserId");
+        query.setParameter("userId", user.getUserId());
+
+        int count = ((Number) query.getSingleResult()).intValue();
+        em.close();
+        emf.close();
+        
+        return count;
     }
 
 }

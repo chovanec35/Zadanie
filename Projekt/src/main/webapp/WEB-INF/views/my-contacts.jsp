@@ -5,6 +5,7 @@
 
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <c:set var="size" value="${size}"/>
+<c:set var="countContacts" value="${countContacts}"/>
 
 <!DOCTYPE html>
 <html>
@@ -57,18 +58,19 @@
 
             <div class="form1">
                 <h2>Contacts:</h2>
-                <c:if test="${!empty contactsList}">
-                    <div class="container">
-                        <table class="table-contacts" >
-                            <tr>
-                                <th>First name</th>
-                                <th>Last name</th>
-                                <th>Category</th>
-                                <th>Detail</th>
-                                <th>Delete</th>
-                            </tr>
+
+                <div class="container" id="contactstable">
+                    <table class="table-contacts" >
+                        <tr>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Category</th>
+                            <th>Detail</th>
+                            <th>Delete</th>
+                        </tr>
+                        <c:if test="${!empty contactsList}">
                             <c:forEach items="${contactsList}" var="contact">
-                                <tr>
+                                <tr class="contactrecord">
                                     <td><c:out value="${contact.firstName}" /></td>
                                     <td><c:out value="${contact.lastName}" /></td>
                                     <td><c:out value="${contact.categoryId.name}" /></td>
@@ -76,47 +78,59 @@
                                     <td><input onclick="deleteAjax(${contact.contactId})" id="opener" value="Delete" type="submit" name="deleteContact" class="btn btn-primary details contactBtn" ></td>
                                 </tr>
                             </c:forEach>
-                        </table>
-                        <div class="container">
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination" id="pagination"></ul>
-                            </nav>
-                        </div>
+                        </c:if>
+                    </table>
+                    <div class="container">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination" id="pagination"></ul>
+                        </nav>
                     </div>
-                </c:if>
+                </div>
+
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal" id="result">
-            <span class="close" onclick="closeModal()" >&times;</span>
-            <h2>Contact detail</h2>
-            <table>
-                <tr>
-                    <td>First name: </td>
-                    <td id="fName"></td>
-                </tr>
-                <tr>
-                    <td>Last name: </td>
-                    <td id="lName"></td>
-                </tr>
-                <tr>
-                    <td>Description: </td>
-                    <td id="description"></td>
-                </tr>
-                <tr>
-                    <td>Birthdate: </td>
-                    <td id="birthdate"></td>
-                </tr>
-                <tr>
-                    <td>Creation Date: </td>
-                    <td id="creationTs"></td>
-                </tr>
-            </table>            
+        <div class="overlay" id="overlay">
+            <div class="modal" id="result">
+                <span class="close" onclick="closeModal()" >&times;</span>
+                <h2>Contact detail</h2>
+                <table>
+                    <tr>
+                        <td>First name: </td>
+                        <td id="fName"></td>
+                    </tr>
+                    <tr>
+                        <td>Last name: </td>
+                        <td id="lName"></td>
+                    </tr>
+                    <tr>
+                        <td>Description: </td>
+                        <td id="description"></td>
+                    </tr>
+                    <tr>
+                        <td>Birthdate: </td>
+                        <td id="birthdate"></td>
+                    </tr>
+                    <tr>
+                        <td>Creation Date: </td>
+                        <td id="creationTs"></td>
+                    </tr>
+                </table>            
+            </div>
+
+            <div id="modalDialog">
+                <p class="message">
+                    Do you want to delete this contact?
+                </p>
+            </div>  
         </div>
-    </body>
+    </div>
+</body>
 </html>
 
 <script>
+    var totalPages = '${size}';
+    var countContacts = '${countContacts}';
     <%@ include file="/resources/theme/js/info.js" %>
     <%@ include file="/resources/theme/js/jquery.simplePagination.js" %>
 </script>

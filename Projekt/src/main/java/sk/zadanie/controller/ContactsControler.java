@@ -49,12 +49,15 @@ public class ContactsControler {
     public @ResponseBody
     ModelAndView viewLogin(@RequestParam(value = "page", defaultValue = "1") String page, HttpServletRequest request,
             HttpServletResponse response, HttpSession httpSession, Model model) throws ParseException {
-        User user = (User) httpSession.getAttribute("loggedUser");
+
         ModelAndView mav = new ModelAndView("my-contacts");
-        mav.addObject("page", page);
+        User user = (User) httpSession.getAttribute("loggedUser");
+
         if (user != null) {
             ContactDto contactDto = contactDao.setParamertersNull();
-            mav.addObject("size", utilService.contactListSize(user));
+            mav.addObject("page", page);
+            mav.addObject("size", utilService.countPages(user));
+            mav.addObject("countContacts", utilService.countContacts(user));
             mav.addObject("contactsList", contactService.getAllContacts(user, contactDto, Integer.parseInt(page)));
             mav.addObject("categoryList", categoryService.getAllCategories());
             mav.addObject("title", "Contacts");
@@ -65,16 +68,18 @@ public class ContactsControler {
     }
 
     @RequestMapping(value = "/searchProcess", method = RequestMethod.POST)
-    public ModelAndView searchProcess(@ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession,
+    public ModelAndView searchProcess(@RequestParam(value = "page", defaultValue = "1") String page,
+            @ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession,
             BindingResult result, HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
 
-        User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("my-contacts");
-        String dateString = contactDto.getBirthdate();
+        User user = (User) httpSession.getAttribute("loggedUser");
+
         if (user != null) {
-            List<Contact> contactsList = contactService.getAllContacts(user, contactDto, 1);
+            String dateString = contactDto.getBirthdate();
+            mav.addObject("size", utilService.countPages(user));
             mav.addObject("categoryList", categoryService.getAllCategories());
-            mav.addObject("contactsList", contactsList);
+            mav.addObject("contactsList", contactService.getAllContacts(user, contactDto, Integer.parseInt(page)));
             mav.addObject("user_Id", user.getUserId());
             mav.addObject("title", "Contacts");
         } else {
@@ -85,17 +90,19 @@ public class ContactsControler {
     }
 
     @RequestMapping(params = {"delContact"}, method = RequestMethod.POST)
-    public ModelAndView contactListProcess(HttpServletRequest request,
+    public ModelAndView contactListProcess(@RequestParam(value = "page", defaultValue = "1") String page, HttpServletRequest request,
             HttpServletResponse response, HttpSession httpSession) throws IOException, ServletException, ParseException {
-        User user = (User) httpSession.getAttribute("loggedUser");
+
         ModelAndView mav = new ModelAndView("my-contacts");
+        User user = (User) httpSession.getAttribute("loggedUser");
         String id = request.getParameter("delContact");
         ContactDto contactDto = contactDao.setParamertersNull();
 
         contactDao.delContact(Integer.parseInt(id));
 
+        mav.addObject("size", utilService.countPages(user));
         mav.addObject("categoryList", categoryService.getAllCategories());
-        mav.addObject("contactsList", contactService.getAllContacts(user, contactDto, 1));
+        mav.addObject("contactsList", contactService.getAllContacts(user, contactDto, Integer.parseInt(page)));
         mav.addObject("user_Id", user.getUserId());
         mav.addObject("title", "Contacts");
 
@@ -103,14 +110,19 @@ public class ContactsControler {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ModelAndView deleteContact(@RequestParam("id") String id, HttpServletRequest request,
+    public ModelAndView deleteContact(@RequestParam(value = "page", defaultValue = "1") String page,
+            @RequestParam("id") String id, HttpServletRequest request,
             HttpSession httpSession) throws IOException, ServletException, ParseException {
+
+        ModelAndView mav = new ModelAndView("redirect:my-contacts");
         User user = (User) httpSession.getAttribute("loggedUser");
-        ModelAndView mav = new ModelAndView("my-contacts");
         ContactDto contactDto = contactDao.setParamertersNull();
 
         contactDao.delContact(Integer.parseInt(id));
-
+        mav.addObject("size", utilService.countPages(user));
+        System.out.println("SIZE ---> " + utilService.countPages(user));
+        mav.addObject("countContacts", utilService.countContacts(user));
+        System.out.println("Count Contacts ---> " + utilService.countContacts(user));
         mav.addObject("categoryList", categoryService.getAllCategories());
         mav.addObject("contactsList", contactService.getAllContacts(user, contactDto, 1));
         mav.addObject("user_Id", user.getUserId());
@@ -122,6 +134,7 @@ public class ContactsControler {
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public @ResponseBody
     Map<String, Object> getContactDetail(@RequestParam("id") String id) {
+
         Map<String, Object> map = new HashMap<String, Object>();
         List<Contact> detail = new ArrayList<>();
 

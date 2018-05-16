@@ -85,7 +85,7 @@ public class ContactDaoImpl implements ContactDao {
 
         Query query = utilService.createQuery(user, contactDto);
 
-        query.setFirstResult(page);
+        query.setFirstResult((page -1)*5);
         query.setMaxResults(5);
         return query.getResultList();
     }
