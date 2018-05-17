@@ -85,14 +85,12 @@ function closeModal() {
 $(function () {
     $('#pagination').pagination({
         pages: totalPages,
-        displayedPages: "3",
+        //displayedPages: "3",
         hrefTextPrefix: "${path}/my-contacts?page=",
         currentPage: window.location.href.split('=')[1],
         edges: "0",
         onPageClick: function (page, evt) {
-            console.log("PAGE", page);
-            console.log("EVT", evt);
             $('#pagination').pagination('drawPage', page);
         }
     });
-}); 
+});

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import sk.zadanie.dao.ContactDao;
 import sk.zadanie.dto.ContactDto;
@@ -47,16 +48,27 @@ public class ContactsControler {
 
     @RequestMapping(value = "/my-contacts", method = RequestMethod.GET)
     public @ResponseBody
-    ModelAndView viewLogin(@RequestParam(value = "page", defaultValue = "1") String page, HttpServletRequest request,
-            HttpServletResponse response, HttpSession httpSession, Model model) throws ParseException {
+    ModelAndView viewLogin(@RequestParam(value = "page", defaultValue = "1") String page, 
+            @RequestParam(value = "firstName", defaultValue = "") String firstName,
+            HttpServletResponse response, HttpServletRequest request,
+            HttpSession httpSession, Model model) throws ParseException {
 
+        System.out.println(request.getParameter("firstName"));
+        ContactDto contactDto = new ContactDto();
         ModelAndView mav = new ModelAndView("my-contacts");
         User user = (User) httpSession.getAttribute("loggedUser");
 
+        if (request.getSession().getAttribute("contactDto") != null) {
+            contactDto = contactDao.setParamertersNull((ContactDto) request.getSession().getAttribute("contactDto"));
+        } else {
+            contactDto = contactDao.setParamertersNull(contactDto);
+        }
+
         if (user != null) {
-            ContactDto contactDto = contactDao.setParamertersNull();
             mav.addObject("page", page);
-            mav.addObject("size", utilService.countPages(user));
+            System.out.println("po null " + contactDto);
+            mav.addObject("size", utilService.countPages(user, contactDto));
+            System.out.println("COUNT GET" + utilService.countPages(user, contactDto));
             mav.addObject("countContacts", utilService.countContacts(user));
             mav.addObject("contactsList", contactService.getAllContacts(user, contactDto, Integer.parseInt(page)));
             mav.addObject("categoryList", categoryService.getAllCategories());
@@ -67,45 +79,27 @@ public class ContactsControler {
         return mav;
     }
 
-    @RequestMapping(value = "/searchProcess", method = RequestMethod.POST)
+    @RequestMapping(value = "/my-contacts", method = RequestMethod.POST)
     public ModelAndView searchProcess(@RequestParam(value = "page", defaultValue = "1") String page,
             @ModelAttribute("contact") ContactDto contactDto, HttpSession httpSession,
-            BindingResult result, HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
+            HttpServletRequest request) throws IOException, ParseException {
 
         ModelAndView mav = new ModelAndView("my-contacts");
         User user = (User) httpSession.getAttribute("loggedUser");
-
         if (user != null) {
             String dateString = contactDto.getBirthdate();
-            mav.addObject("size", utilService.countPages(user));
+            mav.addObject("size", utilService.countPages(user, contactDto));
+            System.out.println("COUNT POST" + utilService.countPages(user, contactDto));
             mav.addObject("categoryList", categoryService.getAllCategories());
             mav.addObject("contactsList", contactService.getAllContacts(user, contactDto, Integer.parseInt(page)));
             mav.addObject("user_Id", user.getUserId());
             mav.addObject("title", "Contacts");
+            mav.addObject("contact", contactDto);
+            request.getSession().setAttribute("contactDto", contactDto);
         } else {
-            mav.addObject("title", "Not found");
-            mav.addObject("login");
+            mav.addObject("title", "Login");
+            mav.addObject("redirect:login");
         }
-        return mav;
-    }
-
-    @RequestMapping(params = {"delContact"}, method = RequestMethod.POST)
-    public ModelAndView contactListProcess(@RequestParam(value = "page", defaultValue = "1") String page, HttpServletRequest request,
-            HttpServletResponse response, HttpSession httpSession) throws IOException, ServletException, ParseException {
-
-        ModelAndView mav = new ModelAndView("my-contacts");
-        User user = (User) httpSession.getAttribute("loggedUser");
-        String id = request.getParameter("delContact");
-        ContactDto contactDto = contactDao.setParamertersNull();
-
-        contactDao.delContact(Integer.parseInt(id));
-
-        mav.addObject("size", utilService.countPages(user));
-        mav.addObject("categoryList", categoryService.getAllCategories());
-        mav.addObject("contactsList", contactService.getAllContacts(user, contactDto, Integer.parseInt(page)));
-        mav.addObject("user_Id", user.getUserId());
-        mav.addObject("title", "Contacts");
-
         return mav;
     }
 
@@ -116,17 +110,8 @@ public class ContactsControler {
 
         ModelAndView mav = new ModelAndView("redirect:my-contacts");
         User user = (User) httpSession.getAttribute("loggedUser");
-        ContactDto contactDto = contactDao.setParamertersNull();
 
         contactDao.delContact(Integer.parseInt(id));
-        mav.addObject("size", utilService.countPages(user));
-        System.out.println("SIZE ---> " + utilService.countPages(user));
-        mav.addObject("countContacts", utilService.countContacts(user));
-        System.out.println("Count Contacts ---> " + utilService.countContacts(user));
-        mav.addObject("categoryList", categoryService.getAllCategories());
-        mav.addObject("contactsList", contactService.getAllContacts(user, contactDto, 1));
-        mav.addObject("user_Id", user.getUserId());
-        mav.addObject("title", "Contacts");
 
         return mav;
     }

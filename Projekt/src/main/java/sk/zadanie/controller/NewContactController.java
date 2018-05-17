@@ -47,10 +47,11 @@ public class NewContactController {
     ContactDao contactDao;
 
     @RequestMapping(value = "/add-new-contact", method = RequestMethod.GET)
-    public ModelAndView viewAddNewContact(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
+    public ModelAndView viewAddNewContact(HttpServletRequest request, HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("loggedUser");
         ModelAndView mav = new ModelAndView("add-new-contact");
         if (user != null) {
+            httpSession.removeAttribute("contactDto");
             mav.addObject("categoryList", categoryDao.getAllCategories());
             mav.addObject("title", "New Contact");
             return mav;
@@ -62,7 +63,7 @@ public class NewContactController {
 
     @RequestMapping(value = "/newContactProcess", method = RequestMethod.POST)
     public ModelAndView newContactProcess(@ModelAttribute("contact") ContactDto contactDto,
-            BindingResult result, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws IOException, ParseException {
+            HttpSession httpSession) throws IOException, ParseException {
         User user = (User) httpSession.getAttribute("loggedUser");
 
         Date date = null;

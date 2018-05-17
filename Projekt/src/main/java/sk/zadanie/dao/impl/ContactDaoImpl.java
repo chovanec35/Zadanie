@@ -18,7 +18,7 @@ import sk.zadanie.service.impl.UtilService;
 
 @Repository
 public class ContactDaoImpl implements ContactDao {
-    
+
     @Autowired
     UtilService utilService;
 
@@ -57,12 +57,19 @@ public class ContactDaoImpl implements ContactDao {
         return contacts.get(0);
     }
 
-    public ContactDto setParamertersNull() {
-        ContactDto contactDto = new ContactDto();
-        contactDto.setFirstName("");
-        contactDto.setLastName("");
-        contactDto.setBirthdate("");
-        contactDto.setCategory("");
+    public ContactDto setParamertersNull(ContactDto contactDto) {
+        if (contactDto.getFirstName() == null) {
+            contactDto.setFirstName("");
+        }
+        if (contactDto.getLastName()== null) {
+            contactDto.setLastName("");
+        }
+        if (contactDto.getBirthdate()== null) {
+            contactDto.setBirthdate("");
+        }
+        if (contactDto.getCategory()== null) {
+            contactDto.setCategory("");
+        }
         return contactDto;
     }
 
@@ -80,12 +87,13 @@ public class ContactDaoImpl implements ContactDao {
         em.close();
         emf.close();
     }
-    
+
     public List<Contact> getAllContacts(User user, ContactDto contactDto, int page) throws ParseException {
+        String hql = "SELECT c FROM Contact c "
+                + "WHERE c.userId.userId = :userId AND c.flagDel = false";
+        Query query = utilService.createQuery(user, contactDto, hql);
 
-        Query query = utilService.createQuery(user, contactDto);
-
-        query.setFirstResult((page -1)*5);
+        query.setFirstResult((page - 1) * 5);
         query.setMaxResults(5);
         return query.getResultList();
     }

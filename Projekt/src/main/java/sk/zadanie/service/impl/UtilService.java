@@ -30,30 +30,28 @@ public class UtilService {
         return date;
     }
 
-    public static Query createQuery(User user, ContactDto contactDto) throws ParseException {
+    public static Query createQuery(User user, ContactDto contactDto, String hql) throws ParseException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
         Map<String, Object> mapObj = new HashMap<>();
         Map<String, String> mapStr = new HashMap<>();
-
-        String hql = "SELECT c FROM Contact c "
-                + "WHERE c.userId.userId = :userId AND c.flagDel = false";
+        
         mapObj.put("userId", user.getUserId());
 
-        if (contactDto.getFirstName() != "") {
+        if (!"".equals(contactDto.getFirstName())) {
             hql += " AND c.firstName LIKE :firstName";
             mapStr.put("firstName", "%" + contactDto.getFirstName() + "%");
         }
-        if (contactDto.getLastName() != "") {
+        if (!"".equals(contactDto.getLastName())) {
             hql += " AND c.lastName LIKE :lastName";
             mapStr.put("lastName", "%" + contactDto.getLastName() + "%");
         }
-        if (contactDto.getBirthdate() != "") {
+        if (!"".equals(contactDto.getBirthdate())) {
             hql += " AND c.birthdate = :birthdate";
             Date date = UtilService.convertStringToDate(contactDto.getBirthdate());
             mapObj.put("birthdate", date);
         }
-        if (contactDto.getCategory() != "") {
+        if (!"".equals(contactDto.getCategory())) {
             hql += " AND c.categoryId = :categoryId";
             Category category = new Category();
             category.setCategoryId(Integer.parseInt(contactDto.getCategory()));
@@ -71,28 +69,33 @@ public class UtilService {
         return query;
     }
 
-    public int countPages(User user) {
+    public int countPages(User user, ContactDto contactDto) throws ParseException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
 
-        Query query = em.createNamedQuery("Contact.countByUserId");
-        query.setParameter("userId", user.getUserId());
-
-        int count = ((Number) query.getSingleResult()).intValue();
+        //Query query = em.createNamedQuery("Contact.countByUserId");
+        
+        String hql = "SELECT COUNT(c) FROM Contact c "
+                + "WHERE c.userId.userId = :userId AND c.flagDel=false";
+        
+        Query q = createQuery(user, contactDto, hql);
+        q.setParameter("userId", user.getUserId());
+        int count = ((Number) q.getSingleResult()).intValue();
+        
         em.close();
         emf.close();
-        
-        if (count % 5 == 0){
+
+        if (count % 5 == 0) {
             count /= 5;
-        }
-        else{
+        } else {
             count = (count / 5) + 1;
         }
+        System.out.println("POCET STRAN: " + count);
         return count;
     }
-    
+
     public int countContacts(User user) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
@@ -105,7 +108,7 @@ public class UtilService {
         int count = ((Number) query.getSingleResult()).intValue();
         em.close();
         emf.close();
-        
+
         return count;
     }
 

@@ -13,7 +13,7 @@ public interface ContactDao {
 
     public Contact getContactById(int contactId);
 
-    public ContactDto setParamertersNull();
+    public ContactDto setParamertersNull(ContactDto contact);
 
     public void addNewContact(ContactDto contact, User user, Date date);
 

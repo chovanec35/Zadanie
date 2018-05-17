@@ -22,27 +22,26 @@
         </div>
         <label style="color: red"> ${message} </label><br>
         <div class="row">
-            <form  class="form1" method="POST" modelAttribute="contact" action="${path}/searchProcess">
+            <form  class="form1" method="POST" modelAttribute="contact" action="${path}/my-contacts">
                 <div class="container">
-                    <h2>Filter</h2>
+                    <h2>Filter:</h2>
                     <table>
                         <tr>
                             <td class="text">First name</td>
-                            <td><input path="firstName" type="text" name="firstName" ></td>
-
+                            <td><input path="firstName" type="text" name="firstName" value="${contactDto.firstName}"></td>
                         </tr>
                         <tr>
                             <td class="text">Last name</td>
-                            <td><input path="lastName" type="text" name="lastName" ></td>
+                            <td><input path="lastName" type="text" name="lastName" value="${contactDto.lastName}"></td>
                         </tr>
                         <tr>
                             <td class="text">Birthdate</td> 
-                            <td><input type="date" path="birthdate" name="birthdate" ></td>
+                            <td><input type="date" path="birthdate" name="birthdate" value="${contactDto.birthdate}"></td>
                         </tr>
                         <tr>
                             <td class="text">Category</td>
                             <td><select textarea path="category" name="category">
-                                    <option value=""></option>
+                                    <option value=""></option>a
                                     <c:forEach items="${categoryList}" var="category">
                                         <option value="${category.categoryId}"><c:out value="${category.name}" /></option>
                                     </c:forEach>

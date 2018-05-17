@@ -6,7 +6,7 @@
 				items: 1,
 				itemsOnPage: 1,
 				pages: 0,
-				displayedPages: 5,
+				displayedPages: 3,
 				edges: 2,
 				currentPage: 0,
 				useAnchors: true,
