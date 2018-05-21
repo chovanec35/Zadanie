@@ -38,11 +38,18 @@ public class LoginController {
     public ModelAndView loginProcess(HttpServletRequest request,
             HttpServletResponse response, @ModelAttribute("login") LoginDto login, HttpSession httpSession) {
         User user = userService.loginUser(login);
+
         ModelAndView mav = new ModelAndView("login");
-        
         if (user != null) {
             httpSession.setAttribute("loggedUser", user);
-            mav = new ModelAndView("redirect:my-contacts");
+            if (httpSession.getAttribute("currentUrl") != null) {
+                String url = (String) httpSession.getAttribute("currentUrl");
+                System.out.println("login url" + url);
+                mav = new ModelAndView("redirect:" + url);
+            } else {
+                mav = new ModelAndView("redirect:my-contacts");
+            }
+
         } else {
             mav.addObject("message", "Username or Password is wrong!!");
             mav.addObject("title", "Login");

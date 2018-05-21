@@ -6,6 +6,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <c:set var="size" value="${size}"/>
 <c:set var="countContacts" value="${countContacts}"/>
+<c:set var="searchURL" value="${searchUrl}"/>
 
 <!DOCTYPE html>
 <html>
@@ -20,9 +21,9 @@
                 <li><a href="<c:url value="/logoutProcess" />">Log out</a></li>
             </ul>
         </div>
-        <label style="color: red"> ${message} </label><br>
+        <label style="color: red">${message}</label><br>
         <div class="row">
-            <form  class="form1" method="POST" modelAttribute="contact" action="${path}/my-contacts">
+            <form  class="form1" method="GET" modelAttribute="contact" action="${path}/my-contacts">
                 <div class="container">
                     <h2>Filter:</h2>
                     <table>
@@ -41,7 +42,7 @@
                         <tr>
                             <td class="text">Category</td>
                             <td><select textarea path="category" name="category">
-                                    <option value=""></option>a
+                                    <option value="${contactDto.category}"></option>
                                     <c:forEach items="${categoryList}" var="category">
                                         <option value="${category.categoryId}"><c:out value="${category.name}" /></option>
                                     </c:forEach>
@@ -116,12 +117,11 @@
                     </tr>
                 </table>            
             </div>
-
             <div id="modalDialog">
                 <p class="message">
                     Do you want to delete this contact?
                 </p>
-            </div>  
+            </div>
         </div>
     </div>
 </body>
@@ -130,7 +130,7 @@
 <script>
     var totalPages = '${size}';
     var countContacts = '${countContacts}';
+    var searchURL = '${searchURL}';
     <%@ include file="/resources/theme/js/info.js" %>
     <%@ include file="/resources/theme/js/jquery.simplePagination.js" %>
 </script>
-

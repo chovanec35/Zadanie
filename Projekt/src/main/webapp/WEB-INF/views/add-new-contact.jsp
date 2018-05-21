@@ -27,7 +27,7 @@
                 <tr>
                     <td class="text">Birthdate</td> 
                     <td><input type="date" path="birthdate" name="birthdate" value="" ></td>
-                    <td><form:errors path="date" class="error" /></td>
+                    <td><form:errors path="birthdate" class="error" /></td>
                 </tr>
                 <tr>
                     <td class="text">Description</td> 
@@ -43,9 +43,16 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><button type="submit">Add new contact</button></td>
+                    <td><button onclick="addContact()" type="submit" >Add new contact</button></td>
                 </tr>
             </table>
         </form:form>
+        <div class="overlay" id="overlay">
+            <div id="modalDeleteUser">
+                <p class="message">
+                    Contact added!
+                </p>
+            </div>
+        </div>
     </body>
 </html> 
