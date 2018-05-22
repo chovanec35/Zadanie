@@ -47,7 +47,7 @@ public class UtilService {
             mapStr.put("lastName", "%" + contactDto.getLastName() + "%");
         }
         if (!"".equals(contactDto.getBirthdate())) {
-            hql += " AND c.birthdate = :birthdate";
+            hql += " AND c.birthdate >= :birthdate";
             Date date = UtilService.convertStringToDate(contactDto.getBirthdate());
             mapObj.put("birthdate", date);
         }
@@ -74,8 +74,6 @@ public class UtilService {
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-
-        //Query query = em.createNamedQuery("Contact.countByUserId");
         
         String hql = "SELECT COUNT(c) FROM Contact c "
                 + "WHERE c.userId.userId = :userId AND c.flagDel=false";
@@ -92,7 +90,6 @@ public class UtilService {
         } else {
             count = (count / 5) + 1;
         }
-        System.out.println("POCET STRAN: " + count);
         return count;
     }
 

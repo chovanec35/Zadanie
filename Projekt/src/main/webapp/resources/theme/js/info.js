@@ -7,7 +7,6 @@ $(document).ready(function () {
     $("#modalDialog").hide();
 
     $(function () {
-        console.log("tu som", totalPages);
         console.log(searchURL);
         $('#pagination').pagination({
             pages: totalPages,
@@ -96,26 +95,4 @@ function doFunctionForYes(id) {
 function closeModal() {
     $("#result").css("display", "none");
     $("#overlay").css("display", "none");
-}
-
-function addContact() {
-    console.log("Anoooo");
-    $("#overlay").css("display", "block");
-    $('#modalDialog').dialog({
-        modal: true,
-        zIndex: 10000,
-        autoOpen: true,
-        dialogClass: "modalDialog",
-        resizable: false,
-        buttons: [
-            {
-                text: "OK",
-                "class": 'dialogButtonYesNo',
-                click: function () {
-                    $("#overlay").css("display", "none");
-                    $(this).dialog("close");
-                }
-            }
-        ]
-    });
 }

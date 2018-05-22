@@ -14,7 +14,8 @@
             <li><a href="${path}/add-new-contact">Add new contact</a></li>
             <li><a href="<c:url value="/logoutProcess" />">Log out</a></li>
         </ul>
-        <form:form  class="form" method="POST" modelAttribute="contact" action="${path}/newContactProcess">
+        <label style="color: red; font-size: 20px"> ${success} </label><br>
+        <form  class="form" method="POST" modelAttribute="contact" action="${path}/newContactProcess">
             <table>
                 <tr>
                     <td class="text">First name *</td> 
@@ -46,8 +47,8 @@
                     <td><button onclick="addContact()" type="submit" >Add new contact</button></td>
                 </tr>
             </table>
-        </form:form>
-        <div class="overlay" id="overlay">
+        </form>
+        <div class="overlay" id="overlay1">
             <div id="modalDeleteUser">
                 <p class="message">
                     Contact added!

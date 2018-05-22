@@ -16,7 +16,7 @@
                 <li><a href="${path}/registration">Registration</a></li>
             </ul>
         </div>
-        <label style="color: red"> ${message} </label><br>
+        <label style="color: red; font-size: 20px"> ${message} </label><br>
         <div class="form">
             <form method="POST" modelAttribute="login" action="${path}/loginProcess">
 

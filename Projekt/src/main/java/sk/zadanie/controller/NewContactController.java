@@ -54,6 +54,7 @@ public class NewContactController {
             mav.addObject("title", "New Contact");
             return mav;
         }
+        httpSession.setAttribute("currentUrl", "add-new-contact");
         mav = new ModelAndView("login");
         mav.addObject("title", "Login");
         return mav;
@@ -72,6 +73,7 @@ public class NewContactController {
         ModelAndView mav = new ModelAndView("add-new-contact");
         mav.addObject("title", "New Contact");
         contactDao.addNewContact(contactDto, user, date);
+        mav.addObject("success", "Kontakt " + contactDto.getFirstName() + " " + contactDto.getLastName()+" bol pridany.");
         return mav;
     }
 }

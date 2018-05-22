@@ -44,7 +44,6 @@ public class LoginController {
             httpSession.setAttribute("loggedUser", user);
             if (httpSession.getAttribute("currentUrl") != null) {
                 String url = (String) httpSession.getAttribute("currentUrl");
-                System.out.println("login url" + url);
                 mav = new ModelAndView("redirect:" + url);
             } else {
                 mav = new ModelAndView("redirect:my-contacts");
