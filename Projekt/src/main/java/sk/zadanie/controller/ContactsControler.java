@@ -100,4 +100,18 @@ public class ContactsControler {
         map.put("data", detail);
         return map;
     }
+    
+    @RequestMapping(value = "/sort", method = RequestMethod.GET)
+    public @ResponseBody
+    Map<String, Object> sortBy(@RequestParam("id") String id) {
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<Contact> detail = new ArrayList<>();
+
+        Contact contact = contactService.getContactById(Integer.parseInt(id));
+        detail.add(contact);
+
+        map.put("data", detail);
+        return map;
+    }
 }

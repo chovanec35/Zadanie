@@ -1,25 +1,8 @@
-var pageIndex = window.location.href.split('=')[5];
+var pageIndex = window.location.href.split('=')[6];
 var totalPages = '${size}';
 var countContacts = '${countContacts}';
 var searchURL = '${searchURL}';
-
-$(document).ready(function () {
-    $("#modalDialog").hide();
-
-    $(function () {
-        console.log(searchURL);
-        $('#pagination').pagination({
-            pages: totalPages,
-            hrefTextPrefix: "${path}/my-contacts" + searchURL + "&page=",
-            currentPage: window.location.href.split('=')[5],
-            edges: "0",
-            onPageClick: function (page, evt) {
-                console.log(searchURL);
-                $('#pagination').pagination('drawPage', page);
-            }
-        });
-    });
-});
+var value = '${value}';
 
 function detailAjax(id) {
     $.ajax({
@@ -42,7 +25,6 @@ function detailAjax(id) {
         }
     });
 }
-
 
 function deleteAjax(id) {
     $("#overlay").css("display", "block");
@@ -95,4 +77,41 @@ function doFunctionForYes(id) {
 function closeModal() {
     $("#result").css("display", "none");
     $("#overlay").css("display", "none");
+}
+
+$(document).ready(function () {
+    $("#modalDialog").hide();
+
+    $(function () {
+        $('#pagination').pagination({
+            pages: totalPages,
+            hrefTextPrefix: "${path}/my-contacts" + searchURL + "&sort=" + "&page=",
+            currentPage: window.location.href.split('=')[6],
+            edges: "0",
+            onPageClick: function (page, evt) {
+                $('#pagination').pagination('drawPage', page);
+            }
+        });
+    });
+});
+
+function sortByValue(value) {
+    $.ajax({
+        url: "sort",
+        type: "GET",
+        success: function (response) {
+            console.log(value);
+        },
+        error: function (data) {
+            console.log("Chyba pri sort");
+        }
+    });
+}
+
+function sortByLname() {
+    console.log("sortByLname");
+}
+
+function sortByCategory() {
+    console.log("sortByCategory");
 }

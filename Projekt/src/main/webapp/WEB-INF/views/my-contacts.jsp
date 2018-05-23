@@ -28,7 +28,7 @@
                     <h2>Filter:</h2>
                     <table>
                         <tr>
-                            <td class="text">First name</td>
+                            <td class="text" >First name</td>
                             <td><input path="firstName" type="text" name="firstName" value="${contactDto.firstName}"></td>
                         </tr>
                         <tr>
@@ -62,9 +62,9 @@
                 <div class="container" id="contactstable">
                     <table class="table-contacts" >
                         <tr>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>Category</th>
+                            <th onclick="sortByValue(1)" value="firstName">First name</th>
+                            <th onclick="sortByValue(2)" value="lastName">Last name</th>
+                            <th onclick="sortByValue(3)" value="category">Category</th>
                             <th>Detail</th>
                             <th>Delete</th>
                         </tr>
@@ -131,6 +131,7 @@
     var totalPages = '${size}';
     var countContacts = '${countContacts}';
     var searchURL = '${searchURL}';
+    var value = '${value}';
     <%@ include file="/resources/theme/js/info.js" %>
     <%@ include file="/resources/theme/js/jquery.simplePagination.js" %>
 </script>
