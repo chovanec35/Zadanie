@@ -46,8 +46,8 @@ public class ContactsControler {
 
     @RequestMapping(value = "/my-contacts", method = RequestMethod.GET)
     public @ResponseBody
-    ModelAndView viewLogin(@RequestParam(value = "page", defaultValue = "1") String page, @ModelAttribute("contact") ContactDto contactDto,
-            String firstName, HttpServletResponse response, HttpServletRequest request,
+    ModelAndView viewLogin(@RequestParam(value = "page", defaultValue = "1") String page, 
+            @ModelAttribute("contact") ContactDto contactDto, String firstName, HttpServletResponse response,
             HttpSession httpSession, Model model) throws ParseException {
 
         ModelAndView mav = new ModelAndView("my-contacts");
@@ -55,7 +55,7 @@ public class ContactsControler {
         contactDto = contactDao.setParamertersNull(contactDto);
 
         String url;
-        url = "?firstName=" + contactDto.getFirstName() + "&lastName=" + contactDto.getLastName() 
+        url = "?firstName=" + contactDto.getFirstName() + "&lastName=" + contactDto.getLastName()
                 + "&birthdate=" + contactDto.getBirthdate() + "&category=" + contactDto.getCategory();
         if (user != null) {
             mav.addObject("contactDto", contactDto);
@@ -68,7 +68,7 @@ public class ContactsControler {
             mav.addObject("searchUrl", url);
             return mav;
         }
-        
+
         httpSession.setAttribute("currentUrl", "my-contacts" + url);
         mav = new ModelAndView("login");
         return mav;
@@ -80,7 +80,6 @@ public class ContactsControler {
             HttpSession httpSession) throws IOException, ServletException, ParseException {
 
         ModelAndView mav = new ModelAndView("redirect:my-contacts");
-        User user = (User) httpSession.getAttribute("loggedUser");
 
         contactDao.delContact(Integer.parseInt(id));
 
@@ -100,18 +99,13 @@ public class ContactsControler {
         map.put("data", detail);
         return map;
     }
-    
+
     @RequestMapping(value = "/sort", method = RequestMethod.GET)
-    public @ResponseBody
-    Map<String, Object> sortBy(@RequestParam("id") String id) {
+    public ModelAndView sortBy(HttpServletRequest request) {
 
-        Map<String, Object> map = new HashMap<String, Object>();
-        List<Contact> detail = new ArrayList<>();
-
-        Contact contact = contactService.getContactById(Integer.parseInt(id));
-        detail.add(contact);
-
-        map.put("data", detail);
-        return map;
+        ModelAndView mav = new ModelAndView("my-contacts");
+        String value = request.getParameter("");
+        System.out.println("VALUE " + value);
+        return mav;
     }
 }

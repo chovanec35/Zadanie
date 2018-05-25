@@ -57,6 +57,7 @@ public class ContactDaoImpl implements ContactDao {
         return contacts.get(0);
     }
 
+    @Override
     public ContactDto setParamertersNull(ContactDto contactDto) {
         if (contactDto.getFirstName() == null) {
             contactDto.setFirstName("");
@@ -73,6 +74,7 @@ public class ContactDaoImpl implements ContactDao {
         return contactDto;
     }
 
+    @Override
     public void addNewContact(ContactDto contactDto, User user, Date date) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
@@ -88,10 +90,11 @@ public class ContactDaoImpl implements ContactDao {
         emf.close();
     }
 
+    @Override
     public List<Contact> getAllContacts(User user, ContactDto contactDto, int page) throws ParseException {
         String hql = "SELECT c FROM Contact c "
                 + "WHERE c.userId.userId = :userId AND c.flagDel = false";
-        Query query = utilService.createQuery(user, contactDto, hql);
+        Query query = UtilService.createQuery(user, contactDto, hql);
 
         query.setFirstResult((page - 1) * 5);
         query.setMaxResults(5);

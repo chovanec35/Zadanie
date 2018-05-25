@@ -58,6 +58,11 @@ public class UtilService {
             mapObj.put("categoryId", category);
         }
 
+        
+        String first = hql.substring(7,8);
+        if (!"C".equals(first)){
+            hql += " ORDER BY c.firstName";
+        }
         Query query = em.createQuery(hql);
 
         for (Map.Entry me : mapStr.entrySet()) {

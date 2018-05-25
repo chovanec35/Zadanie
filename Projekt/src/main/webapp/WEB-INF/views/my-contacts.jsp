@@ -7,6 +7,7 @@
 <c:set var="size" value="${size}"/>
 <c:set var="countContacts" value="${countContacts}"/>
 <c:set var="searchURL" value="${searchUrl}"/>
+<c:set var="value" value="${value}"/>
 
 <!DOCTYPE html>
 <html>
@@ -62,9 +63,9 @@
                 <div class="container" id="contactstable">
                     <table class="table-contacts" >
                         <tr>
-                            <th onclick="sortByValue(1)" value="firstName">First name</th>
-                            <th onclick="sortByValue(2)" value="lastName">Last name</th>
-                            <th onclick="sortByValue(3)" value="category">Category</th>
+                            <th onclick="sortByValue(1)" id="first" value="valueT" name="valueT">First name</th>
+                            <th onclick="sortByValue(2)" id="last" value="valueT" name="valueT">Last name</th>
+                            <th onclick="sortByValue(3)" id="cat" value="valueT" name="valueT">Category</th>
                             <th>Detail</th>
                             <th>Delete</th>
                         </tr>
@@ -74,8 +75,8 @@
                                     <td><c:out value="${contact.firstName}" /></td>
                                     <td><c:out value="${contact.lastName}" /></td>
                                     <td><c:out value="${contact.categoryId.name}" /></td>
-                                    <td><input onclick="detailAjax(${contact.contactId})" id="opener" value="Detail" type="submit" name="infoContact" class="btn btn-primary details contactBtn" ></td>
-                                    <td><input onclick="deleteAjax(${contact.contactId})" id="opener" value="Delete" type="submit" name="deleteContact" class="btn btn-primary details contactBtn" ></td>
+                                    <td><input onclick="detailAjax(${contact.contactId})" value="Detail" type="submit" name="infoContact" class="btn btn-primary details contactBtn" ></td>
+                                    <td><input onclick="deleteAjax(${contact.contactId})" value="Delete" type="submit" name="deleteContact" class="fabtn btn-primary details contactBtn" ></td>
                                 </tr>
                             </c:forEach>
                         </c:if>
